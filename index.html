@@ -199,12 +199,18 @@ function renderKPI(){
   const c=DATA.company;
   const cards=[];
   cards.push(kpi('公司总库存', fmt(c.totalStockL),'L'));
-  cards.push(kpi('总库存(吨)', fmt(c.totalStockT),'t'));
+  cards.push(kpi('总库存(吨)', fmt2(c.totalStockT),'t'));
   DATA.products.forEach(p=>{
     if(!inFilter(p)) return;
     const b=c.byProduct[p];
+    const color=PROD_COLOR[p];
     const cls = p==='92#汽油'?'accent92':p==='95#汽油'?'accent95':'accent0';
-    cards.push(kpi(prodOf(p)+' 库存', fmt(b.stockL),'L', PROD_COLOR[p], cls));
+    cards.push(
+      `<div class="kpi ${cls}">
+         <div class="t">${prodOf(p)} 库存</div>
+         <div class="v" style="color:${color}">${fmt(b.stockL)}<span class="u">L</span></div>
+         <div class="t" style="margin-top:7px;line-height:1.5;">吨位：<b style="color:${color}">${fmt2(b.stockT)}</b><span class="u">t</span></div>
+       </div>`);
   });
   document.getElementById('kpis').innerHTML=cards.join('');
 }
