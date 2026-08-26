@@ -182,6 +182,7 @@ const TIP = {backgroundColor:'#1f262e', borderWidth:0, padding:[10,14],
 const ANIM = {animationDuration:900, animationEasing:'cubicOut'};
 
 function fmt(n){ if(n==null||isNaN(n)) return '-'; return Math.round(n).toLocaleString('zh-CN'); }
+function fmt2(n){ if(n==null||isNaN(n)) return '-'; return Number(n).toFixed(2); }
 function prodOf(p){ return DATA.productLabel?DATA.productLabel[p]:p; }
 function inFilter(p){ return FP==='ALL' || FP===p; }
 
@@ -284,7 +285,7 @@ function renderUnload(){
   tb.innerHTML=rows.slice().reverse().map(r=>`<tr>
     <td>${r.date}</td><td><span class="pill ${PROD_CLASS[r.product]}">${prodOf(r.product)}</span></td>
     <td>${r.station}</td><td>${r.truck}</td><td>${r.tank}</td>
-    <td>${fmt(r.volumeL)}</td><td>${r.massT}</td><td>${r.gainLossT}</td></tr>`).join('');
+    <td>${fmt(r.volumeL)}</td><td>${fmt2(r.massT)}</td><td>${fmt2(r.gainLossT)}</td></tr>`).join('');
 }
 
 // ---------- 损益 ----------
