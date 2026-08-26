@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>加油站损溢管理 · 公司驾驶舱</title>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.5.1/echarts.min.js"></script>
+<script>
+  if (typeof echarts === 'undefined') {
+    document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"><\/script>');
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1c232b; --panel:#232b34; --panel2:#1f262e; --line:#323b45;
+    --txt:#e3e8ec; --sub:#9aa4ad; --faint:#5f6a73;
+    --acc:#7fa3a8;
+    --c92:#8aa6bd; --c95:#9aab94; --c0:#cbb89a;
+    --good:#a7bda0; --bad:#c89a92;
+    --r:16px;
+    --font:'Inter','Microsoft YaHei','PingFang SC',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;}
+  body{background:var(--bg);color:var(--txt);font-family:var(--font);
+    -webkit-font-smoothing:antialiased;letter-spacing:.01em;}
+
+  /* ── 顶栏 ── */
+  header{display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:15px 26px;border-bottom:1px solid var(--line);background:var(--panel2);
+    position:sticky;top:0;z-index:20;}
+  header h1{font-size:19px;margin:0;font-weight:700;letter-spacing:.02em;}
+  header h1 .dot{color:var(--acc);}
+  .meta{color:var(--sub);font-size:12px;display:flex;align-items:center;gap:10px;}
+  .filters{display:flex;gap:8px;}
+  .filters button{background:var(--panel);color:var(--sub);border:1px solid var(--line);
+    padding:7px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-family:var(--font);transition:.18s;}
+  .filters button:hover{color:var(--txt);border-color:var(--acc);}
+  .filters button.active{background:var(--acc);color:#06223a;border-color:var(--acc);font-weight:700;}
+
+  .wrap{padding:18px 28px 40px;display:grid;gap:16px;max-width:none;margin:0;}
+
+  /* ── KPI ── */
+  .kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
+  .kpi{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:15px 18px;position:relative;overflow:hidden;}
+  .kpi::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--acc);opacity:.9;}
+  .kpi .t{color:var(--sub);font-size:12px;font-weight:500;}
+  .kpi .v{font-size:25px;font-weight:800;margin-top:7px;line-height:1;font-variant-numeric:tabular-nums;}
+  .kpi .u{color:var(--sub);font-size:12px;margin-left:5px;font-weight:500;}
+  .kpi.accent92::before{background:var(--c92);} .kpi.accent95::before{background:var(--c95);}
+  .kpi.accent0::before{background:var(--c0);}
+
+  /* ── 区块标题 ── */
+  .section-title{font-size:15px;font-weight:700;margin:8px 2px 0;display:flex;align-items:center;gap:9px;}
+  .section-title::before{content:"";width:4px;height:15px;background:var(--acc);border-radius:2px;}
+
+  .grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;}
+  .card h2{font-size:14.5px;margin:1px 4px 2px;font-weight:700;}
+  .card .sub{color:var(--sub);font-size:11.5px;margin:0 4px 10px;font-weight:400;}
+  .chart{width:100%;height:360px;}
+  .chart.tall{height:404px;}
+  .src{color:var(--faint);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;
+    margin-top:8px;font-weight:500;}
+
+  table{width:100%;border-collapse:collapse;font-size:12px;color:var(--txt);}
+  th,td{padding:6px 9px;border-bottom:1px solid var(--line);text-align:left;}
+  th{color:var(--sub);font-weight:600;font-size:11px;}
+  .pill{display:inline-block;padding:1px 9px;border-radius:10px;font-size:11px;font-weight:600;}
+  .p92{background:rgba(91,143,249,.16);color:var(--c92);}
+  .p95{background:rgba(255,122,122,.16);color:var(--c95);}
+  .p0{background:rgba(246,189,22,.16);color:var(--c0);}
+  select{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:9px;
+    padding:6px 12px;font-size:13px;font-family:var(--font);outline:none;}
+  select:focus{border-color:var(--acc);}
+  .hint{color:var(--sub);font-size:12px;line-height:1.9;}
+  .hint b{color:var(--txt);}
+
+  .foot{color:var(--faint);font-size:11px;text-align:center;padding:14px;}
+
+  /* ── 入场动画 ── */
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .kpi,.card,.section-title{animation:rise .55s cubic-bezier(.2,.7,.3,1) both;}
+  .kpi:nth-child(2){animation-delay:.04s}.kpi:nth-child(3){animation-delay:.08s}
+  .kpi:nth-child(4){animation-delay:.12s}.kpi:nth-child(5){animation-delay:.16s}
+  @media (prefers-reduced-motion:reduce){.kpi,.card,.section-title{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1><span class="dot">●</span> 加油站损溢管理 · 公司驾驶舱</h1>
+  <div class="filters" id="filters">
+    <button data-p="ALL" class="active">全部</button>
+    <button data-p="92#汽油">92汽油</button>
+    <button data-p="95#汽油">95汽油</button>
+    <button data-p="0#柴油">柴油</button>
+  </div>
+  <div class="meta" id="meta"></div>
+</header>
+
+<div class="wrap">
+  <div class="kpis" id="kpis"></div>
+
+  <div class="section-title">一、公司库存总览 · 点击柱体下钻至各罐</div>
+  <div class="grid2">
+    <div class="card">
+      <h2>各站库存分布</h2>
+      <div class="sub">按油品堆叠 · 单位 升(L)</div>
+      <div id="stationChart" class="chart"></div>
+      <div class="src">SOURCE · 15 站《加油站损溢管理—优化版》罐表 · 实际库存</div>
+    </div>
+    <div class="card">
+      <h2 id="tankTitle">各罐库存</h2>
+      <div class="sub">单站 12 罐 · 单位 升(L)</div>
+      <div id="tankChart" class="chart"></div>
+      <div class="src" id="tankSrc">SOURCE · 选中站点罐表</div>
+    </div>
+  </div>
+
+  <div class="section-title">二、油品接卸统计</div>
+  <div class="grid2">
+    <div class="card">
+      <h2>接卸体积走势</h2>
+      <div class="sub">按日期 × 油品堆叠 · 单位 升(L)</div>
+      <div id="unloadChart" class="chart"></div>
+      <div class="src">SOURCE · 15 站《收油统计表》· 入库体积</div>
+    </div>
+    <div class="card">
+      <h2>近期接卸明细</h2>
+      <div class="sub">最新记录置顶</div>
+      <div style="max-height:300px;overflow:auto;">
+        <table id="unloadTable"><thead><tr>
+          <th>日期</th><th>油品</th><th>站</th><th>车号</th><th>罐</th><th>体积(L)</th><th>质量(t)</th><th>溢耗(t)</th>
+        </tr></thead><tbody></tbody></table>
+      </div>
+      <div class="src">SOURCE · 收油统计表 · 共 <span id="unloadCnt">0</span> 条</div>
+    </div>
+  </div>
+
+  <div class="section-title">三、三种油品损溢 · 近 5 日趋势与均值</div>
+  <div class="kpis" id="lossCards" style="grid-template-columns:repeat(3,1fr);"></div>
+  <div class="grid2">
+    <div class="card">
+      <h2>单罐近 5 日损溢走势
+        <span class="hint" style="margin-left:6px;">选择：</span>
+        <select id="lossSel"></select>
+      </h2>
+      <div class="sub">柱=原始损溢量(L) · 线=5日损溢率(%) · 已剔除建账伪值</div>
+      <div id="lossChart" class="chart tall"></div>
+      <div class="src">SOURCE · 罐表 L/N 列 · 异常罐优先</div>
+    </div>
+    <div class="card">
+      <h2>损益说明</h2>
+      <div class="hint" style="line-height:1.95;">
+        • <b>原始损溢量(L)</b>：罐表 L 列，正为盈、负为亏。<br/>
+        • <b>5日损溢率</b>：罐表 N 列，红字超标已在原表条件格式预警。<br/>
+        • 上排卡片为<b>公司级</b>按油品近 5 日均值；右图图表为<b>单罐</b>逐日走势。<br/>
+        • 已剔除"期初建账/周期重置"伪值（单日损溢 &gt; 15% 库存），仅取运营日真实损溢。<br/>
+        • 数据为每日自动同步自 15 站《损溢管理》罐表（真实数据）。
+      </div>
+    </div>
+  </div>
+
+  <div class="foot" id="foot"></div>
+</div>
+
+<script>
+const PROD_COLOR = {"92#汽油":"#8aa6bd","95#汽油":"#9aab94","0#柴油":"#cbb89a"};
+const PROD_CLASS = {"92#汽油":"p92","95#汽油":"p95","0#柴油":"p0"};
+const FONT = "Inter, 'Microsoft YaHei', 'PingFang SC', sans-serif";
+let DATA=null, FP='ALL';
+let charts={};
+
+const AX_LABEL = {color:'#9aa4ad', fontFamily:FONT, fontSize:11};
+const SPLIT = {lineStyle:{color:'#323b45'}};
+const TIP = {backgroundColor:'#1f262e', borderWidth:0, padding:[10,14],
+  textStyle:{color:'#e3e8ec', fontFamily:FONT, fontSize:12},
+  extraCssText:'border-radius:10px;box-shadow:none;'};
+const ANIM = {animationDuration:900, animationEasing:'cubicOut'};
+
+function fmt(n){ if(n==null||isNaN(n)) return '-'; return Math.round(n).toLocaleString('zh-CN'); }
+function prodOf(p){ return DATA.productLabel?DATA.productLabel[p]:p; }
+function inFilter(p){ return FP==='ALL' || FP===p; }
+
+function initCharts(){
+  ['stationChart','tankChart','unloadChart','lossChart'].forEach(id=>{
+    charts[id]=echarts.init(document.getElementById(id),null,{renderer:'canvas'});
+  });
+  charts.stationChart.on('click', p=>{ if(p.componentType==='series'){ openStation(p.name); } });
+}
+window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
+
+// ---------- KPI ----------
+function renderKPI(){
+  const c=DATA.company;
+  const cards=[];
+  cards.push(kpi('公司总库存', fmt(c.totalStockL),'L'));
+  cards.push(kpi('总库存(吨)', fmt(c.totalStockT),'t'));
+  DATA.products.forEach(p=>{
+    if(!inFilter(p)) return;
+    const b=c.byProduct[p];
+    const cls = p==='92#汽油'?'accent92':p==='95#汽油'?'accent95':'accent0';
+    cards.push(kpi(prodOf(p)+' 库存', fmt(b.stockL),'L', PROD_COLOR[p], cls));
+  });
+  document.getElementById('kpis').innerHTML=cards.join('');
+}
+function kpi(t,v,u,color,cls){
+  return `<div class="kpi ${cls||''}"><div class="t">${t}</div><div class="v" style="${color?('color:'+color):''}">${v}<span class="u">${u}</span></div></div>`;
+}
+
+// ---------- 库存下钻 ----------
+function stationSeries(){
+  const names=[], s92=[], s95=[], s0=[];
+  DATA.stations.forEach(s=>{
+    names.push(s.name);
+    const bp=s.byProduct||{};
+    s92.push(inFilter('92#汽油')?(bp['92#汽油']?.stockL||0):0);
+    s95.push(inFilter('95#汽油')?(bp['95#汽油']?.stockL||0):0);
+    s0.push(inFilter('0#柴油')?(bp['0#柴油']?.stockL||0):0);
+  });
+  return {names,s92,s95,s0};
+}
+function renderStationChart(){
+  const {names,s92,s95,s0}=stationSeries();
+  const series=[];
+  if(inFilter('92#汽油')) series.push({name:prodOf('92#汽油'),type:'bar',stack:'t',data:s92,itemStyle:{color:PROD_COLOR['92#汽油'],borderRadius:[0,0,0,0]}});
+  if(inFilter('95#汽油')) series.push({name:prodOf('95#汽油'),type:'bar',stack:'t',data:s95,itemStyle:{color:PROD_COLOR['95#汽油']}});
+  if(inFilter('0#柴油')) series.push({name:prodOf('0#柴油'),type:'bar',stack:'t',data:s0,itemStyle:{color:PROD_COLOR['0#柴油']}});
+  charts.stationChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:Object.assign({trigger:'axis',axisPointer:{type:'shadow'}},TIP),
+    legend:{show:true,textStyle:{color:'#9aa4ad',fontFamily:FONT},top:0,itemWidth:12,itemHeight:12},
+    grid:{left:64,right:18,top:38,bottom:30},
+    xAxis:{type:'category',data:names,axisLabel:{color:'#cdd4dc',fontFamily:FONT,fontSize:11},axisLine:{lineStyle:{color:'#323b45'}}},
+    yAxis:{type:'value',name:'L',nameTextStyle:{color:'#5f6a73'},axisLabel:AX_LABEL,splitLine:SPLIT},
+    series
+  },true);
+  if(names.length) openStation(names[0]);
+}
+function openStation(name){
+  const s=DATA.stations.find(x=>x.name===name);
+  if(!s) return;
+  document.getElementById('tankTitle').innerHTML='各罐库存 · <b>'+name+'</b>';
+  document.getElementById('tankSrc').textContent='SOURCE · '+name+' 罐表 · 实际库存';
+  const tanks=(s.tanks||[]).filter(t=>inFilter(t.product));
+  const names=tanks.map(t=>t.tank), data=tanks.map(t=>({value:t.stockL,itemStyle:{color:PROD_COLOR[t.product]}}));
+  charts.tankChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:Object.assign({trigger:'axis',axisPointer:{type:'shadow'},formatter:p=>{
+      const t=tanks[p[0].dataIndex]; return `${name} · ${t.tank}<br/>油品：${prodOf(t.product)}<br/>库存：${fmt(t.stockL)} L`;
+    }},TIP),
+    grid:{left:64,right:18,top:24,bottom:28},
+    xAxis:{type:'category',data:names,axisLabel:{color:'#cdd4dc',fontFamily:FONT,fontSize:11},axisLine:{lineStyle:{color:'#323b45'}}},
+    yAxis:{type:'value',name:'L',nameTextStyle:{color:'#5f6a73'},axisLabel:AX_LABEL,splitLine:SPLIT},
+    series:[{type:'bar',data,barWidth:'52%',itemStyle:{borderRadius:[5,5,0,0]}}]
+  },true);
+}
+
+// ---------- 接卸 ----------
+function renderUnload(){
+  const rows=(DATA.unload||[]).filter(r=>inFilter(r.product));
+  const byDate={};
+  rows.forEach(r=>{ byDate[r.date]=byDate[r.date]||{}; byDate[r.date][r.product]=(byDate[r.date][r.product]||0)+r.volumeL; });
+  const dates=Object.keys(byDate).sort();
+  const mk=p=>dates.map(d=>byDate[d][p]||0);
+  const series=[];
+  if(inFilter('92#汽油')) series.push({name:prodOf('92#汽油'),type:'bar',stack:'u',data:mk('92#汽油'),itemStyle:{color:PROD_COLOR['92#汽油']}});
+  if(inFilter('95#汽油')) series.push({name:prodOf('95#汽油'),type:'bar',stack:'u',data:mk('95#汽油'),itemStyle:{color:PROD_COLOR['95#汽油']}});
+  if(inFilter('0#柴油')) series.push({name:prodOf('0#柴油'),type:'bar',stack:'u',data:mk('0#柴油'),itemStyle:{color:PROD_COLOR['0#柴油']}});
+  charts.unloadChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:Object.assign({trigger:'axis',axisPointer:{type:'shadow'}},TIP),
+    legend:{show:true,textStyle:{color:'#9aa4ad',fontFamily:FONT},top:0,itemWidth:12,itemHeight:12},
+    grid:{left:64,right:18,top:38,bottom:34},
+    xAxis:{type:'category',data:dates,axisLabel:{color:'#cdd4dc',fontFamily:FONT,fontSize:10,rotate:32},axisLine:{lineStyle:{color:'#323b45'}}},
+    yAxis:{type:'value',name:'L',nameTextStyle:{color:'#5f6a73'},axisLabel:AX_LABEL,splitLine:SPLIT},
+    series
+  },true);
+  const tb=document.querySelector('#unloadTable tbody');
+  document.getElementById('unloadCnt').textContent=rows.length;
+  tb.innerHTML=rows.slice().reverse().map(r=>`<tr>
+    <td>${r.date}</td><td><span class="pill ${PROD_CLASS[r.product]}">${prodOf(r.product)}</span></td>
+    <td>${r.station}</td><td>${r.truck}</td><td>${r.tank}</td>
+    <td>${fmt(r.volumeL)}</td><td>${r.massT}</td><td>${r.gainLossT}</td></tr>`).join('');
+}
+
+// ---------- 损益 ----------
+function renderLossCards(){
+  const c=DATA.company.byProduct;
+  const cards=DATA.products.filter(inFilter).map(p=>{
+    const b=c[p]; if(!b) return '';
+    const gain=b.lossAvg5L>=0, rc=b.lossRateAvg5>=0, anc=b.anomalyCount||0;
+    const col = p==='92#汽油'?'accent92':p==='95#汽油'?'accent95':'accent0';
+    return `<div class="kpi ${col}"><div class="t">${prodOf(p)} · 近5日损溢</div>
+      <div class="v" style="color:${gain?'#a7bda0':'#c89a92'}">${fmt(b.lossAvg5L)}<span class="u">L/罐·日</span></div>
+      <div class="t" style="margin-top:7px;line-height:1.7;">
+        损溢率：<b style="color:${rc?'#a7bda0':'#c89a92'}">${(b.lossRateAvg5*100).toFixed(3)}%</b><br/>
+        ${anc>0?`<span style="color:#c89a92;">⚠ 异常罐 ${anc} 个</span>`:`<span style="color:#a7bda0;">✓ 正常</span>`}
+      </div></div>`;
+  }).join('');
+  document.getElementById('lossCards').innerHTML=cards;
+}
+function renderLossSelect(){
+  const sel=document.getElementById('lossSel');
+  const items=[];
+  DATA.stations.forEach(s=>{
+    (s.tanks||[]).filter(t=>inFilter(t.product)).forEach(t=>{
+      items.push({s:s.name,t:t.tank,p:t.product,a:t.anomaly});
+    });
+  });
+  items.sort((x,y)=>(y.a?1:0)-(x.a?1:0));
+  sel.innerHTML=items.map(it=>`<option value="${it.s}||${it.t}">${it.s} · ${it.t}（${prodOf(it.p)}）${it.a?' ⚠':''}</option>`).join('');
+  sel.onchange=()=>renderLossDetail();
+  renderLossDetail();
+}
+function renderLossDetail(){
+  const sel=document.getElementById('lossSel');
+  if(!sel.value) return;
+  const [sname,tank]=sel.value.split('||');
+  const s=DATA.stations.find(x=>x.name===sname);
+  const t=(s.tanks||[]).find(x=>x.tank===tank);
+  if(!t) return;
+  const last5=t.last5||[];
+  const dates=last5.map(x=>x.date);
+  const lossL=last5.map(x=>x.lossL);
+  const rate=last5.map(x=>{let v=(x.lossRate5||0)*100; return Math.max(-5,Math.min(5,v));});
+  charts.lossChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:Object.assign({trigger:'axis'},TIP),
+    legend:{show:true,textStyle:{color:'#9aa4ad',fontFamily:FONT},top:0,itemWidth:12,itemHeight:12},
+    grid:{left:64,right:64,top:38,bottom:42},
+    xAxis:{type:'category',data:dates,axisLabel:{color:'#cdd4dc',fontFamily:FONT,fontSize:11,rotate:20},axisLine:{lineStyle:{color:'#323b45'}}},
+    yAxis:[
+      {type:'value',name:'损溢量(L)',nameTextStyle:{color:'#5f6a73'},axisLabel:AX_LABEL,splitLine:SPLIT},
+      {type:'value',name:'率(%)',min:-5,max:5,nameTextStyle:{color:'#5f6a73'},axisLabel:AX_LABEL,splitLine:{show:false}}
+    ],
+    series:[
+      {name:'原始损溢量(L)',type:'bar',data:lossL,itemStyle:{color:PROD_COLOR[t.product],borderRadius:[4,4,0,0]},
+        markLine:{silent:true,data:[{yAxis:0}],lineStyle:{color:'#5f6a73',type:'dashed'}}},
+      {name:'5日损溢率(%)',type:'line',yAxisIndex:1,data:rate,smooth:true,symbol:'circle',symbolSize:7,
+        lineStyle:{color:'#7fa3a8',width:2.5},itemStyle:{color:'#7fa3a8'}}
+    ]
+  },true);
+}
+
+// ---------- 主渲染 ----------
+function renderAll(){ renderKPI(); renderStationChart(); renderUnload(); renderLossCards(); renderLossSelect(); }
+function bindFilters(){
+  document.querySelectorAll('#filters button').forEach(b=>{
+    b.onclick=()=>{
+      document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active'); FP=b.dataset.p; renderAll();
+    };
+  });
+}
+fetch('all_data.json').then(r=>r.json()).then(d=>{
+  DATA=d;
+  document.getElementById('meta').innerHTML='真实数据 · 15 站 · '+(d.generatedAt||'')
+    + (d.isMock?' <span style="color:#ffcf6b;">示例</span>':'');
+  document.getElementById('foot').textContent='数据来源：15 站《加油站损溢管理—优化版》罐表 + 《收油统计表》 · 每日自动同步 · 生成于 '+(d.generatedAt||'');
+  initCharts(); bindFilters(); renderAll();
+}).catch(e=>{
+  document.getElementById('meta').innerHTML='数据加载失败：'+e.message;
+});
+</script>
+</body>
+</html>
