@@ -15,7 +15,7 @@
   "byProduct": {
    "92#汽油": {
     "stockL": 1157108.2,
-    "stockT": 852.4,
+    "stockT": 852.9,
     "lossAvg5L": -375.76,
     "lossSum5L": -14278.91,
     "lossRateAvg5": -0.01234,
@@ -39,7 +39,7 @@
    }
   },
   "totalStockL": 3659072.4,
-  "totalStockT": 2846.3
+  "totalStockT": 2846.8
  },
  "stations": [
   {
@@ -52859,7 +52859,7 @@
    "byProduct": {
     "92#汽油": {
      "stockL": 112610.2,
-     "stockT": 83.4,
+     "stockT": 83.9,
      "lossAvg5L": -541.67,
      "lossSum5L": -2166.7,
      "lossRateAvg5": -0.01924,
@@ -53389,7 +53389,7 @@
      "tank": "西3",
      "product": "92#汽油",
      "stockL": 6279.2,
-     "stockT": 4.7031208,
+     "stockT": 5.236852799999999,
      "last5": [
       {
        "date": "2026-08-24",
@@ -53419,7 +53419,7 @@
      ],
      "lossAvg5L": -2477.5,
      "lossRateAvg5": 1.10158,
-     "density": 749.0,
+     "density": 834.0,
      "last5Raw": [
       {
        "date": "2026-08-24",
