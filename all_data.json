@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-08-30 (真实数据·15站自动抽取)",
+ "generatedAt": "2026-08-31 (真实数据·15站自动抽取)",
  "isMock": false,
  "products": [
   "92#汽油",
@@ -30035,7 +30035,7 @@
      ],
      "lossAvg5L": 0.0,
      "lossRateAvg5": 0.0,
-     "density": 831.5726852346353,
+     "density": 831.3221567439549,
      "last5Raw": [
       {
        "date": "2026-08-24",
@@ -30099,7 +30099,7 @@
      ],
      "lossAvg5L": 0.0,
      "lossRateAvg5": 0.0,
-     "density": 831.5726852346353,
+     "density": 831.3221567439549,
      "last5Raw": [
       {
        "date": "2026-08-24",
@@ -30163,7 +30163,7 @@
      ],
      "lossAvg5L": 0.0,
      "lossRateAvg5": 0.0,
-     "density": 754.5753477005246,
+     "density": 753.6206226110381,
      "last5Raw": [
       {
        "date": "2026-08-24",
@@ -30227,7 +30227,7 @@
      ],
      "lossAvg5L": 0.0,
      "lossRateAvg5": 0.0,
-     "density": 831.5726852346353,
+     "density": 831.3221567439549,
      "last5Raw": [
       {
        "date": "2026-08-24",
@@ -30527,7 +30527,7 @@
      ],
      "lossAvg5L": 0.0,
      "lossRateAvg5": 0.0,
-     "density": 831.5726852346353,
+     "density": 831.3221567439549,
      "last5Raw": [
       {
        "date": "2026-08-24",
@@ -30591,7 +30591,7 @@
      ],
      "lossAvg5L": 0.0,
      "lossRateAvg5": 0.0,
-     "density": 831.5726852346353,
+     "density": 831.3221567439549,
      "last5Raw": [
       {
        "date": "2026-08-24",
@@ -37602,6 +37602,436 @@
      "volumeL": 11359.0,
      "massT": 9.3403087958216,
      "gainLossT": -0.0256714833783969
+    },
+    {
+     "date": "2026-08-02",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 9754.0,
+     "massT": 8.05974525,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-02",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 11830.0,
+     "massT": 9.78228230855561,
+     "gainLossT": -0.0279724414443927
+    },
+    {
+     "date": "2026-08-03",
+     "product": "95#汽油",
+     "station": "南沙",
+     "truck": "陕A U5750",
+     "tank": "北3",
+     "volumeL": 16964.0,
+     "massT": 12.7098126088237,
+     "gainLossT": -0.0201873911763229
+    },
+    {
+     "date": "2026-08-03",
+     "product": "92#汽油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北2",
+     "volumeL": 16233.0,
+     "massT": 12.0461071362,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-03",
+     "product": "92#汽油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南2",
+     "volumeL": 14466.0,
+     "massT": 10.7290624670188,
+     "gainLossT": -0.0248303967811666
+    },
+    {
+     "date": "2026-08-03",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕B 39955",
+     "tank": "北4",
+     "volumeL": 5580.0,
+     "massT": 4.59962514,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-03",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕B 39955",
+     "tank": "南1",
+     "volumeL": 16011.0,
+     "massT": 13.2129698878248,
+     "gainLossT": -0.0274049721752105
+    },
+    {
+     "date": "2026-08-04",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 15770.0,
+     "massT": 13.0719138066,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-04",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 5692.0,
+     "massT": 4.72145287493094,
+     "gainLossT": -0.0266333184690564
+    },
+    {
+     "date": "2026-08-05",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕E 77312",
+     "tank": "北1",
+     "volumeL": 7137.0,
+     "massT": 5.9019499504,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-05",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕E 77312",
+     "tank": "北4",
+     "volumeL": 3768.0,
+     "massT": 3.1226481812,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-05",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕E 77312",
+     "tank": "南1",
+     "volumeL": 10654.0,
+     "massT": 8.80714099507535,
+     "gainLossT": -0.0282608733246464
+    },
+    {
+     "date": "2026-08-06",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 5384.0,
+     "massT": 4.47093827655,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-06",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 16057.0,
+     "massT": 13.311462583655,
+     "gainLossT": -0.027599139794963
+    },
+    {
+     "date": "2026-08-08",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 6291.0,
+     "massT": 5.2088011453,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-08",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 15278.0,
+     "massT": 12.6390016182139,
+     "gainLossT": -0.0221972364860524
+    },
+    {
+     "date": "2026-08-09",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 11377.0,
+     "massT": 9.399098778,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-09",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 10237.0,
+     "massT": 8.45254113080312,
+     "gainLossT": -0.0283600911968757
+    },
+    {
+     "date": "2026-08-10",
+     "product": "95#汽油",
+     "station": "南沙",
+     "truck": "陕A U5750",
+     "tank": "北3",
+     "volumeL": 10676.0,
+     "massT": 7.95431523280917,
+     "gainLossT": -0.0126847671908317
+    },
+    {
+     "date": "2026-08-10",
+     "product": "92#汽油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北2",
+     "volumeL": 16682.0,
+     "massT": 12.2036539327,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-10",
+     "product": "92#汽油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南2",
+     "volumeL": 14368.0,
+     "massT": 10.5214351426524,
+     "gainLossT": -0.0249109246475871
+    },
+    {
+     "date": "2026-08-10",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕B 39955",
+     "tank": "南1",
+     "volumeL": 16115.0,
+     "massT": 13.2605333469,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-10",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕B 39955",
+     "tank": "北4",
+     "volumeL": 5548.0,
+     "massT": 4.56244531457262,
+     "gainLossT": -0.0270213385273809
+    },
+    {
+     "date": "2026-08-12",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 11415.0,
+     "massT": 9.409103886,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-12",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 10160.0,
+     "massT": 8.37276966671656,
+     "gainLossT": -0.0281264472834373
+    },
+    {
+     "date": "2026-08-13",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 10549.0,
+     "massT": 8.71162008,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-13",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 11069.0,
+     "massT": 9.14062405895099,
+     "gainLossT": -0.0277558610490094
+    },
+    {
+     "date": "2026-08-14",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕E 77312",
+     "tank": "北1",
+     "volumeL": 4083.0,
+     "massT": 3.380880213,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-14",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕E 77312",
+     "tank": "北4",
+     "volumeL": 11390.0,
+     "massT": 9.4080772272,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-14",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕E 77312",
+     "tank": "南1",
+     "volumeL": 6115.0,
+     "massT": 5.07429819407035,
+     "gainLossT": -0.0267443657296495
+    },
+    {
+     "date": "2026-08-15",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 5965.0,
+     "massT": 4.916373504,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-15",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 15656.0,
+     "massT": 12.8479513117277,
+     "gainLossT": -0.0256751842723314
+    },
+    {
+     "date": "2026-08-16",
+     "product": "92#汽油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北2",
+     "volumeL": 14331.0,
+     "massT": 10.5420598902,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-16",
+     "product": "92#汽油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南2",
+     "volumeL": 16565.0,
+     "massT": 12.1950147550438,
+     "gainLossT": -0.0329253547562206
+    },
+    {
+     "date": "2026-08-16",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕B 39955",
+     "tank": "北4",
+     "volumeL": 8806.0,
+     "massT": 7.3066935791,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-16",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕B 39955",
+     "tank": "南1",
+     "volumeL": 12844.0,
+     "massT": 10.6161980814343,
+     "gainLossT": -0.0271083394657169
+    },
+    {
+     "date": "2026-08-18",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 10390.0,
+     "massT": 8.6674095064,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-18",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 10780.0,
+     "massT": 8.99798129640364,
+     "gainLossT": -0.0246091971963588
+    },
+    {
+     "date": "2026-08-19",
+     "product": "95#汽油",
+     "station": "南沙",
+     "truck": "陕A U5750",
+     "tank": "北3",
+     "volumeL": 14755.0,
+     "massT": 10.958626950321,
+     "gainLossT": -0.0113730496789686
+    },
+    {
+     "date": "2026-08-19",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 8479.0,
+     "massT": 7.0222407948,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-19",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 13158.0,
+     "massT": 10.8791063638831,
+     "gainLossT": -0.0286528413169316
+    },
+    {
+     "date": "2026-08-20",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "北4",
+     "volumeL": 9855.0,
+     "massT": 8.20400139918,
+     "gainLossT": 0.0
+    },
+    {
+     "date": "2026-08-20",
+     "product": "0#柴油",
+     "station": "南沙",
+     "truck": "陕A AB792",
+     "tank": "南1",
+     "volumeL": 11598.0,
+     "massT": 9.63937740156353,
+     "gainLossT": -0.0266211992564718
     }
    ]
   },
@@ -104208,6 +104638,436 @@
    "volumeL": 11359.0,
    "massT": 9.3403087958216,
    "gainLossT": -0.0256714833783969
+  },
+  {
+   "date": "2026-08-02",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 9754.0,
+   "massT": 8.05974525,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-02",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 11830.0,
+   "massT": 9.78228230855561,
+   "gainLossT": -0.0279724414443927
+  },
+  {
+   "date": "2026-08-03",
+   "product": "95#汽油",
+   "station": "南沙",
+   "truck": "陕A U5750",
+   "tank": "北3",
+   "volumeL": 16964.0,
+   "massT": 12.7098126088237,
+   "gainLossT": -0.0201873911763229
+  },
+  {
+   "date": "2026-08-03",
+   "product": "92#汽油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北2",
+   "volumeL": 16233.0,
+   "massT": 12.0461071362,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-03",
+   "product": "92#汽油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南2",
+   "volumeL": 14466.0,
+   "massT": 10.7290624670188,
+   "gainLossT": -0.0248303967811666
+  },
+  {
+   "date": "2026-08-03",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕B 39955",
+   "tank": "北4",
+   "volumeL": 5580.0,
+   "massT": 4.59962514,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-03",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕B 39955",
+   "tank": "南1",
+   "volumeL": 16011.0,
+   "massT": 13.2129698878248,
+   "gainLossT": -0.0274049721752105
+  },
+  {
+   "date": "2026-08-04",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 15770.0,
+   "massT": 13.0719138066,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-04",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 5692.0,
+   "massT": 4.72145287493094,
+   "gainLossT": -0.0266333184690564
+  },
+  {
+   "date": "2026-08-05",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕E 77312",
+   "tank": "北1",
+   "volumeL": 7137.0,
+   "massT": 5.9019499504,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-05",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕E 77312",
+   "tank": "北4",
+   "volumeL": 3768.0,
+   "massT": 3.1226481812,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-05",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕E 77312",
+   "tank": "南1",
+   "volumeL": 10654.0,
+   "massT": 8.80714099507535,
+   "gainLossT": -0.0282608733246464
+  },
+  {
+   "date": "2026-08-06",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 5384.0,
+   "massT": 4.47093827655,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-06",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 16057.0,
+   "massT": 13.311462583655,
+   "gainLossT": -0.027599139794963
+  },
+  {
+   "date": "2026-08-08",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 6291.0,
+   "massT": 5.2088011453,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-08",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 15278.0,
+   "massT": 12.6390016182139,
+   "gainLossT": -0.0221972364860524
+  },
+  {
+   "date": "2026-08-09",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 11377.0,
+   "massT": 9.399098778,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-09",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 10237.0,
+   "massT": 8.45254113080312,
+   "gainLossT": -0.0283600911968757
+  },
+  {
+   "date": "2026-08-10",
+   "product": "95#汽油",
+   "station": "南沙",
+   "truck": "陕A U5750",
+   "tank": "北3",
+   "volumeL": 10676.0,
+   "massT": 7.95431523280917,
+   "gainLossT": -0.0126847671908317
+  },
+  {
+   "date": "2026-08-10",
+   "product": "92#汽油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北2",
+   "volumeL": 16682.0,
+   "massT": 12.2036539327,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-10",
+   "product": "92#汽油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南2",
+   "volumeL": 14368.0,
+   "massT": 10.5214351426524,
+   "gainLossT": -0.0249109246475871
+  },
+  {
+   "date": "2026-08-10",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕B 39955",
+   "tank": "南1",
+   "volumeL": 16115.0,
+   "massT": 13.2605333469,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-10",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕B 39955",
+   "tank": "北4",
+   "volumeL": 5548.0,
+   "massT": 4.56244531457262,
+   "gainLossT": -0.0270213385273809
+  },
+  {
+   "date": "2026-08-12",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 11415.0,
+   "massT": 9.409103886,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-12",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 10160.0,
+   "massT": 8.37276966671656,
+   "gainLossT": -0.0281264472834373
+  },
+  {
+   "date": "2026-08-13",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 10549.0,
+   "massT": 8.71162008,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-13",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 11069.0,
+   "massT": 9.14062405895099,
+   "gainLossT": -0.0277558610490094
+  },
+  {
+   "date": "2026-08-14",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕E 77312",
+   "tank": "北1",
+   "volumeL": 4083.0,
+   "massT": 3.380880213,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-14",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕E 77312",
+   "tank": "北4",
+   "volumeL": 11390.0,
+   "massT": 9.4080772272,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-14",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕E 77312",
+   "tank": "南1",
+   "volumeL": 6115.0,
+   "massT": 5.07429819407035,
+   "gainLossT": -0.0267443657296495
+  },
+  {
+   "date": "2026-08-15",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 5965.0,
+   "massT": 4.916373504,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-15",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 15656.0,
+   "massT": 12.8479513117277,
+   "gainLossT": -0.0256751842723314
+  },
+  {
+   "date": "2026-08-16",
+   "product": "92#汽油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北2",
+   "volumeL": 14331.0,
+   "massT": 10.5420598902,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-16",
+   "product": "92#汽油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南2",
+   "volumeL": 16565.0,
+   "massT": 12.1950147550438,
+   "gainLossT": -0.0329253547562206
+  },
+  {
+   "date": "2026-08-16",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕B 39955",
+   "tank": "北4",
+   "volumeL": 8806.0,
+   "massT": 7.3066935791,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-16",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕B 39955",
+   "tank": "南1",
+   "volumeL": 12844.0,
+   "massT": 10.6161980814343,
+   "gainLossT": -0.0271083394657169
+  },
+  {
+   "date": "2026-08-18",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 10390.0,
+   "massT": 8.6674095064,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-18",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 10780.0,
+   "massT": 8.99798129640364,
+   "gainLossT": -0.0246091971963588
+  },
+  {
+   "date": "2026-08-19",
+   "product": "95#汽油",
+   "station": "南沙",
+   "truck": "陕A U5750",
+   "tank": "北3",
+   "volumeL": 14755.0,
+   "massT": 10.958626950321,
+   "gainLossT": -0.0113730496789686
+  },
+  {
+   "date": "2026-08-19",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 8479.0,
+   "massT": 7.0222407948,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-19",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 13158.0,
+   "massT": 10.8791063638831,
+   "gainLossT": -0.0286528413169316
+  },
+  {
+   "date": "2026-08-20",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "北4",
+   "volumeL": 9855.0,
+   "massT": 8.20400139918,
+   "gainLossT": 0.0
+  },
+  {
+   "date": "2026-08-20",
+   "product": "0#柴油",
+   "station": "南沙",
+   "truck": "陕A AB792",
+   "tank": "南1",
+   "volumeL": 11598.0,
+   "massT": 9.63937740156353,
+   "gainLossT": -0.0266211992564718
   },
   {
    "date": "2026-01-01",
