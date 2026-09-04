@@ -124,13 +124,13 @@
   <div class="grid2">
     <div class="card">
       <h2>接卸体积走势</h2>
-      <div class="sub">按日期 × 油品堆叠 · 单位 升(L)</div>
+      <div class="sub">按日期 × 油品堆叠 · 单位 升(L) · 近半年</div>
       <div id="unloadChart" class="chart"></div>
       <div class="src">SOURCE · 15 站《收油统计表》· 入库体积</div>
     </div>
     <div class="card">
       <h2>近期接卸明细</h2>
-      <div class="sub">最新记录置顶</div>
+      <div class="sub">近 1 个月 · 最新记录置顶</div>
       <div style="max-height:300px;overflow:auto;">
         <table id="unloadTable"><thead><tr>
           <th>日期</th><th>油品</th><th>站</th><th>车号</th><th>罐</th><th>体积(L)</th><th>质量(t)</th><th>溢耗(t)</th>
@@ -185,6 +185,14 @@ function fmt(n){ if(n==null||isNaN(n)) return '-'; return Math.round(n).toLocale
 function fmt2(n){ if(n==null||isNaN(n)) return '-'; return Number(n).toFixed(2); }
 function prodOf(p){ return DATA.productLabel?DATA.productLabel[p]:p; }
 function inFilter(p){ return FP==='ALL' || FP===p; }
+// 以 YYYY-MM-DD 字符串为基准，向前/向后平移 n 个月（本地时区，避免 UTC 偏移）
+function ymdShift(dateStr, months){
+  const [y,m,dd]=dateStr.split('-').map(Number);
+  const d=new Date(y, m-1, dd);
+  d.setMonth(d.getMonth()-months);
+  const yy=d.getFullYear(), mm=String(d.getMonth()+1).padStart(2,'0'), dd2=String(d.getDate()).padStart(2,'0');
+  return yy+'-'+mm+'-'+dd2;
+}
 
 function initCharts(){
   ['stationChart','tankChart','unloadChart','lossChart'].forEach(id=>{
@@ -268,9 +276,14 @@ function openStation(name){
 
 // ---------- 接卸 ----------
 function renderUnload(){
-  const rows=(DATA.unload||[]).filter(r=>inFilter(r.product));
+  const allRows=(DATA.unload||[]).filter(r=>inFilter(r.product));
+  // 以数据中最新的接卸日期为锚点，向前取「近半年 / 近 1 个月」
+  const maxDate=allRows.reduce((m,r)=> (r.date&&r.date>m)?r.date:m, '');
+  const chartCut=ymdShift(maxDate,6);   // 走势图：近半年
+  const tableCut=ymdShift(maxDate,1);   // 明细表：近 1 个月
+  // —— 走势图（近半年）——
   const byDate={};
-  rows.forEach(r=>{ byDate[r.date]=byDate[r.date]||{}; byDate[r.date][r.product]=(byDate[r.date][r.product]||0)+r.volumeL; });
+  allRows.forEach(r=>{ if(r.date<chartCut) return; byDate[r.date]=byDate[r.date]||{}; byDate[r.date][r.product]=(byDate[r.date][r.product]||0)+r.volumeL; });
   const dates=Object.keys(byDate).sort();
   const mk=p=>dates.map(d=>byDate[d][p]||0);
   const series=[];
@@ -286,9 +299,11 @@ function renderUnload(){
     yAxis:{type:'value',name:'L',nameTextStyle:{color:'#5f6a73'},axisLabel:AX_LABEL,splitLine:SPLIT},
     series
   },true);
+  // —— 明细表（近 1 个月）——
+  const tbRows=allRows.filter(r=> r.date>=tableCut);
   const tb=document.querySelector('#unloadTable tbody');
-  document.getElementById('unloadCnt').textContent=rows.length;
-  tb.innerHTML=rows.slice().reverse().map(r=>`<tr>
+  document.getElementById('unloadCnt').textContent=tbRows.length;
+  tb.innerHTML=tbRows.slice().reverse().map(r=>`<tr>
     <td>${r.date}</td><td><span class="pill ${PROD_CLASS[r.product]}">${prodOf(r.product)}</span></td>
     <td>${r.station}</td><td>${r.truck}</td><td>${r.tank}</td>
     <td>${fmt(r.volumeL)}</td><td>${fmt2(r.massT)}</td><td>${fmt2(r.gainLossT)}</td></tr>`).join('');
