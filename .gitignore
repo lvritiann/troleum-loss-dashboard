@@ -1,0 +1,27 @@
+# 驾驶舱 GitHub Pages 仓库忽略项
+#
+# ★ 2026-10-14 云端化变更：_extract 下的 .py 流水线脚本必须纳管
+#   （GitHub Actions 云端跑批要用它们），因此不再整体忽略 _extract/，
+#   改为「只忽略脚本产出的原始载荷/中间 json/日志」，避免仓库膨胀。
+#   deploy.py 仅显式推送 index.html + all_data.json，此处再兜底防误提交大文件。
+
+# —— 流水线产物（不纳管）——
+_extract/raw_*
+_extract/*.json
+_extract/*.txt
+_extract/*.log
+_extract/__pycache__/
+_extract/_probe_*
+_extract/*.pyc
+# 恢复现场目录含 .env_upload 等凭据 + 大体积 xlsx —— 一律不纳管
+_extract/restore_temp/
+_extract/*.xlsx
+_extract/*.xls
+
+# —— 通用 ——
+dist/
+node_modules/
+*.log
+__pycache__/
+deploy_config.json
+_backup/
