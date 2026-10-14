@@ -14,12 +14,12 @@
  "company": {
   "byProduct": {
    "92#汽油": {
-    "stockL": 1057071.9,
-    "stockT": 784.2,
-    "lossAvg5L": -1762.54,
-    "lossSum5L": -65214.16,
-    "lossRateAvg5": -0.06169,
-    "anomalyCount": 28
+    "stockL": 1081222.4,
+    "stockT": 801.8,
+    "lossAvg5L": -1859.29,
+    "lossSum5L": -70653.06,
+    "lossRateAvg5": -0.06535,
+    "anomalyCount": 29
    },
    "95#汽油": {
     "stockL": 914075.0,
@@ -30,16 +30,16 @@
     "anomalyCount": 25
    },
    "0#柴油": {
-    "stockL": 1579536.0,
-    "stockT": 1296.3,
-    "lossAvg5L": -1137.82,
-    "lossSum5L": -117195.16,
-    "lossRateAvg5": -0.0742,
-    "anomalyCount": 45
+    "stockL": 1647636.7,
+    "stockT": 1352.3,
+    "lossAvg5L": -1136.81,
+    "lossSum5L": -119365.16,
+    "lossRateAvg5": -0.07245,
+    "anomalyCount": 46
    }
   },
-  "totalStockL": 3550682.9,
-  "totalStockT": 2763.8
+  "totalStockL": 3642934.1,
+  "totalStockT": 2837.4
  },
  "stations": [
   {
@@ -10984,11 +10984,11 @@
      "anomalyCount": 1
     },
     "0#柴油": {
-     "stockL": 139626.9,
-     "stockT": 115.3,
-     "lossAvg5L": -504.39,
+     "stockL": 178945.6,
+     "stockT": 147.7,
+     "lossAvg5L": -441.34,
      "lossSum5L": -3530.7,
-     "lossRateAvg5": -0.02529,
+     "lossRateAvg5": -0.01973,
      "anomalyCount": 3
     }
    },
@@ -11176,6 +11176,70 @@
        "date": "2026-10-13",
        "lossL": 0,
        "lossRate5": 4.06537826776973
+      }
+     ],
+     "anomaly": false
+    },
+    {
+     "tank": "东4",
+     "product": "0#柴油",
+     "stockL": 39318.7,
+     "stockT": 32.437927499999994,
+     "last5": [
+      {
+       "date": "2026-10-09",
+       "lossL": -1506.2,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-10",
+       "lossL": -50.4000000000015,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0,
+       "lossRate5": 9.08081904555141
+      }
+     ],
+     "lossAvg5L": 0,
+     "lossRateAvg5": 9.08082,
+     "density": 825,
+     "last5Raw": [
+      {
+       "date": "2026-10-09",
+       "lossL": -1506.2,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-10",
+       "lossL": -50.4000000000015,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0,
+       "lossRate5": 9.08081904555141
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0,
+       "lossRate5": 9.08081904555141
       }
      ],
      "anomaly": false
@@ -15331,12 +15395,12 @@
      "anomalyCount": 3
     },
     "0#柴油": {
-     "stockL": 110917,
-     "stockT": 86.8,
-     "lossAvg5L": -1058.58,
-     "lossSum5L": -6351.5,
-     "lossRateAvg5": -0.05726,
-     "anomalyCount": 4
+     "stockL": 139699,
+     "stockT": 110.4,
+     "lossAvg5L": -1217.36,
+     "lossSum5L": -8521.5,
+     "lossRateAvg5": -0.061,
+     "anomalyCount": 5
     }
    },
    "tanks": [
@@ -15936,6 +16000,70 @@
        "date": "2026-10-11",
        "lossL": -1321,
        "lossRate5": 5.03901912746398
+      }
+     ],
+     "anomaly": true
+    },
+    {
+     "tank": "西5",
+     "product": "0#柴油",
+     "stockL": 28782,
+     "stockT": 23.60124,
+     "last5": [
+      {
+       "date": "2026-10-07",
+       "lossL": -3096,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-08",
+       "lossL": -1111,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-09",
+       "lossL": -2455,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-10",
+       "lossL": -1881,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": -2170,
+       "lossRate5": 133.155558104853
+      }
+     ],
+     "lossAvg5L": -2170,
+     "lossRateAvg5": 133.15556,
+     "density": 820,
+     "last5Raw": [
+      {
+       "date": "2026-10-07",
+       "lossL": -3096,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-08",
+       "lossL": -1111,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-09",
+       "lossL": -2455,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-10",
+       "lossL": -1881,
+       "lossRate5": 133.155558104853
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": -2170,
+       "lossRate5": 133.155558104853
       }
      ],
      "anomaly": true
@@ -26498,12 +26626,12 @@
    "name": "韩城",
    "byProduct": {
     "92#汽油": {
-     "stockL": 26674,
-     "stockT": 19.0,
-     "lossAvg5L": -4607.6,
-     "lossSum5L": -4607.6,
-     "lossRateAvg5": -0.17274,
-     "anomalyCount": 1
+     "stockL": 50824.5,
+     "stockT": 36.6,
+     "lossAvg5L": -5023.25,
+     "lossSum5L": -10046.5,
+     "lossRateAvg5": -0.19767,
+     "anomalyCount": 2
     },
     "95#汽油": {
      "stockL": 46110.6,
@@ -26760,6 +26888,70 @@
        "date": "2026-10-13",
        "lossL": -2890.9,
        "lossRate5": 1.99188712928968
+      }
+     ],
+     "anomaly": true
+    },
+    {
+     "tank": "东5",
+     "product": "92#汽油",
+     "stockL": 24150.5,
+     "stockT": 17.56948875,
+     "last5": [
+      {
+       "date": "2026-10-09",
+       "lossL": 16431,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-10",
+       "lossL": -5438.9,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": -5274.4,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": -5568.8,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": -6275.2,
+       "lossRate5": -0.0306360067516848
+      }
+     ],
+     "lossAvg5L": -5438.9,
+     "lossRateAvg5": -0.03064,
+     "density": 727.5,
+     "last5Raw": [
+      {
+       "date": "2026-10-09",
+       "lossL": 16431,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-10",
+       "lossL": -5438.9,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": -5274.4,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": -5568.8,
+       "lossRate5": -0.0306360067516848
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": -6275.2,
+       "lossRate5": -0.0306360067516848
       }
      ],
      "anomaly": true
