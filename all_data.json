@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-10 (真实数据·15站自动抽取)",
+ "generatedAt": "2026-10-14 (真实数据·15站自动抽取)",
  "isMock": false,
  "products": [
   "92#汽油",
@@ -16,25 +16,25 @@
    "92#汽油": {
     "stockL": 1198701.3,
     "stockT": 888.9,
-    "lossAvg5L": -1197.88,
-    "lossSum5L": -45519.39,
-    "lossRateAvg5": -0.03797,
+    "lossAvg5L": -1210.63,
+    "lossSum5L": -46003.89,
+    "lossRateAvg5": -0.03838,
     "anomalyCount": 30
    },
    "95#汽油": {
     "stockL": 934739.3,
     "stockT": 699.4,
-    "lossAvg5L": -1665.32,
-    "lossSum5L": -56620.92,
-    "lossRateAvg5": -0.06057,
+    "lossAvg5L": -1700.35,
+    "lossSum5L": -57811.92,
+    "lossRateAvg5": -0.06185,
     "anomalyCount": 28
    },
    "0#柴油": {
     "stockL": 1704794.2,
     "stockT": 1398.0,
-    "lossAvg5L": -1255.53,
-    "lossSum5L": -131830.53,
-    "lossRateAvg5": -0.07733,
+    "lossAvg5L": -1253.31,
+    "lossSum5L": -131597.03,
+    "lossRateAvg5": -0.07719,
     "anomalyCount": 51
    }
   },
@@ -48,25 +48,25 @@
     "92#汽油": {
      "stockL": 95962,
      "stockT": 70.9,
-     "lossAvg5L": -4167.5,
-     "lossSum5L": -12502.5,
-     "lossRateAvg5": -0.13029,
+     "lossAvg5L": -4329.0,
+     "lossSum5L": -12987,
+     "lossRateAvg5": -0.13533,
      "anomalyCount": 3
     },
     "95#汽油": {
      "stockL": 72730,
      "stockT": 54.0,
-     "lossAvg5L": -4496.5,
-     "lossSum5L": -8993.0,
-     "lossRateAvg5": -0.12365,
+     "lossAvg5L": -5092.0,
+     "lossSum5L": -10184,
+     "lossRateAvg5": -0.14002,
      "anomalyCount": 2
     },
     "0#柴油": {
      "stockL": 122660,
      "stockT": 101.3,
-     "lossAvg5L": -777.21,
-     "lossSum5L": -5440.5,
-     "lossRateAvg5": -0.04435,
+     "lossAvg5L": -743.86,
+     "lossSum5L": -5207.0,
+     "lossRateAvg5": -0.04245,
      "anomalyCount": 5
     }
    },
@@ -80,52 +80,57 @@
       {
        "date": "2026-09-21",
        "lossL": -2869,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-22",
        "lossL": -2551,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-23",
        "lossL": -2823,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
+      },
+      {
+       "date": "2026-09-24",
+       "lossL": -3097.9,
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-25",
        "lossL": -2322,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       }
      ],
-     "lossAvg5L": -2687.0,
-     "lossRateAvg5": 0.75079,
+     "lossAvg5L": -2823,
+     "lossRateAvg5": -3.40895,
      "density": 742,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -2869,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-22",
        "lossL": -2551,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-23",
        "lossL": -2823,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-24",
-       "lossL": 9585,
-       "lossRate5": 0.750790726773487
+       "lossL": -3097.9,
+       "lossRate5": -3.40895346008133
       },
       {
        "date": "2026-09-25",
        "lossL": -2322,
-       "lossRate5": 0.750790726773487
+       "lossRate5": -3.40895346008133
       }
      ],
      "anomaly": true
@@ -139,52 +144,57 @@
       {
        "date": "2026-09-21",
        "lossL": -3481,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-22",
        "lossL": -3952,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-23",
        "lossL": -4514,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
+      },
+      {
+       "date": "2026-09-24",
+       "lossL": -4438.3,
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-25",
        "lossL": -3483,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       }
      ],
-     "lossAvg5L": -3717.5,
-     "lossRateAvg5": 3.86709,
+     "lossAvg5L": -3952,
+     "lossRateAvg5": -4.15361,
      "density": 739,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -3481,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-22",
        "lossL": -3952,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-23",
        "lossL": -4514,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-24",
-       "lossL": 16475,
-       "lossRate5": 3.86708564898977
+       "lossL": -4438.3,
+       "lossRate5": -4.15361242403781
       },
       {
        "date": "2026-09-25",
        "lossL": -3483,
-       "lossRate5": 3.86708564898977
+       "lossRate5": -4.15361242403781
       }
      ],
      "anomaly": true
@@ -260,6 +270,11 @@
      "stockT": 30.410842,
      "last5": [
       {
+       "date": "2026-09-21",
+       "lossL": -115.699999999997,
+       "lossRate5": -2.90340675879053
+      },
+      {
        "date": "2026-09-22",
        "lossL": -1452,
        "lossRate5": -2.90340675879053
@@ -280,13 +295,13 @@
        "lossRate5": -2.90340675879053
       }
      ],
-     "lossAvg5L": -809.5,
+     "lossAvg5L": -576,
      "lossRateAvg5": -2.90341,
      "density": 826,
      "last5Raw": [
       {
        "date": "2026-09-21",
-       "lossL": 38429,
+       "lossL": -115.699999999997,
        "lossRate5": -2.90340675879053
       },
       {
@@ -383,27 +398,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -413,27 +428,27 @@
      "density": 830.9102431459389,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -449,57 +464,57 @@
       {
        "date": "2026-09-21",
        "lossL": -1833,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-22",
        "lossL": -2196,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-23",
        "lossL": -2350,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-24",
        "lossL": -1537,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-25",
        "lossL": -1586,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       }
      ],
      "lossAvg5L": -1833,
-     "lossRateAvg5": 9.24807,
+     "lossRateAvg5": -3.28779,
      "density": 826,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -1833,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-22",
        "lossL": -2196,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-23",
        "lossL": -2350,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-24",
        "lossL": -1537,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       },
       {
        "date": "2026-09-25",
        "lossL": -1586,
-       "lossRate5": 9.24807470516016
+       "lossRate5": -3.28778706690831
       }
      ],
      "anomaly": true
@@ -513,57 +528,57 @@
       {
        "date": "2026-09-21",
        "lossL": -1017,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-22",
        "lossL": -1016,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-23",
        "lossL": -1399,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-24",
        "lossL": -745,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-25",
        "lossL": -199,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       }
      ],
      "lossAvg5L": -1016,
-     "lossRateAvg5": 8.02097,
+     "lossRateAvg5": -2.02241,
      "density": 826,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -1017,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-22",
        "lossL": -1016,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-23",
        "lossL": -1399,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-24",
        "lossL": -745,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       },
       {
        "date": "2026-09-25",
        "lossL": -199,
-       "lossRate5": 8.02097225859742
+       "lossRate5": -2.02240935861018
       }
      ],
      "anomaly": true
@@ -577,57 +592,57 @@
       {
        "date": "2026-09-21",
        "lossL": -6306,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-22",
        "lossL": -6203,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-23",
        "lossL": -7361,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-24",
-       "lossL": 20350,
-       "lossRate5": 1.05701044872174
+       "lossL": -9669.2,
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-25",
        "lossL": -9944,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       }
      ],
-     "lossAvg5L": -6306,
-     "lossRateAvg5": 1.05701,
+     "lossAvg5L": -7361,
+     "lossRateAvg5": -3.87984,
      "density": 742,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -6306,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-22",
        "lossL": -6203,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-23",
        "lossL": -7361,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-24",
-       "lossL": 20350,
-       "lossRate5": 1.05701044872174
+       "lossL": -9669.2,
+       "lossRate5": -3.87983890156675
       },
       {
        "date": "2026-09-25",
        "lossL": -9944,
-       "lossRate5": 1.05701044872174
+       "lossRate5": -3.87983890156675
       }
      ],
      "anomaly": true
@@ -641,37 +656,37 @@
       {
        "date": "2026-09-22",
        "lossL": -3801,
-       "lossRate5": 1.75109976755481
+       "lossRate5": -3.24609210265963
       }
      ],
      "lossAvg5L": -3801,
-     "lossRateAvg5": 1.7511,
+     "lossRateAvg5": -3.24609,
      "density": 739,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -4591,
-       "lossRate5": 1.75109976755481
+       "lossRate5": -3.24609210265963
       },
       {
        "date": "2026-09-22",
        "lossL": -3801,
-       "lossRate5": 1.75109976755481
+       "lossRate5": -3.24609210265963
       },
       {
        "date": "2026-09-23",
        "lossL": -5022,
-       "lossRate5": 1.75109976755481
+       "lossRate5": -3.24609210265963
       },
       {
        "date": "2026-09-24",
-       "lossL": 4471,
-       "lossRate5": 1.75109976755481
+       "lossL": -5805.4,
+       "lossRate5": -3.24609210265963
       },
       {
        "date": "2026-09-25",
        "lossL": -6198,
-       "lossRate5": 1.75109976755481
+       "lossRate5": -3.24609210265963
       }
      ],
      "anomaly": true
@@ -685,57 +700,57 @@
       {
        "date": "2026-09-21",
        "lossL": -4459,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-22",
        "lossL": -5234,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-23",
        "lossL": -4984,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-24",
-       "lossL": 4984,
-       "lossRate5": 2.93872367190272
+       "lossL": -7031.5,
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-25",
        "lossL": -6993,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       }
      ],
-     "lossAvg5L": -4984,
-     "lossRateAvg5": 2.93872,
+     "lossAvg5L": -5234,
+     "lossRateAvg5": -3.15446,
      "density": 739,
      "last5Raw": [
       {
        "date": "2026-09-21",
        "lossL": -4459,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-22",
        "lossL": -5234,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-23",
        "lossL": -4984,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-24",
-       "lossL": 4984,
-       "lossRate5": 2.93872367190272
+       "lossL": -7031.5,
+       "lossRate5": -3.1544568267587
       },
       {
        "date": "2026-09-25",
        "lossL": -6993,
-       "lossRate5": 2.93872367190272
+       "lossRate5": -3.1544568267587
       }
      ],
      "anomaly": true
@@ -747,27 +762,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -777,27 +792,27 @@
      "density": 830.9102431459389,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -7144,27 +7159,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -7174,27 +7189,27 @@
      "density": 825.996349734516,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -7508,27 +7523,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -7538,27 +7553,27 @@
      "density": 825.996349734516,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -11280,27 +11295,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -11310,27 +11325,27 @@
      "density": 826.6931987084403,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -11634,27 +11649,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -11664,27 +11679,27 @@
      "density": 826.6931987084403,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -15636,27 +15651,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -15666,27 +15681,27 @@
      "density": 826.2747038620171,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -16000,27 +16015,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -16030,27 +16045,27 @@
      "density": 826.2747038620171,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20449,27 +20464,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20479,27 +20494,27 @@
      "density": 826.994281444095,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20513,27 +20528,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20543,27 +20558,27 @@
      "density": 746.1496589754823,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20577,27 +20592,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20607,27 +20622,27 @@
      "density": 826.994281444095,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20803,27 +20818,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20833,27 +20848,27 @@
      "density": 826.994281444095,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20867,27 +20882,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20897,27 +20912,27 @@
      "density": 826.994281444095,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20931,27 +20946,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -20961,27 +20976,27 @@
      "density": 826.994281444095,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -26823,27 +26838,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -26853,27 +26868,27 @@
      "density": 828.3682049304798,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -27098,27 +27113,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -27128,27 +27143,27 @@
      "density": 828.3682049304798,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -27162,27 +27177,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -27192,27 +27207,27 @@
      "density": 828.3682049304798,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -31754,27 +31769,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -31784,27 +31799,27 @@
      "density": 827.5949138146235,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -32133,27 +32148,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -32163,27 +32178,27 @@
      "density": 827.5949138146235,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33338,27 +33353,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33368,27 +33383,27 @@
      "density": 831.5128315740637,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33402,27 +33417,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33432,27 +33447,27 @@
      "density": 831.5128315740637,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33466,27 +33481,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33496,27 +33511,27 @@
      "density": 754.0530452484007,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33530,27 +33545,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33560,27 +33575,27 @@
      "density": 831.5128315740637,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33805,27 +33820,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33835,27 +33850,27 @@
      "density": 831.5128315740637,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33869,27 +33884,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -33899,27 +33914,27 @@
      "density": 831.5128315740637,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41074,27 +41089,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41104,27 +41119,27 @@
      "density": 829.8293261723613,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41138,27 +41153,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41168,27 +41183,27 @@
      "density": 829.8293261723613,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41290,27 +41305,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41320,27 +41335,27 @@
      "density": 829.8293261723613,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41482,27 +41497,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -41512,27 +41527,27 @@
      "density": 829.8293261723613,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -48937,27 +48952,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0,
        "lossRate5": 0
       }
@@ -48967,27 +48982,27 @@
      "density": 823.6974082956793,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0,
-       "lossRate5": 0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0,
+       "lossRate5": 0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0,
        "lossRate5": 0
       }
@@ -49276,27 +49291,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -49306,27 +49321,27 @@
      "density": 823.6974082956793,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53519,27 +53534,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53549,27 +53564,27 @@
      "density": 825.7184836777,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53583,27 +53598,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53613,27 +53628,27 @@
      "density": 825.7184836777,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53878,27 +53893,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53908,27 +53923,27 @@
      "density": 825.7184836777,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53942,27 +53957,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -53972,27 +53987,27 @@
      "density": 825.7184836777,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57275,27 +57290,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57305,27 +57320,27 @@
      "density": 817.3531247239301,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57339,27 +57354,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57369,27 +57384,27 @@
      "density": 817.3531247239301,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57659,27 +57674,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57689,27 +57704,27 @@
      "density": 817.3531247239301,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57723,27 +57738,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -57753,27 +57768,27 @@
      "density": 817.3531247239301,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -58675,27 +58690,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -58705,27 +58720,27 @@
      "density": 824.5259334974023,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -59029,27 +59044,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -59059,27 +59074,27 @@
      "density": 824.5259334974023,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60173,27 +60188,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60203,27 +60218,27 @@
      "density": 0.0,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60237,27 +60252,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60267,27 +60282,27 @@
      "density": 0.0,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60301,27 +60316,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60331,27 +60346,27 @@
      "density": 0.0,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60547,27 +60562,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60577,27 +60592,27 @@
      "density": 747.439068962758,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60611,27 +60626,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60641,27 +60656,27 @@
      "density": 731.9198304930624,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60675,27 +60690,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -60705,27 +60720,27 @@
      "density": 828.8847573968583,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -61157,27 +61172,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -61187,27 +61202,27 @@
      "density": 822.4813216103423,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -61496,27 +61511,27 @@
      "stockT": 0.0,
      "last5": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
@@ -61526,27 +61541,27 @@
      "density": 822.4813216103423,
      "last5Raw": [
       {
-       "date": "2026-10-06",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-07",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-08",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
-       "date": "2026-10-09",
-       "lossL": 0.0,
-       "lossRate5": 0.0
-      },
-      {
        "date": "2026-10-10",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-11",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-12",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-13",
+       "lossL": 0.0,
+       "lossRate5": 0.0
+      },
+      {
+       "date": "2026-10-14",
        "lossL": 0.0,
        "lossRate5": 0.0
       }
