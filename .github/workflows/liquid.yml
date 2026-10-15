@@ -1,0 +1,58 @@
+name: liquid-writeback
+
+# ============================================================================
+# 液位回写（读 A 表 → 写 15 站优化表罐表 C/D/F），全程云端，脱离本地电脑。
+#
+# 数据流：手机表单「液位仪数据采集表」→ A 表（.dbt）→ _sync_form_to_tanks.py(kdocs-cli)
+#         → 各站罐表 C(试枪回罐)/D(实际库存)/F(交班温度)。
+#
+# 为什么 windows-latest：kdocs-cli.exe 是 Windows 二进制，Linux runner 跑不了。
+#   与 daily.yml（驾驶舱取数）同一机制，复用仓库内 bin/kdocs-cli.exe + KDOCS_TOKEN 密钥。
+#
+# 触发：每日 21:30 北京时间（UTC 13:30）自动 + 网页 Actions 页可手动 Run workflow。
+#   幂等：同值跳过，重复跑无害；本机 21:30 自动化保留作兜底，双保险。
+# ============================================================================
+
+on:
+  schedule:
+    # UTC 13:30 = 北京 21:30（油站白天填完，晚上统一回写）。
+    - cron: "30 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: liquid-writeback
+  cancel-in-progress: false
+
+jobs:
+  writeback:
+    runs-on: windows-latest
+    timeout-minutes: 30
+
+    env:
+      KDOCS_CLI: ${{ github.workspace }}\bin\kdocs-cli.exe
+      KDOCS_TOKEN: ${{ secrets.KDOCS_TOKEN }}
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 自检 kdocs-cli 与令牌
+        shell: pwsh
+        run: |
+          if (!(Test-Path $env:KDOCS_CLI)) { throw "缺少 kdocs-cli：$env:KDOCS_CLI" }
+          if ([string]::IsNullOrWhiteSpace($env:KDOCS_TOKEN)) { throw "缺少密钥 KDOCS_TOKEN（Settings → Secrets and variables → Actions）" }
+          Write-Host "kdocs-cli 与令牌就绪（令牌长度 $($env:KDOCS_TOKEN.Length)）"
+
+      - name: 液位回写（A 表 → 罐表 C/D/F）
+        shell: pwsh
+        run: python _extract/_sync_form_to_tanks.py
