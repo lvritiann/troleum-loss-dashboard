@@ -58,6 +58,13 @@ jobs:
           if ([string]::IsNullOrWhiteSpace($env:KDOCS_TOKEN)) { throw "缺少密钥 KDOCS_TOKEN" }
           Write-Host "kdocs-cli 与令牌就绪"
 
+      - name: 自动修复匹配键（幂等，无问题时秒过）
+        shell: pwsh
+        run: |
+          # 新 V20 录入会写「南1#罐」这种带后缀罐号，导致罐表公式取不到卸油量。
+          # 本步自动把受影响行的 G/H/I 公式改成兼容两种键的版本；无问题时不做任何写入。
+          python _extract/_fix_tank_ghi_keyfmt.py
+
       - name: 卸油数据体检
         shell: pwsh
         run: |
