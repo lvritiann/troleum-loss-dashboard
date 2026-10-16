@@ -1,0 +1,71 @@
+name: unload-health
+
+# ============================================================================
+# 卸油数据每日体检（15 站优化表），全程云端，脱离本地电脑。2026-10-16 新建：
+# 应「监控要云端自动运行」要求。此前这类断档（如 8 站销售列停更一个月）
+# 无人发现，因为没有定时监控。
+#
+# 检查四类（脚本只读，不改任何数据）：
+#   ① 销售列 B 列新鲜度（外部写入，来源=日报泵码同步）→ SALES_STALE
+#   ② 罐表 G 列卸油量 vs 收油统计表 → KEY_MISMATCH / MISMATCH
+#   ③ 罐表 A3 罐号重复或为空 → A3_BAD
+#   ④ 收油统计表新鲜度 / 罐表有值源无记录 → STALE / ORPHAN
+#
+# 退出码语义（本 workflow 据此决定是否标红，标红时 GitHub 会发邮件通知）：
+#   1 = 有「数据错误类」告警（KEY_MISMATCH / MISMATCH / A3_BAD / SALES_STALE）
+#   0 = 健康，或仅有「业务未录入类」提示（STALE / ORPHAN）
+#
+# 触发：每日 21:45 北京时间（UTC 13:45）+ 手动 Run workflow。
+# ============================================================================
+
+on:
+  schedule:
+    # UTC 13:45 = 北京 21:45（排在 sales-sync 21:40 之后，可检到当日同步结果）
+    - cron: "45 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unload-health
+  cancel-in-progress: false
+
+jobs:
+  health:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    env:
+      KDOCS_CLI: ${{ github.workspace }}\bin\kdocs-cli.exe
+      KDOCS_TOKEN: ${{ secrets.KDOCS_TOKEN }}
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 自检 kdocs-cli 与令牌
+        shell: pwsh
+        run: |
+          if (!(Test-Path $env:KDOCS_CLI)) { throw "缺少 kdocs-cli：$env:KDOCS_CLI" }
+          if ([string]::IsNullOrWhiteSpace($env:KDOCS_TOKEN)) { throw "缺少密钥 KDOCS_TOKEN" }
+          Write-Host "kdocs-cli 与令牌就绪"
+
+      - name: 卸油数据体检
+        shell: pwsh
+        run: |
+          python _extract/_check_unload_health.py
+          $code = $LASTEXITCODE
+          Write-Host "体检退出码: $code"
+          if ($code -eq 1) {
+            # 数据错误类告警 ⇒ 让 job 失败，GitHub 会发邮件通知
+            throw "体检发现【数据错误类】告警（键不匹配 / 数量不符 / A3异常 / 销售列停更），详见上方输出。修复命令见脚本结尾提示。"
+          }
+          Write-Host "无数据错误类告警。"
