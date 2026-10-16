@@ -1,0 +1,62 @@
+name: sales-sync
+
+# ============================================================================
+# 销售数据同步（日报泵码表 → 各站优化表罐表 B 列「💰当日销售」），全程云端，
+# 脱离本地电脑。2026-10-16 新建：原 AirScript 版（airscript_sales_sync_ksdrive.js）
+# 所在脚本槽位被「收油统计同步」占用后停摆，8 个站的销售列自 2026-09-13 起未更新。
+#
+# 数据流：各站《日报月报表》-「日泵码数明细」（左半区 B=枪号/F=泵码数，
+#         右半区 K=枪号/O=泵码数）+《枪罐对照表》(csgZJjI1Pu30)
+#         → _sync_sales_to_tanks.py(kdocs-cli) 按 (日期, 站侧|罐号) 聚合
+#         → 写各站优化表罐表 B 列。会计月窗口 = 上月26日 ~ 本月25日，只聚合到「昨日」。
+#
+# 为什么 windows-latest：kdocs-cli.exe 是 Windows 二进制，Linux runner 跑不了。
+#   与 daily.yml / liquid.yml 同一机制，复用仓库内 bin/kdocs-cli.exe + KDOCS_TOKEN 密钥。
+#
+# 触发：每日 21:40 北京时间（UTC 13:40）+ 网页 Actions 页可手动 Run workflow。
+#   幂等：同值跳过，重复跑无害。
+# ============================================================================
+
+on:
+  schedule:
+    # UTC 13:40 = 北京 21:40
+    - cron: "40 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sales-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    env:
+      KDOCS_CLI: ${{ github.workspace }}\bin\kdocs-cli.exe
+      KDOCS_TOKEN: ${{ secrets.KDOCS_TOKEN }}
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: "1"
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 准备 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: 自检 kdocs-cli 与令牌
+        shell: pwsh
+        run: |
+          if (!(Test-Path $env:KDOCS_CLI)) { throw "缺少 kdocs-cli：$env:KDOCS_CLI" }
+          if ([string]::IsNullOrWhiteSpace($env:KDOCS_TOKEN)) { throw "缺少密钥 KDOCS_TOKEN（Settings → Secrets and variables → Actions）" }
+          Write-Host "kdocs-cli 与令牌就绪（令牌长度 $($env:KDOCS_TOKEN.Length)）"
+
+      - name: 销售同步（日报泵码 → 罐表 B 列）
+        shell: pwsh
+        run: python _extract/_sync_sales_to_tanks.py
