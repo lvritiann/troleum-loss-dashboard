@@ -229,8 +229,17 @@ def collect_sales(pump_fid, win_start, win_end, max_serial, g2t, st):
         except ValueError:
             isnum = False
         if isnum:
+            # ★★ 2026-10-19 修复 P0（与 AirScript 版同源同修）：
+            #   原为 skip = 2，会把「日号行之后的 2 行」都当表头跳过。
+            #   实际结构（南沙/汉中实测）：
+            #     行33  A=26(日号) + B=枪号   ← 日号行本身就是表头第 1 行
+            #     行34  F=数量                ← 表头第 2 行
+            #     行35  B=1 F=9098.58         ← **第一个数据行（枪1）**
+            #   设 2 ⇒ 行34、行35 全跳 ⇒ 每站每天左/右半区各漏 1 号枪销量。
+            #   实例：南沙 9-26 枪1=9098.58 未进 1#罐，罐表只显示枪2=7926.16。
+            #   ⇒ 只跳 1 行（表头第 2 行），枪1 正常参与聚合。
             cur = int(fv)
-            skip = 2
+            skip = 1
             continue
         if cur is None:
             continue
