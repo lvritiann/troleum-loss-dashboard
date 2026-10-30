@@ -115,6 +115,20 @@
     padding:12px 16px;font-size:13px;color:var(--sub);line-height:1.75;}
   .conclusion b{color:var(--txt);font-weight:600;font-variant-numeric:tabular-nums;}
   .conclusion .cmark{color:var(--acc);font-weight:700;}
+  /* ── 异常罐清单 ── */
+  .anom-list{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;}
+  .anom-list:empty{display:none;}
+  .al-hd{color:var(--warn);font-size:12px;font-weight:700;letter-spacing:.02em;}
+  .al-items{display:flex;flex-wrap:wrap;gap:7px;}
+  .al-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:10px;
+    background:var(--panel2);border:1px solid var(--line);font-size:12px;color:var(--txt);
+    cursor:pointer;transition:border-color .15s,background .15s,transform .15s;}
+  .al-chip:hover{border-color:var(--acc);background:rgba(127,163,168,.09);transform:translateY(-1px);}
+  .al-dot{width:7px;height:7px;border-radius:2px;flex:0 0 7px;}
+  .al-chip b{font-weight:700;}
+  .al-chip i{font-style:normal;color:var(--faint);font-size:10.5px;}
+  .al-chip em{font-style:normal;font-weight:700;font-variant-numeric:tabular-nums;}
+  .al-chip u{text-decoration:none;color:var(--faint);font-size:10.5px;font-variant-numeric:tabular-nums;}
 
   /* ── 站点选择 ── */
   .sel{background:var(--panel2);color:var(--txt);border:1px solid var(--line);border-radius:9px;
@@ -372,6 +386,7 @@
   <div class="kpis" id="kpis"></div>
   <div class="kpis" id="lossCards" style="grid-template-columns:repeat(4,1fr);"></div>
   <div class="conclusion" id="conclusion"></div>
+  <div class="anom-list" id="anomList"></div>
 
   <div class="section-title">二、全公司罐级损溢矩阵 · 点击格子查看该站明细</div>
   <div class="card">
@@ -948,38 +963,70 @@ function renderLossCards(){
 
 // 首屏结论句（P0 新增：把「谁在漏、漏多少、哪些数据不可信」压成一句话）
 function renderConclusion(){
-  // 合计曾被 1-2 个异常罐主导（10-29 数据下 9 个异常罐占合计四成），
-  // 故把「常规罐」与「异常罐」拆开陈述，避免「公司一天盈一万多升」的失真观感。
-  let totalL=0, normalL=0, normalStock=0, anomL=0, anomN=0, tankN=0, top=null;
+  // 汇总 + 异常罐逐罐清单：不只报「9 个」，而要能直接指认是哪几个罐
+  let totalL=0, normalL=0, normalStock=0, anomL=0, anomN=0, tankN=0;
+  const anoms=[];
   DATA.stations.forEach(s=>(s.tanks||[]).forEach(t=>{
     if(!inFilter(t.product)) return;
     const v=metricOf(t);
     tankN++; totalL+=v;
     if(t.anomaly){
       anomL+=v; anomN++;
-      if(!top || Math.abs(v)>Math.abs(top.v)) top={s:s.name,t:t.tank,v};
+      anoms.push({
+        st:s.name, tank:t.tank, prod:t.product, v,
+        rate:(Number(t.lossRateAvg5)||0)*1000,
+        asOf:tankAsOf(t),
+      });
     }else{
       normalL+=v; normalStock+=(t.stockL||0);
     }
   }));
+  anoms.sort((a,b)=>Math.abs(b.v)-Math.abs(a.v));
+
   const nRate=normalStock?(normalL/normalStock*1000):0;
-  const col=v=>v>=0?'#a7bda0':'#c89a92';
+  const col=v=>v>=0?'#a7bda0':'#e59a92';
   const w=v=>v>=0?'盈':'亏';
   let html=`<span class="cmark">结论</span><span>`;
   html+=`<b>${tankN}</b> 罐${winLabel()}日均损溢合计 <b style="color:${col(totalL)}">${totalL>0?'+':''}${fmt2(totalL)} L/日</b>（${w(totalL)}）`;
   if(anomN>0){
-    // 不算「异常罐占合计 X%」：常规罐与异常罐方向常相反（10-29：常规 -481、异常 +14015），
-    // 占比会算出 100% 以上，反而看不懂；并列陈述更清楚。
     html+=`；其中 <b>${tankN-anomN}</b> 罐常规罐
       <b style="color:${col(normalL)}">${normalL>0?'+':''}${fmt2(normalL)} L/日</b>、加权 <b>${nRate.toFixed(2)}‰</b>，
-      <b>${anomN}</b> 个异常罐 <b style="color:${col(anomL)}">${anomL>0?'+':''}${fmt2(anomL)} L/日</b>`
-      +(top?`（最大单罐 <b>${top.s} ${top.t}</b> <b style="color:${col(top.v)}">${top.v>0?'+':''}${fmt2(top.v)} L/日</b>）`:'');
+      <b>${anomN}</b> 个异常罐 <b style="color:${col(anomL)}">${anomL>0?'+':''}${fmt2(anomL)} L/日</b>`;
     if(normalL*anomL<0) html+=`，两者方向相反`;
+    html+=`（逐罐明细见下方清单）`;
   }else{
     html+=`，加权损溢率 <b>${nRate.toFixed(2)}‰</b>`;
   }
   html+=`。数据截止 <b>${HEALTH.asOf}</b>${HEALTH.staleN?`，<b>${HEALTH.staleN}</b> 罐停更`:''}。</span>`;
   document.getElementById('conclusion').innerHTML=html;
+
+  // 异常罐清单：站名 + 罐号 + 油品 + 损溢量 + 损溢率，点击直达该站卡片区
+  const el=document.getElementById('anomList');
+  if(!el) return;
+  if(!anoms.length){ el.innerHTML=''; return; }
+  const bySt={};
+  anoms.forEach(a=>{ bySt[a.st]=(bySt[a.st]||0)+1; });
+  const stTop=Object.keys(bySt).sort((x,y)=>bySt[y]-bySt[x]);
+  let focus='';
+  if(stTop.length===1) focus=`　全部集中在 <b style="color:#e0b070">${stTop[0]}</b>（建议先核该站）`;
+  else if(bySt[stTop[0]]>=Math.ceil(anoms.length*0.6)) focus=`　其中 <b style="color:#e0b070">${stTop[0]} ${bySt[stTop[0]]} 个</b>`;
+  el.innerHTML=`<span class="al-hd">⚠ 异常罐 ${anoms.length} 个${focus} · 按 |损溢| 降序 · 点击定位</span>
+    <div class="al-items">` + anoms.map(a=>`
+      <span class="al-chip" data-st="${a.st}" data-tank="${a.tank}"
+            title="${a.st} ${a.tank}（${prodOf(a.prod)}）· 日均损溢 ${a.v>0?'+':''}${fmt2(a.v)} L/日 · 损溢率 ${Math.abs(a.rate)>100?'分母过小，不具可比性':a.rate.toFixed(2)+'‰'} · 数据日 ${a.asOf||'—'} · 点击定位">
+        <span class="al-dot" style="background:${PROD_COLOR[a.prod]||'#7fa3a8'}"></span>
+        <b>${a.st} ${a.tank}</b>
+        <i>${prodOf(a.prod)}</i>
+        <em style="color:${a.v>=0?'#a7bda0':'#e59a92'}">${a.v>0?'+':''}${fmt2(a.v)}<i style="font-size:9.5px;">L/日</i></em>
+        ${Math.abs(a.rate)>100?'':`<u>${a.rate.toFixed(2)}‰</u>`}
+      </span>`).join('') + `</div>`;
+  el.querySelectorAll('.al-chip').forEach(c=>{
+    c.onclick=()=>{
+      syncStation(c.dataset.st);
+      const w2=document.getElementById('lossTableWrap');
+      if(w2) w2.scrollIntoView({behavior:'smooth',block:'center'});
+    };
+  });
 }
 
 // ---------- 全公司罐级损溢矩阵 ----------
@@ -1022,30 +1069,32 @@ function renderHeatmap(){
         +`数据日：${d.asOf||'—'}${(lag===null||lag>STALE_DAYS)?' <span style="color:#d9a35b">（停更）</span>':''}`
         +(d.anom?'<br/><span style="color:#d9a35b">⚠ 异常罐</span>':'');
     }},TIP),
-    grid:{left:42,right:18,top:8,bottom:74},
+    grid:{left:46,right:20,top:12,bottom:60},
     xAxis:{type:'category',data:names,
-      axisLabel:{color:'#cdd4dc',fontFamily:FONT,fontSize:10,rotate:30,interval:0},
+      axisLabel:{color:'#cdd4dc',fontFamily:FONT,fontSize:11,rotate:0,interval:0,margin:11},
       axisLine:{lineStyle:{color:'#323b45'}},axisTick:{show:false},splitArea:{show:false}},
     yAxis:{type:'category',data:TANK_SLOT,inverse:true,
-      axisLabel:{color:'#9aa4ad',fontFamily:FONT,fontSize:10},
+      axisLabel:{color:'#9aa4ad',fontFamily:FONT,fontSize:10.5,margin:10},
       axisLine:{lineStyle:{color:'#323b45'}},axisTick:{show:false},splitArea:{show:false}},
     visualMap:{type:'continuous',min:-p85,max:p85,calculable:false,orient:'horizontal',
       left:'center',bottom:6,itemWidth:10,itemHeight:120,
       text:['盈 +'+Math.round(p85),'亏 -'+Math.round(p85)],
       textGap:6,textStyle:{color:'#859098',fontFamily:FONT,fontSize:10},
-      inRange:{color:['#b04a42','#7d4a44','#3d4750','#4a7350','#78b184']}},
+      inRange:{color:['#c2544a','#8a524a','#48545f','#518059','#82bd8e']}},
     series:[{
       type:'heatmap',
       data:rows.map(r=>{
         const lag=dayDiff(r.asOf,HEALTH.asOf);
         const stale=(lag===null||lag>STALE_DAYS);
-        const st={borderColor:'#232b34',borderWidth:1.5,borderRadius:3};
-        if(stale) st.opacity=0.3;              // 停更罐压暗：避免「全灰 = 正常」的误读
+        const st={borderColor:'#232b34',borderWidth:2.5,borderRadius:7};
+        if(stale) st.opacity=0.32;              // 停更罐压暗：避免「全灰 = 正常」的误读
         if(anomTop.has(r.station+'|'+r.tank)){ st.borderColor='#d9a35b'; st.borderWidth=2; }
         return {value:[r.x,r.y,r.v],raw:r,itemStyle:st};
       }),
-      itemStyle:{borderColor:'#232b34',borderWidth:1.5,borderRadius:3},
-      emphasis:{itemStyle:{borderColor:'#7fa3a8',borderWidth:2,opacity:1}}
+      itemStyle:{borderColor:'#232b34',borderWidth:2.5,borderRadius:7},
+      cursor:'pointer',
+      emphasis:{itemStyle:{borderColor:'#9fd8c8',borderWidth:2.5,opacity:1,
+        shadowBlur:16,shadowColor:'rgba(159,216,200,.6)'}}
     }]
   },true);
   charts.lossHeat.off('click');
