@@ -31,7 +31,12 @@
   header{display:flex;align-items:center;justify-content:space-between;gap:16px;
     padding:15px 26px;border-bottom:1px solid var(--line);background:var(--panel2);
     position:sticky;top:0;z-index:20;}
-  header h1{font-size:19px;margin:0;font-weight:700;letter-spacing:.02em;}
+  header .brand{display:flex;align-items:center;gap:10px;min-width:0;}
+  header .logo{height:30px;width:auto;flex:0 0 auto;display:block;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.4)) brightness(1.05);}
+  header .brand-sep{width:1px;height:26px;background:var(--line);margin:0 5px;flex:0 0 auto;}
+  header h1{font-size:19px;margin:0;font-weight:700;letter-spacing:.02em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   header h1 .dot{color:var(--acc);}
   .meta{color:var(--sub);font-size:12px;display:flex;align-items:center;gap:10px;}
   .filters{display:flex;gap:8px;}
@@ -243,8 +248,11 @@
     .wrap{padding:14px 16px 32px;}
   }
   @media (max-width:760px){
-    header{padding:12px 14px;flex-wrap:wrap;gap:10px 12px;}
-    header h1{font-size:16px;width:100%;}
+    header{padding:11px 13px;flex-wrap:wrap;gap:9px 12px;}
+    header .brand{width:100%;gap:7px;}
+    header .logo{height:22px;}
+    header .brand-sep{display:none;}
+    header h1{font-size:14.5px;width:auto;flex:1;min-width:0;}
     .filters{flex-wrap:wrap;}
     .filters button{padding:6px 13px;font-size:12px;}
     .meta{font-size:11px;width:100%;}
@@ -271,7 +279,12 @@
 </head>
 <body>
 <header>
-  <h1><span class="dot">●</span> 加油站损溢管理 · 公司驾驶舱</h1>
+  <div class="brand">
+    <img class="logo" src="logo-jt.png" alt="陕西交通控股集团" title="陕西交通控股集团" />
+    <img class="logo" src="logo-yc.png" alt="延长石油" title="延长石油" />
+    <span class="brand-sep" aria-hidden="true"></span>
+    <h1><span class="dot">●</span> 加油站损溢管理 · 公司驾驶舱</h1>
+  </div>
   <div class="filters" id="filters">
     <button data-p="ALL" class="active">全部</button>
     <button data-p="92#汽油">92汽油</button>
