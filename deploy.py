@@ -75,9 +75,30 @@ def push_file(local_rel, msg):
     print("FAIL %s -> HTTP %s: %s" % (local_rel, st2, info[:200]))
     return False
 
+def build_encrypted_copy():
+    """生成加密副本 data.enc.json（供下载场景）。失败不影响主流程：
+    推送环节会因本地文件缺失自动跳过它，页面仍走明文通道。"""
+    import shutil, subprocess
+    script = os.path.join(HERE, "scripts", "encrypt_data.js")
+    if not os.path.exists(script):
+        print("  ! 缺少 scripts/encrypt_data.js，跳过加密副本")
+        return
+    node = os.environ.get("NODE_EXE") or shutil.which("node") or "node"
+    try:
+        r = subprocess.run([node, script], cwd=HERE, capture_output=True,
+                           text=True, encoding="utf-8", timeout=120)
+        if r.stdout.strip():
+            print("  " + r.stdout.strip())
+        if r.returncode != 0:
+            print("  ! 加密副本生成失败（不影响主流程）:", (r.stderr or "")[:200])
+    except Exception as e:
+        print("  ! 加密副本生成异常（不影响主流程）:", e)
+
+
 msg = "sync " + datetime.date.today().isoformat()
+build_encrypted_copy()
 ok = True
-for f in ["index.html", "all_data.json"]:
+for f in ["index.html", "all_data.json", "data.enc.json"]:
     if not push_file(f, msg):
         ok = False
 
