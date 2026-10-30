@@ -95,7 +95,22 @@ def build_encrypted_copy():
         print("  ! 加密副本生成异常（不影响主流程）:", e)
 
 
+def ensure_static_assets():
+    """确保静态资源（ECharts / 徽标）在仓库里。这些文件不随每日数据变化，
+    所以只在远端缺失时才推送，避免每天重复上传 565KB。仓库被重建后会自动补齐。"""
+    for f in ["echarts.min.js", "logo-jt.png", "logo-yc.png"]:
+        local = os.path.join(HERE, f)
+        if not os.path.exists(local):
+            continue
+        st, _ = api_call("GET", "/repos/%s/%s/contents/%s" % (USER, REPO, f))
+        if st == 200:
+            continue
+        print("  补齐静态资源: " + f)
+        push_file(f, "chore(assets): 补齐静态资源 " + f)
+
+
 msg = "sync " + datetime.date.today().isoformat()
+ensure_static_assets()
 build_encrypted_copy()
 ok = True
 for f in ["index.html", "all_data.json", "data.enc.json"]:
