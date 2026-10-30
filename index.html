@@ -195,11 +195,24 @@
     cursor:pointer;line-height:1;padding:0 2px;}
   .modal-x:hover{color:var(--txt);}
   .ltab tbody tr{cursor:pointer;}
+  /* 站点明细弹窗内的小表 */
+  .smtab{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .smtab th{color:var(--sub);font-weight:600;font-size:11.5px;text-align:right;
+    padding:7px 8px;border-bottom:1px solid var(--line);}
+  .smtab th:first-child,.smtab td:first-child,
+  .smtab th:nth-child(2),.smtab td:nth-child(2){text-align:left;}
+  .smtab td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:right;
+    font-variant-numeric:tabular-nums;color:var(--txt);}
+  .smtab tbody tr:hover td{background:rgba(127,163,168,.08);}
+  .smtab .pd{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:middle;}
+  .smtab .na{color:var(--faint);}
   /* 发散柱入场：逐根错峰生长，克制不弹跳 */
   @keyframes barIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  @keyframes drawTrend{to{stroke-dashoffset:0}}
+  .ltab .trend{stroke-dasharray:1;stroke-dashoffset:1;animation:drawTrend .85s cubic-bezier(.3,.7,.3,1) .15s forwards;}
   .ltab .bar{animation:barIn .4s cubic-bezier(.2,.7,.3,1) both;animation-delay:var(--d,0ms);}
   .ltab .bar:hover{fill-opacity:1;}
-  @media (prefers-reduced-motion:reduce){.ltab .bar{animation:none;}}
+  @media (prefers-reduced-motion:reduce){.ltab .bar{animation:none;}.ltab .trend{animation:none;stroke-dashoffset:0;}}
   /* ── 说明抽屉 ── */
   .note-card{padding:0;}
   .note-card summary{cursor:pointer;list-style:none;padding:13px 18px;font-size:13px;
@@ -381,6 +394,22 @@
   <div class="foot" id="foot"></div>
 </div>
 
+<div class="modal-mask" id="staModal" hidden>
+  <div class="modal" style="width:min(760px,100%)">
+    <div class="modal-hd">
+      <b id="smTitle">—</b>
+      <span id="smSub" class="sub" style="margin:0;"></span>
+      <button class="modal-x" id="smClose" title="关闭">×</button>
+    </div>
+    <div id="smBody"></div>
+    <div class="src" style="margin-top:9px;line-height:1.7;">
+      损益量 = 各罐最近 5 条记录的日均值（L/日，正盈负亏）；损益率 = 罐表 N 列 ×1000，单位 ‰；
+      「—」表示该罐损溢率分母接近 0（停用 / 备用罐），数值不具可比性<br/>
+      <a href="javascript:void(0)" id="smMore" style="color:var(--acc);">查看该站 5 日逐日明细 →</a>
+    </div>
+  </div>
+</div>
+
 <div class="modal-mask" id="tankModal" hidden>
   <div class="modal">
     <div class="modal-hd">
@@ -413,7 +442,11 @@ const TIP = {backgroundColor:'#1f262e', borderWidth:0, padding:[10,14],
 const ANIM = {animationDuration:900, animationEasing:'cubicOut'};
 
 function fmt(n){ if(n==null||isNaN(n)) return '-'; return Math.round(n).toLocaleString('zh-CN'); }
-function fmt2(n){ if(n==null||isNaN(n)) return '-'; return Number(n).toFixed(2); }
+// 小数统一口径：千分位 + 固定两位小数。整数值仍走 fmt()，不补 .00
+function fmt2(n){
+  if(n==null||isNaN(n)) return '-';
+  return Number(n).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
 function prodOf(p){ return DATA.productLabel?DATA.productLabel[p]:p; }
 function inFilter(p){ return FP==='ALL' || FP===p; }
 // 以 YYYY-MM-DD 字符串为基准，向前/向后平移 n 个月（本地时区，避免 UTC 偏移）
@@ -465,13 +498,20 @@ function initCharts(){
   if(sel) sel.onchange=()=>{ syncStation(sel.value); };
 
   // 趋势弹层：关闭按钮 / 点遮罩 / Esc / 明细表行点击
+  const smClose=document.getElementById('smClose');
+  if(smClose && !smClose.dataset.bound){ smClose.onclick=closeStationModal; smClose.dataset.bound='1'; }
+  const smMask=document.getElementById('staModal');
+  if(smMask && !smMask.dataset.bound){
+    smMask.onclick=e=>{ if(e.target===smMask) closeStationModal(); };
+    smMask.dataset.bound='1';
+  }
   const mClose=document.getElementById('mClose');
   if(mClose && !mClose.dataset.bound){ mClose.onclick=closeTankModal; mClose.dataset.bound='1'; }
   const mask=document.getElementById('tankModal');
   if(mask && !mask.dataset.bound){
     mask.onclick=e=>{ if(e.target===mask) closeTankModal(); };
     mask.dataset.bound='1';
-    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeTankModal(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeTankModal(); closeStationModal(); } });
   }
   const lmWrap=document.getElementById('lossTableWrap');
   if(lmWrap && !lmWrap.dataset.boundClick){
@@ -777,7 +817,7 @@ function exportUnloadCsv(){
   const lines=[head.join(',')];
   UN_ROWS.forEach(r=>lines.push([
     r.date, prodOf(r.product), r.station||'', r.truck||'', r.tank||'',
-    (Number(r.volumeL)||0).toFixed(1), (Number(r.massT)||0).toFixed(2), (Number(r.gainLossT)||0).toFixed(3)
+    (Number(r.volumeL)||0).toFixed(2), (Number(r.massT)||0).toFixed(2), (Number(r.gainLossT)||0).toFixed(2)
   ].map(esc).join(',')));
   // ﻿ 保证 Excel 打开中文不乱码
   const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'});
@@ -943,9 +983,7 @@ function renderHeatmap(){
   charts.lossHeat.off('click');
   charts.lossHeat.on('click',p=>{
     const d=p.data&&p.data.raw; if(!d) return;
-    syncStation(d.station);
-    const t=document.getElementById('lossTableWrap');
-    if(t) t.scrollIntoView({behavior:'smooth',block:'center'});
+    openStationModal(d.station);      // 先弹站点罐级明细（含损益量 + 损益率），可再跳转逐日表
   });
 }
 
@@ -967,7 +1005,7 @@ function renderPareto(){
   all.sort((a,b)=>Math.abs(b.v)-Math.abs(a.v));
   const top=all.slice(0,30);
   let cum=0;
-  const cumArr=top.map(x=>{ cum+=Math.abs(x.v); return +(cum/total*100).toFixed(1); });
+  const cumArr=top.map(x=>{ cum+=Math.abs(x.v); return +(cum/total*100).toFixed(2); });
   const idx80=cumArr.findIndex(v=>v>=80);          // 累计首次到 80% 的位置
   const n80=idx80>=0?idx80+1:0;
   const G=echarts.graphic.LinearGradient;
@@ -979,7 +1017,7 @@ function renderPareto(){
         const i=ps[0].dataIndex, d=top[i]; if(!d) return '';
         return `<b>${d.station} · ${d.tank}</b>（${prodOf(d.p)}）<br/>`
           +`日均损溢：<b style="color:${d.v>=0?'#a7bda0':'#e59a92'}">${d.v>0?'+':''}${fmt2(d.v)} L/日</b><br/>`
-          +`累计占比：<b>${cumArr[i]}%</b>`
+          +`累计占比：<b>${cumArr[i].toFixed(2)}%</b>`
           +(d.anom?'<br/><span style="color:#d9a35b">⚠ 异常罐</span>':'');
       }},TIP),
     legend:{show:true,textStyle:{color:'#9aa4ad',fontFamily:FONT},top:0,itemWidth:12,itemHeight:12},
@@ -1083,11 +1121,43 @@ function syncStation(name){
 // 为什么换掉折线：这里的 5 个点是「离散的期段观测」，不是连续时间采样，
 // 折线会暗示「每天都在平滑变化」；而损溢天然有正有负，0 轴就是基准线，
 // 用柱长∝|数值| 才能直接比较「哪一天亏得多、盈得多」。
-function sparkbars(vals,color){
+// 单调三次插值（Fritsch–Carlson）：保证曲线不冲出相邻两点的数值区间。
+// 常规样条（Catmull-Rom / ECharts smooth）会在两点之间「过冲」，凭空画出更深的亏损或更高的盈余，
+// 在财务类图表里属于严重误导，所以这里必须用单调插值。
+function monotonePath(pts){
+  const n=pts.length;
+  if(n<2) return '';
+  if(n===2) return `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)} L${pts[1][0].toFixed(1)},${pts[1][1].toFixed(1)}`;
+  const dx=[],delta=[],m=[];
+  for(let i=0;i<n-1;i++){
+    dx[i]=pts[i+1][0]-pts[i][0];
+    delta[i]=dx[i]===0?0:(pts[i+1][1]-pts[i][1])/dx[i];
+  }
+  m[0]=delta[0]; m[n-1]=delta[n-2];
+  for(let i=1;i<n-1;i++){
+    if(delta[i-1]*delta[i]<=0){ m[i]=0; }   // 极值点切线归零 → 不越过顶点
+    else{
+      const w1=2*dx[i]+dx[i-1], w2=dx[i]+2*dx[i-1];
+      m[i]=(w1+w2)/(w1/delta[i-1]+w2/delta[i]);
+    }
+  }
+  let d=`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`;
+  for(let i=0;i<n-1;i++){
+    const x1=pts[i][0]+dx[i]/3, y1=pts[i][1]+m[i]*dx[i]/3;
+    const x2=pts[i+1][0]-dx[i]/3, y2=pts[i+1][1]-m[i+1]*dx[i]/3;
+    d+=` C${x1.toFixed(1)},${y1.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)} ${pts[i+1][0].toFixed(1)},${pts[i+1][1].toFixed(1)}`;
+  }
+  return d;
+}
+
+// 逐日损溢：竖向柱 + 单调平滑曲线（同一序列、同一纵轴）
+// 柱负责「量级」（长 ∝ |值|，0 轴为基准），曲线负责「走向」（平滑轮廓，经过每个柱顶）。
+function sparkcombo(vals){
   const present=vals.filter(v=>v!==null);
-  const H=84, VW=760;              // 高度放大，柱状才有足够行程表达正负
-  const padT=9,padB=12,padX=5;
-  if(!present.length) return `<div class="sparkbox"><svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none"></svg></div>`;
+  const H=84, VW=760;
+  const padT=9, padB=12, padX=5;
+  const empty=`<div class="sparkbox"><svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none"></svg></div>`;
+  if(!present.length) return empty;
   const maxV=Math.max(0,...present), minV=Math.min(0,...present);
   const span=(maxV-minV)||1;
   const plotH=H-padT-padB;
@@ -1095,47 +1165,76 @@ function sparkbars(vals,color){
   const y0=Y(0);
   const n=vals.length;
   const slot=(VW-padX*2)/n;
-  // 柱宽设上限：走势列很宽时（5 根柱摊 400+px）不限宽会变成色块，失去「柱」的形态
-  const barW=Math.min(34,Math.max(10,slot*0.44));
+  const barW=Math.min(30,Math.max(10,slot*0.4));   // 柱宽上限：列很宽时避免摊成色块
   const NS='vector-effect="non-scaling-stroke"';
   const amax=Math.max(...present.map(Math.abs));
+
   let bars='';
   vals.forEach((v,i)=>{
     if(v===null) return;
-    const yv=Y(v);
-    const top=Math.min(yv,y0);
-    const h=Math.max(2,Math.abs(yv-y0));       // 柱长 ∝ |数值|，不做断轴
+    const yv=Y(v), top=Math.min(yv,y0), h=Math.max(2,Math.abs(yv-y0));
     const x=padX+slot*i+(slot-barW)/2;
     const up=v>=0;
-    const isMax=Math.abs(v)>1e-9 && Math.abs(v)>=amax-1e-9;   // 行内极值才标，且 0 值不标
-    bars+=`<rect class="bar" style="--d:${i*65}ms" x="${x.toFixed(1)}" y="${top.toFixed(1)}" `
+    bars+=`<rect class="bar" style="--d:${i*55}ms" x="${x.toFixed(1)}" y="${top.toFixed(1)}" `
       +`width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="3" `
-      +`fill="url(#${up?'sgp':'sgn'})">`
+      +`fill="url(#${up?'sgp':'sgn'})" fill-opacity=".46">`
       +`<title>${v>0?'+':''}${fmt2(v)} L</title></rect>`;
-    if(isMax){
-      const ly=up?(top-3):(top+h+9);
-      bars+=`<text x="${(x+barW/2).toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" `
-        +`fill="#c9d2d9" font-size="9.5" font-family="${FONT}" font-weight="600">`
-        +(v>0?'+':'')+(Math.abs(v)>=100?Math.round(v):Math.round(v*10)/10)+`</text>`;
-    }
   });
-  // 槽位刻度：与 5 个日期列一一对应，帮助把「第几根柱」对上「第几天」
+
+  // 曲线：按连续段分组，逐段单调插值（缺失日断开，不连线）
+  const segs=[]; let cur=[];
+  vals.forEach((v,i)=>{
+    if(v===null){ if(cur.length){ segs.push(cur); cur=[]; } }
+    else cur.push([padX+slot*i+slot/2, Y(v), v, i]);
+  });
+  if(cur.length) segs.push(cur);
+
+  let trend='', dots='';
+  segs.forEach(seg=>{
+    if(seg.length>=2){
+      trend+=`<path class="trend" pathLength="1" d="${monotonePath(seg.map(p=>[p[0],p[1]]))}" `
+        +`fill="none" stroke="#9fd8c8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" ${NS}/>`;
+    }
+    seg.forEach((p,k)=>{
+      const last=(k===seg.length-1) && (p[3]===Math.max(...present.map((_,ii)=>vals[ii]===null?-1:ii)));
+      dots+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${last?3.4:2.2}" `
+        +`fill="#1c232b" stroke="#9fd8c8" stroke-width="${last?1.8:1.3}" ${NS}/>`;
+    });
+  });
+
+  // 0 轴只在跨零行画（全正/全负时 0 轴即行边界，再画会与邻行错位成锯齿）
+  const cross=(minV<0&&maxV>0);
+  const zero=cross
+    ? `<line x1="${padX}" y1="${y0.toFixed(1)}" x2="${VW-padX}" y2="${y0.toFixed(1)}" stroke="#7b8794" stroke-width="1" ${NS}/>`
+    : '';
+
+  // 槽位刻度：对齐 5 个日期列
   let slots='';
   for(let i=0;i<n;i++){
     const cx=(padX+slot*i+slot/2).toFixed(1);
     slots+=`<line x1="${cx}" y1="${H-6}" x2="${cx}" y2="${H-1}" stroke="rgba(150,163,176,.6)" stroke-width="1" ${NS}/>`;
   }
-  // 0 轴只在「跨零行」画：全正/全负时 0 轴就是行边界，再画一条会与相邻行的线错位成锯齿
-  const cross=(minV<0&&maxV>0);
-  const zero=cross
-    ? `<line x1="${padX}" y1="${y0.toFixed(1)}" x2="${VW-padX}" y2="${y0.toFixed(1)}" stroke="#7b8794" stroke-width="1" ${NS}/>`
-    : '';
-  const fm=v=>Math.abs(v)>=100?Math.round(v):(Math.round(v*10)/10);
+
+  // 仅标行内极值，0 值不标
+  let labels='';
+  vals.forEach((v,i)=>{
+    if(v===null||Math.abs(v)<=1e-9) return;
+    if(Math.abs(v)<amax-1e-9) return;
+    const up=v>=0;
+    const ly=up?(Y(v)-5):(Y(v)+11);
+    labels+=`<text x="${(padX+slot*i+slot/2).toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" `
+      +`fill="#c9d2d9" font-size="9.5" font-family="${FONT}" font-weight="600">`
+      +(v>0?'+':'')+Math.abs(v).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2})+`</text>`;
+  });
+
+  const fm=v=>Math.abs(v).toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
   return `<div class="sparkbox">`
     +`<div class="sparkticks" title="该行取值范围（最低 ~ 最高）"><span>${fm(minV)} ~ ${fm(maxV)}</span></div>`
-    +`<svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none">${zero}${bars}${slots}</svg>`
+    +`<svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none">`
+    +`${zero}${bars}${trend}${dots}${labels}${slots}</svg>`
     +`</div>`;
 }
+
 function renderLossTable(){
   const wrap=document.getElementById('lossTableWrap');
   const asOfEl=document.getElementById('lossAsOf');
@@ -1196,10 +1295,10 @@ function renderLossTable(){
   rows.sort((a,b)=>Math.abs(b.agg)-Math.abs(a.agg));   // 问题罐排前面
 
   const maxAbs=Math.max(1e-6,...rows.flatMap(r=>r.cells.map(c=>c.v===null?0:Math.abs(c.v))));
+  // 损溢量与损溢率都保留两位小数（与全页口径一致）；||0 把 -0 归一成 0
   const fmtV=v=>{
-    if(isL) return (Math.round(v)||0).toLocaleString('zh-CN');   // ||0 把 -0 归一成 0
-    const n=Math.round(v*10)/10;
-    return (n===0?0:n).toFixed(1);
+    const x=(Math.abs(v)<0.005)?0:v;
+    return x.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
   };
   const sign=v=> v>0?'+':'';
   const clsOf=v=> v===null?'zero':(v>0?'pos':(v<0?'neg':'zero'));
@@ -1218,7 +1317,7 @@ function renderLossTable(){
       : `<th>${lbl}</th>`;
   });
   html+=`<th>${isL?'合计 (L)':'均值 (‰)'}</th>`
-    +`<th title="柱高 ∝ 当日损溢绝对值，以 0 轴为基准；绿=盈、红=亏。各行按自身取值范围缩放，幅度对比请看底色深浅与合计列">逐日损溢柱（绿盈 / 红亏）</th></tr></thead><tbody>`;
+    +`<th title="柱高 ∝ 当日损溢绝对值（0 轴为基准，绿盈红亏）；青线为同一序列的单调平滑趋势，不会越过柱顶">柱 + 平滑趋势线</th></tr></thead><tbody>`;
 
   rows.forEach(r=>{
     const lag=dayDiff(r.asOf,HEALTH.asOf);
@@ -1232,7 +1331,7 @@ function renderLossTable(){
     r.cells.forEach(c=>{
       if(c.v===null){
         const tip=c.why==='lowbase'
-          ? `${c.date} 损溢率 ${c.pct.toFixed(1)}%：分母接近 0（停用/备用罐），不参与对比`
+          ? `${c.date} 损溢率 ${c.pct.toFixed(2)}%：分母接近 0（停用/备用罐），不参与对比`
           : (c.date?`${c.date} 无记录`:'无记录');
         html+=`<td><span class="cellbg na" title="${tip}">—</span></td>`;
       }else{
@@ -1243,7 +1342,7 @@ function renderLossTable(){
       }
     });
     html+=`<td class="tot ${clsOf(r.n?r.agg:null)}">${r.n?sign(r.agg)+fmtV(r.agg):'—'}</td>`;
-    html+=`<td class="sparkcell">${sparkbars(r.cells.map(c=>c.v))}</td>`;
+    html+=`<td class="sparkcell">${sparkcombo(r.cells.map(c=>c.v))}</td>`;
     html+='</tr>';
   });
 
@@ -1266,7 +1365,7 @@ function renderLossTable(){
   const a0=asOfList[0], a1=asOfList[asOfList.length-1];
   const staleN=tanks.filter(t=>{const l=dayDiff(tankAsOf(t),HEALTH.asOf);return l===null||l>STALE_DAYS;}).length;
   const sub=document.getElementById('lossSub');
-  if(sub) sub.textContent=`行 = 罐、列 = 各罐自身最近 ${SLOTS} 条记录（右端为最新，故同一列未必同一天）；底色越深偏离越大；右侧为逐日损溢柱 —— 绿盈 / 红亏，柱高 ∝ 量级，左侧标注该行取值范围`;
+  if(sub) sub.textContent=`行 = 罐、列 = 各罐自身最近 ${SLOTS} 条记录（右端为最新，故同一列未必同一天）；底色越深偏离越大；右侧柱=当日损溢量（绿盈红亏），青线=同序列趋势，左侧标注该行取值范围`;
   if(asOfEl) asOfEl.innerHTML=`${st.name} · ${tanks.length} 罐 · 数据截止 <b>${a0?(a0===a1?a0:a0+' ~ '+a1):'—'}</b>`
     +(staleN?` · <span style="color:var(--warn);">${staleN} 罐停更（罐号下带 *）</span>`:'');
   if(outEl) outEl.innerHTML = lowBase.length
@@ -1334,6 +1433,67 @@ function openTankModal(station,tank){
 }
 function closeTankModal(){
   const m=document.getElementById('tankModal');
+  if(m) m.hidden=true;
+}
+
+// ---------- 站点罐级明细弹窗（点击损溢矩阵格子触发） ----------
+// 同时给出「损益量」与「损益率(‰)」：前者看绝对规模，后者看相对水平（大罐小罐可比）
+function openStationModal(name){
+  const mask=document.getElementById('staModal');
+  if(!mask||!DATA) return;
+  const s=DATA.stations.find(x=>x.name===name);
+  if(!s) return;
+  const tanks=(s.tanks||[]).filter(t=>inFilter(t.product));
+
+  const rows=tanks.map(t=>{
+    const lossL=metricOf(t);
+    const ratePermille=(Number(t.lossRateAvg5)||0)*1000;          // N 列小数 ×1000 = ‰
+    return {t,lossL,ratePermille,asOf:tankAsOf(t)};
+  }).sort((a,b)=>Math.abs(b.lossL)-Math.abs(a.lossL));
+
+  document.getElementById('smTitle').textContent=name+' · 罐级明细';
+  const asOfList=[...new Set(tanks.map(t=>tankAsOf(t)).filter(Boolean))].sort();
+  const a0=asOfList[0],a1=asOfList[asOfList.length-1];
+  document.getElementById('smSub').textContent=
+    `${tanks.length} 罐 · ${winLabel()}口径 · 数据截止 ${a0?(a0===a1?a0:a0+' ~ '+a1):'—'}`;
+
+  const body=document.getElementById('smBody');
+  if(!rows.length){
+    body.innerHTML='<div class="empty box">该站在当前油品筛选下无罐数据</div>';
+  }else{
+    // 低基数保护：|率| 超过 100‰（=10%）视为分母接近 0 的噪声，显示「—」
+    const RATE_CAP=100;
+    let html='<table class="smtab"><thead><tr>'
+      +'<th>罐号</th><th>油品</th><th>损益量 (L/日)</th><th>损益率 (‰)</th><th>截止日</th>'
+      +'</tr></thead><tbody>';
+    rows.forEach(r=>{
+      const lowBase=Math.abs(r.ratePermille)>RATE_CAP;
+      const lc=r.lossL>=0?'#a7bda0':'#e59a92';
+      const rc=lowBase?'var(--faint)':(r.ratePermille>=0?'#a7bda0':'#e59a92');
+      html+='<tr>'
+        +`<td><span class="pd" style="background:${PROD_COLOR[r.t.product]||'#7fa3a8'}"></span>${r.t.tank}`
+        +(r.t.anomaly?' <span style="color:#d9a35b" title="异常罐">⚠</span>':'')+'</td>'
+        +`<td style="color:var(--sub)">${prodOf(r.t.product)}</td>`
+        +`<td style="color:${lc};font-weight:600">${r.lossL>0?'+':''}${fmt2(r.lossL)}</td>`
+        +`<td style="color:${rc};font-weight:600">${lowBase?'—':((r.ratePermille>0?'+':'')+fmt2(r.ratePermille))}</td>`
+        +`<td style="color:var(--faint);font-size:11.5px">${r.asOf?r.asOf.slice(5):'—'}</td>`
+        +'</tr>';
+    });
+    html+='</tbody></table>';
+    body.innerHTML=html;
+  }
+
+  const more=document.getElementById('smMore');
+  more.onclick=()=>{
+    closeStationModal();
+    syncStation(name);
+    const t=document.getElementById('lossTableWrap');
+    if(t) t.scrollIntoView({behavior:'smooth',block:'center'});
+  };
+  mask.hidden=false;
+}
+function closeStationModal(){
+  const m=document.getElementById('staModal');
   if(m) m.hidden=true;
 }
 
