@@ -9,15 +9,26 @@ name: liquid-writeback
 # 为什么 windows-latest：kdocs-cli.exe 是 Windows 二进制，Linux runner 跑不了。
 #   与 daily.yml（驾驶舱取数）同一机制，复用仓库内 bin/kdocs-cli.exe + KDOCS_TOKEN 密钥。
 #
-# 触发：每日 21:30 北京时间（UTC 13:30）自动 + 网页 Actions 页可手动 Run workflow。
-#   幂等：同值跳过，重复跑无害；本机 21:30 自动化保留作兜底，双保险。
+# 触发（2026-10-30 起）：北京时间每天 08:30 / 09:00 / 10:00 各跑一次 + 网页 Actions 页可手动。
+#   · 08:30、09:00 两轮：只补最近 3 天（早班油站上交后尽快落表，调用量小）
+#   · 10:00 一轮：补最近 20 天，把油站补录的历史数据一起带进来（调用量大，一天只跑一次）
+#   · 幂等：同值跳过，重复跑无害
+#   · 金山文档内的 AirScript 定时任务由用户在 10:30 运行，作为兜底覆盖，晚于本工作流三轮
+#   · GitHub 免费层调度常延迟 1~5 小时，实际触发时刻以 Actions 页面为准
 # ============================================================================
 
 on:
   schedule:
-    # UTC 13:30 = 北京 21:30（油站白天填完，晚上统一回写）。
-    - cron: "30 13 * * *"
+    # cron 一律按 UTC 解释。北京 08:30 / 09:00 / 10:00 = UTC 00:30 / 01:00 / 02:00
+    - cron: "30 0 * * *"   # 北京 08:30 —— 轻量：最近 3 天
+    - cron: "0 1 * * *"    # 北京 09:00 —— 轻量：最近 3 天
+    - cron: "0 2 * * *"    # 北京 10:00 —— 全量：最近 20 天（含补录历史）
   workflow_dispatch:
+    inputs:
+      since:
+        description: "只处理最近 N 天的提交（留空=全部记录）"
+        required: false
+        default: "20"
 
 permissions:
   contents: read
@@ -55,4 +66,13 @@ jobs:
 
       - name: 液位回写（A 表 → 罐表 C/D/F）
         shell: pwsh
-        run: python _extract/_sync_form_to_tanks.py
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_SINCE: ${{ github.event.inputs.since }}
+        run: |
+          # 08:30 / 09:00 两轮轻量（最近 3 天）；10:00 一轮全量（最近 20 天，含补录历史）
+          $since = "20"
+          if ($env:SCHEDULE -eq "30 0 * * *" -or $env:SCHEDULE -eq "0 1 * * *") { $since = "3" }
+          if (-not [string]::IsNullOrWhiteSpace($env:INPUT_SINCE)) { $since = $env:INPUT_SINCE }
+          Write-Host "本次处理窗口：最近 $since 天的提交（触发源：$($env:SCHEDULE)）"
+          python _extract/_sync_form_to_tanks.py --since $since
