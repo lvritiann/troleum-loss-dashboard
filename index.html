@@ -189,6 +189,28 @@
   .section-title .seg{margin-left:auto;font-weight:400;}
   .seg button:disabled{opacity:.42;cursor:not-allowed;}
   /* ── 单罐趋势弹层 ── */
+  /* ── 解锁遮罩 ── */
+  .lock{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;
+    background:var(--bg);padding:24px;}
+  .lock[hidden]{display:none;}
+  .lock-box{width:min(360px,100%);background:var(--panel);border:1px solid var(--line);
+    border-radius:18px;padding:30px 26px 22px;text-align:center;
+    box-shadow:0 18px 50px rgba(0,0,0,.45);}
+  .lock-ico{font-size:26px;line-height:1;margin-bottom:12px;}
+  .lock-t{font-size:16px;font-weight:700;color:var(--txt);letter-spacing:.02em;}
+  .lock-s{font-size:12.5px;color:var(--sub);margin-top:7px;line-height:1.6;}
+  .lock-inp{width:100%;margin-top:18px;background:var(--panel2);border:1px solid var(--line);
+    border-radius:10px;padding:10px 13px;color:var(--txt);font-size:14px;font-family:var(--font);
+    outline:none;letter-spacing:.08em;text-align:center;}
+  .lock-inp:focus{border-color:var(--acc);}
+  .lock-btn{width:100%;margin-top:11px;background:var(--acc);color:#06223a;border:0;
+    border-radius:10px;padding:10px;font-size:14px;font-weight:700;font-family:var(--font);
+    cursor:pointer;transition:.16s;}
+  .lock-btn:hover{filter:brightness(1.08);}
+  .lock-btn:disabled{opacity:.55;cursor:not-allowed;}
+  .lock-err{min-height:17px;margin-top:9px;font-size:12px;color:#e59a92;}
+  .lock-f{margin-top:4px;font-size:10.5px;color:var(--faint);line-height:1.6;}
+
   .modal-mask{position:fixed;inset:0;background:rgba(10,14,18,.74);display:flex;
     align-items:center;justify-content:center;z-index:80;padding:22px;}
   .modal-mask[hidden]{display:none;}
@@ -200,6 +222,30 @@
     cursor:pointer;line-height:1;padding:0 2px;}
   .modal-x:hover{color:var(--txt);}
   .ltab tbody tr{cursor:pointer;}
+  /* ── 各罐损溢：小型图表卡片网格 ── */
+  .tank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:12px;}
+  .tank-card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;
+    padding:11px 12px 8px;cursor:pointer;transition:border-color .16s,transform .16s,background .16s;
+    animation:cardIn .34s cubic-bezier(.2,.7,.3,1) both;}
+  .tank-card:hover{border-color:var(--acc);transform:translateY(-2px);background:rgba(127,163,168,.06);}
+  .tank-card.anom{border-color:rgba(217,163,91,.45);}
+  @keyframes cardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .tc-hd{display:flex;align-items:center;gap:6px;font-size:12.5px;}
+  .tc-hd .pd{width:8px;height:8px;border-radius:2px;flex:0 0 8px;}
+  .tc-tank{font-weight:700;color:var(--txt);letter-spacing:.02em;}
+  .tc-prod{color:var(--faint);font-size:10.5px;}
+  .tc-flag{display:inline-flex;align-items:center;justify-content:center;width:13px;height:13px;
+    border-radius:50%;background:rgba(217,163,91,.18);color:var(--warn);font-size:9.5px;font-weight:700;}
+  .tc-sum{margin-left:auto;font-variant-numeric:tabular-nums;font-size:13px;font-weight:700;}
+  .tc-sum i{font-style:normal;font-size:9.5px;font-weight:500;color:var(--faint);margin-left:2px;}
+  .tc-mid{display:flex;align-items:center;gap:10px;margin:7px 0 5px;}
+  .tc-bars{flex:1;min-width:0;}
+  .tc-donut{flex:0 0 56px;display:flex;align-items:center;}
+  .tc-ft{display:flex;justify-content:space-between;color:var(--faint);font-size:10px;
+    border-top:1px solid var(--line);padding-top:6px;}
+  .tc-ft .warn{color:var(--warn);}
+  .tc-na{color:var(--faint);font-size:11px;height:54px;display:flex;align-items:center;}
+  @media (prefers-reduced-motion:reduce){.tank-card{animation:none;}}
   /* 站点明细弹窗内的小表 */
   .smtab{width:100%;border-collapse:collapse;font-size:12.5px;}
   .smtab th{color:var(--sub);font-weight:600;font-size:11.5px;text-align:right;
@@ -273,7 +319,12 @@
     .ltab th:first-child,.ltab td:first-child{position:sticky;left:0;background:var(--panel);z-index:1;}
     .ltab th:first-child{z-index:2;}
     .ltab tbody tr:hover td:first-child{background:var(--panel);}
-    .swipe-hint{display:block;}
+    .tank-grid{grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:9px;}
+    .tank-card{padding:9px 10px 7px;}
+    .tc-donut{flex:0 0 46px;}
+    .tc-mid{gap:7px;}
+    .tc-sum{font-size:12px;}
+    .swipe-hint{display:none;}
   }
 </style>
 </head>
@@ -293,6 +344,19 @@
   </div>
   <div class="meta" id="meta"></div>
 </header>
+
+<div class="lock" id="lockMask">
+  <div class="lock-box">
+    <div class="lock-ico">🔒</div>
+    <div class="lock-t">数据已加密</div>
+    <div class="lock-s">请输入访问口令以查看驾驶舱</div>
+    <input id="lockPwd" type="password" class="lock-inp" placeholder="访问口令"
+           autocomplete="current-password" spellcheck="false" />
+    <button id="lockBtn" class="lock-btn">解 锁</button>
+    <div id="lockErr" class="lock-err"></div>
+    <div class="lock-f">口令由数据维护方提供 · 解锁后本次会话内有效</div>
+  </div>
+</div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <linearGradient id="sgp" x1="0" y1="0" x2="0" y2="1">
@@ -377,7 +441,7 @@
     </div>
   </div>
 
-  <div class="section-title">六、各罐损溢明细 · 近 5 日横向对比</div>
+  <div class="section-title">六、各罐损溢概览 · 近 5 日小图表</div>
   <div class="card">
     <h2>各罐损溢明细
       <select id="lossSta" class="sel" title="选择站点"></select>
@@ -388,7 +452,6 @@
     </h2>
     <div class="sub" id="lossSub">行 = 罐、列 = 数据日；底色深浅表示偏离程度（红亏 / 绿盈）；右列为 5 日走势形状</div>
     <div id="lossTableWrap" class="loss-wrap"></div>
-    <div class="swipe-hint">← 左右滑动查看「合计 / 走势」→</div>
     <div class="src">SOURCE · 罐表 L/N 列 · <span id="lossAsOf">—</span><br/><span id="lossOutlier"></span></div>
   </div>
 
@@ -1248,6 +1311,51 @@ function sparkcombo(vals){
     +`</div>`;
 }
 
+// ---------- 单罐小图表：迷你柱 + 盈/亏环形 ----------
+function miniBars(vals){
+  const present=vals.filter(v=>v!==null);
+  if(!present.length) return '<div class="tc-na">无有效记录</div>';
+  const W=140,H=54,padT=5,padB=5,padX=2;
+  const maxV=Math.max(0,...present), minV=Math.min(0,...present);
+  const span=(maxV-minV)||1, plotH=H-padT-padB;
+  const Y=v=>padT+(maxV-v)/span*plotH;
+  const y0=Y(0);
+  const n=vals.length, slot=(W-padX*2)/n, bw=Math.min(18,slot*0.6);
+  let bars='';
+  vals.forEach((v,i)=>{
+    if(v===null) return;
+    const yv=Y(v), top=Math.min(yv,y0), h=Math.max(1.5,Math.abs(yv-y0));
+    const x=padX+slot*i+(slot-bw)/2;
+    bars+=`<rect x="${x.toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" `
+      +`rx="2" fill="url(#${v>=0?'sgp':'sgn'})"><title>${v>0?'+':''}${fmt2(v)}</title></rect>`;
+  });
+  const zero=(minV<0&&maxV>0)
+    ? `<line x1="${padX}" y1="${y0.toFixed(1)}" x2="${W-padX}" y2="${y0.toFixed(1)}" stroke="#4a545e" stroke-width=".8"/>`
+    : '';
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}" preserveAspectRatio="none">${zero}${bars}</svg>`;
+}
+
+// 环形：绿色扇区 = 盈的天数，红色底 = 亏的天数，中心显示「盈/总」
+function miniDonut(pos,neg){
+  const total=pos+neg, r=18, C=2*Math.PI*r, cx=28, cy=28;
+  if(!total) return `<svg width="56" height="56" viewBox="0 0 56 56">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#3a444e" stroke-width="6"/>
+    <text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="11" fill="#859098">—</text></svg>`;
+  const p=pos/total;
+  const arc=pos
+    ? `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#63b26f" stroke-width="6"
+        stroke-dasharray="${(C*p).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 ${cx} ${cy})"/>`
+    : '';
+  return `<svg width="56" height="56" viewBox="0 0 56 56">
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="#e05f5f" stroke-width="6" opacity=".85"/>
+    ${arc}
+    <text x="${cx}" y="${cy+4}" text-anchor="middle" font-size="11" font-weight="700"
+      fill="#e3e8ec" font-family="${FONT}">${pos}/${total}</text></svg>`;
+}
+
+// ---------- 各罐损溢：小型图表卡片网格 ----------
+// 替代原来的大表格：每个启用罐一张卡片（迷你柱看量级与方向，环形看盈/亏天数结构），
+// 停用/空占位罐不渲染。卡片按 |合计| 降序，问题罐自动排在前面。
 function renderLossTable(){
   const wrap=document.getElementById('lossTableWrap');
   const asOfEl=document.getElementById('lossAsOf');
@@ -1256,133 +1364,82 @@ function renderLossTable(){
   if(!DATA){ wrap.innerHTML=''; return; }
   const st=DATA.stations.find(x=>x.name===CUR_STATION);
   if(!st){ wrap.innerHTML='<div class="empty box">该站点无数据</div>'; if(asOfEl) asOfEl.textContent=''; return; }
-  const tanks=(st.tanks||[]).filter(t=>inFilter(t.product));
-  if(!tanks.length){ wrap.innerHTML='<div class="empty box">该站在当前油品筛选下无罐数据</div>'; return; }
-  if(!tanks.some(t=>(t.last5||[]).length)){ wrap.innerHTML='<div class="empty box">该站近 5 日无有效损溢记录</div>'; return; }
 
-  const isL = LOSS_METRIC==='L';
-  const RATE_CAP=10;          // %：分母接近 0 的数学噪声
-  // 列数按「多数罐实际拥有的记录条数」定（上限 5）。实测不少罐只有 4 条有信号的行，
-  // 固定 5 列会让首列大面积留空。
-  const lenCnt={};
-  tanks.forEach(t=>{ const n=(t.last5||[]).length; if(n>0) lenCnt[n]=(lenCnt[n]||0)+1; });
-  const SLOTS=Math.min(5, Number(Object.entries(lenCnt).sort((a,b)=> b[1]-a[1] || b[0]-a[0])[0][0]));
-
-  // 列位按「各罐自身记录的先后」右对齐（最右列 = 该罐最新一条）。
-  // 不按绝对日期对列：实测每站 12 罐里约 10 罐停在 10-12 前后，另有 2 个占位罐
-  // 在 10-16~10-20，两组日期不相交；按绝对日期取列会让整张表大面积空白。
-  // 列标题用相对位次，真实日期放进 title 与罐号下方，避免日期乱序。
-  const slotDates=[];
-  for(let i=0;i<SLOTS;i++){
-    const cnt={};
-    tanks.forEach(t=>{
-      const l=t.last5||[];
-      const li=l.length-SLOTS+i;
-      if(li>=0 && l[li]) cnt[l[li].date]=(cnt[l[li].date]||0)+1;
-    });
-    const best=Object.entries(cnt).sort((a,b)=> b[1]-a[1] || a[0].localeCompare(b[0]))[0];
-    slotDates.push(best?best[0]:null);
-  }
-
+  const isL=LOSS_METRIC==='L';
+  const RATE_CAP=10;                 // %：分母接近 0 的噪声线
   const lowBase=[];
-  const valOf=(r,tank)=>{
-    if(!r) return {v:null,why:'nodata',date:null};
-    if(isL) return {v:Number(r.lossL)||0,date:r.date};
-    const pct=(Number(r.lossRate5)||0)*100;
-    if(Math.abs(pct)>RATE_CAP){ lowBase.push(tank+' '+r.date); return {v:null,why:'lowbase',date:r.date,pct}; }
-    return {v:pct*10,date:r.date};   // % → ‰
-  };
+
+  // 只保留「启用罐」：有油品、有近期记录、且不是全 0 的空占位罐（如某些站的东6/西6）
+  const tanks=(st.tanks||[]).filter(t=>{
+    if(!inFilter(t.product)) return false;
+    const l5=t.last5||[];
+    if(!l5.length) return false;
+    return l5.some(x=>Math.abs(Number(x.lossL)||0)>1e-9);
+  });
+  if(!tanks.length){ wrap.innerHTML='<div class="empty box">该站在当前油品筛选下无启用罐</div>'; return; }
 
   const rows=tanks.map(t=>{
-    const l=t.last5||[];
-    const cells=[];
-    for(let i=0;i<SLOTS;i++){
-      const li=l.length-SLOTS+i;
-      cells.push(valOf(li>=0?l[li]:null,t.tank));
-    }
-    const vals=cells.map(c=>c.v).filter(v=>v!==null);
-    const sum=vals.reduce((a,b)=>a+b,0);
-    return {t,cells,sum,n:vals.length,asOf:tankAsOf(t),
-      agg: isL?sum:(vals.length?sum/vals.length:0)};
+    const l5=(t.last5||[]).slice(-5);
+    const vals=l5.map(x=>{
+      if(isL) return Number(x.lossL)||0;
+      const pct=(Number(x.lossRate5)||0)*100;
+      if(Math.abs(pct)>RATE_CAP){ lowBase.push(t.tank+' '+x.date); return null; }
+      return pct*10;                 // % → ‰
+    });
+    const ok=vals.filter(v=>v!==null);
+    const sum=ok.reduce((a,b)=>a+b,0);
+    return {
+      t, vals,
+      agg: isL? sum : (ok.length? sum/ok.length : 0),
+      n: ok.length,
+      pos: ok.filter(v=>v>0).length,
+      neg: ok.filter(v=>v<0).length,
+      asOf: tankAsOf(t),
+      rate: (Number(t.lossRateAvg5)||0)*1000,
+    };
   });
-  rows.sort((a,b)=>Math.abs(b.agg)-Math.abs(a.agg));   // 问题罐排前面
+  rows.sort((a,b)=>Math.abs(b.agg)-Math.abs(a.agg));
 
-  const maxAbs=Math.max(1e-6,...rows.flatMap(r=>r.cells.map(c=>c.v===null?0:Math.abs(c.v))));
-  // 损溢量与损溢率都保留两位小数（与全页口径一致）；||0 把 -0 归一成 0
-  const fmtV=v=>{
-    const x=(Math.abs(v)<0.005)?0:v;
-    return x.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
-  };
-  const sign=v=> v>0?'+':'';
-  const clsOf=v=> v===null?'zero':(v>0?'pos':(v<0?'neg':'zero'));
   const unit=isL?'L':'‰';
-
-  // 列宽：日期列压到 44px，罐号 78（含截止日副行），合计 62，走势列吸收剩余空间
-  const CW_DAY=64, CW_TANK=104, CW_TOT=88;
-  let html='<table class="ltab"><colgroup><col style="width:'+CW_TANK+'px">';
-  for(let i=0;i<SLOTS;i++) html+='<col style="width:'+CW_DAY+'px">';
-  html+='<col style="width:'+CW_TOT+'px"><col></colgroup><thead><tr><th>罐号</th>';
-  const LABELS=['-4 日','-3 日','-2 日','-1 日','最新'].slice(-SLOTS);
-  slotDates.forEach((d,i)=>{
-    const lbl=LABELS[i]||('第 '+(i+1)+' 近');
-    html+= d
-      ? `<th title="该位置出现最多的日期：${d}（各罐取自身第 ${i+1} 近的记录）">${lbl}</th>`
-      : `<th>${lbl}</th>`;
-  });
-  html+=`<th>${isL?'合计 (L)':'均值 (‰)'}</th>`
-    +`<th title="柱高 ∝ 当日损溢绝对值（0 轴为基准，绿盈红亏）；青线为同一序列的单调平滑趋势，不会越过柱顶">柱 + 平滑趋势线</th></tr></thead><tbody>`;
-
-  rows.forEach(r=>{
+  const cards=rows.map(r=>{
+    const c=r.agg>=0?'#a7bda0':'#e59a92';
     const lag=dayDiff(r.asOf,HEALTH.asOf);
     const stale=(lag===null||lag>STALE_DAYS);
-    html+=`<tr data-tank="${r.t.tank}" title="点击查看该罐 30 日趋势">`;
-    html+=`<td class="tankcell"><span class="pd" style="background:${PROD_COLOR[r.t.product]||'#7fa3a8'}"></span>`
-        +`<span class="tk">${r.t.tank}</span>`
-        +(r.t.anomaly?' <span style="color:#d9a35b" title="异常罐（|日均损溢| 超阈值）">⚠</span>':'')
-        +`<span class="asof${stale?' warn':''}" title="该罐最后一条数据日${stale?'（停更超 '+STALE_DAYS+' 天）':''}">`
-        +(r.asOf?r.asOf.slice(5):'—')+(stale?' *':'')+'</span></td>';
-    r.cells.forEach(c=>{
-      if(c.v===null){
-        const tip=c.why==='lowbase'
-          ? `${c.date} 损溢率 ${c.pct.toFixed(2)}%：分母接近 0（停用/备用罐），不参与对比`
-          : (c.date?`${c.date} 无记录`:'无记录');
-        html+=`<td><span class="cellbg na" title="${tip}">—</span></td>`;
-      }else{
-        const a=(0.10+0.55*Math.min(1,Math.abs(c.v)/maxAbs)).toFixed(2);
-        const bg=c.v<0?`rgba(224,95,95,${a})`:(c.v>0?`rgba(99,178,111,${a})`:'transparent');
-        html+=`<td><span class="cellbg" style="background:${bg}" `
-            +`title="${r.t.tank} · ${c.date} · ${sign(c.v)}${fmtV(c.v)} ${unit}">${sign(c.v)}${fmtV(c.v)}</span></td>`;
-      }
-    });
-    html+=`<td class="tot ${clsOf(r.n?r.agg:null)}">${r.n?sign(r.agg)+fmtV(r.agg):'—'}</td>`;
-    html+=`<td class="sparkcell">${sparkcombo(r.cells.map(c=>c.v))}</td>`;
-    html+='</tr>';
-  });
+    return `<div class="tank-card${r.t.anomaly?' anom':''}" data-tank="${r.t.tank}"
+        title="点击查看该罐 30 日趋势">
+      <div class="tc-hd">
+        <span class="pd" style="background:${PROD_COLOR[r.t.product]||'#7fa3a8'}"></span>
+        <span class="tc-tank">${r.t.tank}</span>
+        <span class="tc-prod">${prodOf(r.t.product)}</span>
+        ${r.t.anomaly?'<span class="tc-flag" title="异常罐">!</span>':''}
+        <b class="tc-sum" style="color:${c}">${r.agg>0?'+':''}${fmt2(r.agg)}<i>${unit}</i></b>
+      </div>
+      <div class="tc-mid">
+        <div class="tc-bars">${miniBars(r.vals)}</div>
+        <div class="tc-donut">${miniDonut(r.pos,r.neg)}</div>
+      </div>
+      <div class="tc-ft">
+        <span>${r.pos} 盈 · ${r.neg} 亏</span>
+        <span class="${stale?'warn':''}">${r.asOf?r.asOf.slice(5):'—'}${stale?' *':''}</span>
+      </div>
+    </div>`;
+  }).join('');
 
-  // 合计行：损溢量可直接加总；损溢率不能加总，取均值
-  html+=`</tbody><tfoot><tr><td>${rows.length} 罐${isL?'合计':'均值'}</td>`;
-  for(let i=0;i<SLOTS;i++){
-    const vs=rows.map(r=>r.cells[i].v).filter(v=>v!==null);
-    if(!vs.length){ html+='<td class="zero">—</td>'; continue; }
-    const s=vs.reduce((a,b)=>a+b,0);
-    const v=isL?s:(s/vs.length);
-    html+=`<td class="${clsOf(v)}">${sign(v)+fmtV(v)}</td>`;
-  }
-  const aggs=rows.map(r=>r.agg);
-  const gv=isL?aggs.reduce((a,b)=>a+b,0):(aggs.length?aggs.reduce((a,b)=>a+b,0)/aggs.length:0);
-  html+=`<td class="${clsOf(gv)}">${sign(gv)+fmtV(gv)}</td><td></td></tr></tfoot></table>`;
-  wrap.innerHTML=html;
+  wrap.innerHTML=`<div class="tank-grid">${cards}</div>`;
+  wrap.querySelectorAll('.tank-card').forEach(el=>{
+    el.onclick=()=>openTankModal(CUR_STATION, el.dataset.tank);
+  });
 
   // 脚注
   const asOfList=[...new Set(tanks.map(t=>tankAsOf(t)).filter(Boolean))].sort();
   const a0=asOfList[0], a1=asOfList[asOfList.length-1];
   const staleN=tanks.filter(t=>{const l=dayDiff(tankAsOf(t),HEALTH.asOf);return l===null||l>STALE_DAYS;}).length;
   const sub=document.getElementById('lossSub');
-  if(sub) sub.textContent=`行 = 罐、列 = 各罐自身最近 ${SLOTS} 条记录（右端为最新，故同一列未必同一天）；底色越深偏离越大；右侧柱=当日损溢量（绿盈红亏），青线=同序列趋势，左侧标注该行取值范围`;
-  if(asOfEl) asOfEl.innerHTML=`${st.name} · ${tanks.length} 罐 · 数据截止 <b>${a0?(a0===a1?a0:a0+' ~ '+a1):'—'}</b>`
-    +(staleN?` · <span style="color:var(--warn);">${staleN} 罐停更（罐号下带 *）</span>`:'');
+  if(sub) sub.textContent=`共 ${tanks.length} 个启用罐（未启用罐不展示）· 按 |${isL?'损溢量':'损溢率'}| 降序 · 柱=近 5 日${isL?'损溢量(L)':'损溢率(‰)'}（绿盈红亏），环=盈/亏天数占比 · 点卡片看 30 日趋势`;
+  if(asOfEl) asOfEl.innerHTML=`${st.name} · 数据截止 <b>${a0?(a0===a1?a0:a0+' ~ '+a1):'—'}</b>`
+    +(staleN?` · <span style="color:var(--warn);">${staleN} 罐停更（日期带 *）</span>`:'');
   if(outEl) outEl.innerHTML = lowBase.length
-    ? `⚠ ${lowBase.length} 个损溢率为低基数（|率| &gt; ${RATE_CAP}%，分母接近 0），已显示「—」，不参与对比`
+    ? `⚠ ${lowBase.length} 个损溢率为低基数（|率| &gt; ${RATE_CAP}%，分母接近 0），以「—」格留空，不参与柱高计算`
     : '';
 }
 
@@ -1550,26 +1607,128 @@ function syncWinButtons(){
   });
 }
 initCharts(); bindFilters(); bindWinSeg();
-fetch('all_data.json').then(r=>r.json()).then(d=>{
+bootData();
+
+// ---------- 数据加载：加密 data.bin 优先，明文 all_data.json 仅作过渡兜底 ----------
+const PWD_KEY='DD_PWD';
+// 隐私模式 / 禁用站点数据时 sessionStorage 会抛错，直接调会把启动流程打断，统一包一层
+function pwdGet(){ try{ return sessionStorage.getItem(PWD_KEY); }catch(e){ return null; } }
+function pwdSet(v){ try{ sessionStorage.setItem(PWD_KEY,v); }catch(e){} }
+function pwdDel(){ try{ sessionStorage.removeItem(PWD_KEY); }catch(e){} }
+
+function onDataReady(d,plainMode){
   DATA=d;
-  renderAll();
+  try{
+    renderAll();
+  }catch(e){
+    // 渲染失败时不能让全屏遮罩一直盖着（看起来像白屏），把原因显示出来
+    console.error('[dashboard] 渲染失败', e);
+    const err=document.getElementById('lockErr');
+    if(err) err.textContent='渲染失败：'+(e&&e.message||e);
+    const m=document.getElementById('lockMask');
+    if(m) m.hidden=false;
+    return;
+  }
+  document.getElementById('lockMask').hidden=true;
   document.getElementById('meta').innerHTML=
     '数据截止 <b style="color:#e3e8ec">'+HEALTH.asOf+'</b> · 构建 <b style="color:#e3e8ec">'+HEALTH.build+'</b>'
-    + (d.isMock?' <span style="color:#ffcf6b;">示例</span>':'');
-  document.getElementById('foot').textContent='数据来源：15 站《加油站损溢管理—优化版》罐表 + 《收油统计表》 · 每日 00:00 云端自动同步 · 构建于 '+(d.generatedAt||'')+' · 页面 '+PAGE_VER;
-}).catch(e=>{
-  console.error('[dashboard] all_data.json 加载失败', e);
-  document.getElementById('meta').innerHTML='<span style="color:#c89a92;">数据加载失败</span>';
-  document.getElementById('health').className='health warn';
-  document.getElementById('health').innerHTML='<span class="hi">数据未加载，页面内容不可用。请检查 all_data.json 是否可访问。</span>';
-  ['stationChart','tankChart','unloadChart','lossHeat','lossPareto'].forEach(id=>showEmpty(id,'数据未加载'));
-  document.getElementById('kpis').innerHTML='';
-  document.getElementById('lossCards').innerHTML='';
-  document.getElementById('lossTableWrap').innerHTML='<div class="empty box">数据未加载</div>';
-  document.getElementById('conclusion').innerHTML='<span class="cmark">异常</span><span>'
-    +'all_data.json 加载失败（文件缺失、HTTP 错误或网络异常）。请确认云端每日跑批是否成功，'
-    +'或在浏览器直接打开 <b>all_data.json</b> 检查返回内容。</span>';
-});
+    + (d.isMock?' <span style="color:#ffcf6b;">示例</span>':'')
+    + (plainMode?' <span style="color:var(--warn);" title="未找到加密数据文件">明文模式</span>':'');
+  document.getElementById('foot').textContent=
+    '数据来源：15 站《加油站损溢管理—优化版》罐表 + 《收油统计表》 · 每日 00:00 云端自动同步 · 构建于 '
+    +(d.generatedAt||'')+' · 页面 '+PAGE_VER;
+}
+
+// 密文格式：DDB1(4) | iter(4) | salt(16) | iv(12) | tag(16) | ciphertext(gzip)
+async function decryptBin(buf,pwd){
+  const u8=new Uint8Array(buf);
+  if(u8.length<60) throw new Error('数据文件过短或损坏');
+  const magic=String.fromCharCode(u8[0],u8[1],u8[2],u8[3]);
+  if(magic!=='DDB1') throw new Error('数据格式不识别');
+  const iter=new DataView(buf).getUint32(4);
+  const salt=u8.slice(8,24), iv=u8.slice(24,36), tag=u8.slice(36,52), ct=u8.slice(52);
+  const all=new Uint8Array(ct.length+tag.length);
+  all.set(ct,0); all.set(tag,ct.length);
+  const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pwd),'PBKDF2',false,['deriveKey']);
+  const key=await crypto.subtle.deriveKey(
+    {name:'PBKDF2',salt:salt,iterations:iter,hash:'SHA-256'},
+    km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv:iv},key,all);
+  if(typeof DecompressionStream==='undefined') throw new Error('当前浏览器过旧，不支持解压');
+  const txt=await new Response(new Blob([plain]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+  return JSON.parse(txt);
+}
+
+// 密文只下载一次，解锁重试时复用（避免每次试错都重新拉 313KB）
+let BIN_BUF=null, BIN_TRIED=false;
+async function fetchBin(){
+  if(BIN_TRIED) return BIN_BUF;
+  BIN_TRIED=true;
+  try{
+    const r=await fetch('data.bin',{cache:'no-store'});
+    if(!r.ok) return (BIN_BUF=null);
+    BIN_BUF=await r.arrayBuffer();
+  }catch(e){ BIN_BUF=null; }
+  return BIN_BUF;
+}
+
+async function tryUnlock(pwd){
+  const buf=await fetchBin();
+  if(!buf) return {err:'nofile'};
+  try{ return {data:await decryptBin(buf,pwd)}; }
+  catch(e){
+    if(e && e.name==='OperationError') return {err:'badpwd'};
+    return {err:'bad',msg:String(e&&e.message||e)};
+  }
+}
+
+async function bootData(){
+  const saved=pwdGet();
+  if(saved){
+    const r=await tryUnlock(saved);
+    if(r.data){ onDataReady(r.data,false); return; }
+    pwdDel();      // 口令已变更或密文重签，重新输入
+  }
+  // 取一次密文：有 → 显示解锁框；没有 → 回退明文（过渡兼容）
+  const bin=await fetchBin();
+  if(bin){ showLock(''); return; }
+  try{
+    const d=await (await fetch('all_data.json',{cache:'no-store'})).json();
+    onDataReady(d,true);
+  }catch(e){
+    showLock('数据文件缺失：data.bin 与 all_data.json 均不可用。');
+  }
+}
+
+function showLock(msg){
+  const m=document.getElementById('lockMask');
+  m.hidden=false;
+  const err=document.getElementById('lockErr');
+  const inp=document.getElementById('lockPwd');
+  const btn=document.getElementById('lockBtn');
+  err.textContent=msg||''; inp.value='';
+  setTimeout(()=>{ try{ inp.focus(); }catch(e){} },60);
+  btn.onclick=submit;
+  inp.onkeydown=e=>{ if(e.key==='Enter') submit(); };
+  async function submit(){
+    const pwd=inp.value.trim();
+    if(!pwd){ err.textContent='请输入口令'; return; }
+    btn.disabled=true; btn.textContent='解密中…'; err.textContent='';
+    const r=await tryUnlock(pwd);
+    btn.disabled=false; btn.textContent='解 锁';
+    if(r.data){
+      pwdSet(pwd);
+      onDataReady(r.data,false);
+    }else if(r.err==='badpwd'){
+      err.textContent='口令不正确，请重新输入';
+      inp.select();
+    }else if(r.err==='nofile'){
+      err.textContent='数据文件缺失（data.bin）';
+    }else{
+      err.textContent='解密失败：'+(r.msg||'数据可能已损坏');
+    }
+  }
+}
 </script>
 </body>
 </html>
