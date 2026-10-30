@@ -1718,43 +1718,76 @@ async function fetchEnc(){
 
 
 async function bootData(){
-  // 调试/验证开关：?enc=1 时跳过明文，强制走密文通道（用于确认加密副本可正常解开）
-  const forceEnc=/[?&]enc=1\b/.test(location.search);
-
-  // ① 明文优先：首屏直接用 all_data.json，打开速度最快、最稳
-  if(!forceEnc) try{
+  // 明文优先，保证任何情况下都能看到页面
+  try{
     const d=await (await fetch('all_data.json',{cache:'no-store'})).json();
     onDataReady(d,true);
+  }catch(e){
+    console.warn('[dashboard] 明文不可用，尝试密文副本',e);
+    const r=await loadFromEnc();
+    if(r.data){ onDataReady(r.data,false); return; }
+    showError('数据加载失败：'+(r.err||'明文与加密副本均不可用'));
     return;
-  }catch(e){
-    console.warn('[dashboard] 明文数据不可用，尝试解密副本',e);
   }
-  if(forceEnc) console.info('[dashboard] ?enc=1 已跳过明文，直接验证加密副本');
+  // ?enc=1：页面正常显示后，后台跑一次密文连通性诊断并显示结果
+  if(/[?&]enc=1\b/.test(location.search)) runEncDiagnostic();
+}
 
-  // ② 明文不可用时才用密文副本（data.enc.json 或页面内联），内置密钥静默解开
+// 从密文副本取数：内联 → 外部文件，返回 {data} 或 {err}
+async function loadFromEnc(){
+  const el=document.getElementById('encBlob');
+  const inline=el&&el.textContent.trim();
+  if(inline){
+    try{ return {data:await decryptEnc(JSON.parse(inline),AUTO_KEY)}; }
+    catch(e){ /* 内联失败则走外部 */ }
+  }
+  let r;
   try{
-    const el=document.getElementById('encBlob');
-    const txt=el&&el.textContent.trim();
-    let blob=txt?JSON.parse(txt):null;
-    if(!blob){
-      blob=await Promise.race([
-        fetchEnc(),
-        new Promise(r=>setTimeout(()=>r(null),3000))
-      ]);
-    }
-    if(blob){
-      const d=await Promise.race([
-        decryptEnc(blob,AUTO_KEY),
-        new Promise((_,rej)=>setTimeout(()=>rej(new Error('解密超时')),5000))
-      ]);
-      onDataReady(d,false);
-      return;
-    }
-  }catch(e){
-    console.warn('[dashboard] 密文副本解密失败',e);
-  }
+    r=await Promise.race([
+      fetch('data.enc.json',{cache:'no-store'}),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('下载超时(12s)')),12000))
+    ]);
+  }catch(e){ return {err:'密文下载失败：'+(e&&e.message||e)}; }
+  if(!r.ok) return {err:'密文文件不存在（HTTP '+r.status+'）'};
+  let j;
+  try{ j=await r.json(); }
+  catch(e){ return {err:'密文不是合法 JSON'}; }
+  try{
+    return {data:await Promise.race([
+      decryptEnc(j,AUTO_KEY),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('解密超时(15s)')),15000))
+    ])};
+  }catch(e){ return {err:'解密失败：'+(e&&e.message||e)}; }
+}
 
-  showError('数据加载失败：明文与加密副本均不可用，请稍后重试或联系维护方。');
+// 诊断条：把「下载 → 解析 → 解密」每一步的结果显示在页面顶部，便于快速定位环境问题
+async function runEncDiagnostic(){
+  const box=document.createElement('div');
+  box.style.cssText='position:fixed;left:12px;right:12px;top:12px;z-index:200;'
+    +'background:#232b34;border:1px solid #d9a35b;border-radius:10px;padding:11px 14px;'
+    +'font:12px/1.75 "Microsoft YaHei",system-ui;color:#e3e8ec;box-shadow:0 8px 28px rgba(0,0,0,.5);';
+  box.textContent='⏳ 正在诊断密文通道…';
+  document.body.appendChild(box);
+  const L=[];
+  const t0=performance.now();
+  try{
+    L.push('环境：secure='+window.isSecureContext+' · subtle='+!!(crypto&&crypto.subtle)+' · DS='+(typeof DecompressionStream));
+    const t1=performance.now();
+    const r=await fetch('data.enc.json',{cache:'no-store'});
+    L.push('下载：HTTP '+r.status+'，'+(performance.now()-t1).toFixed(0)+'ms');
+    const txt=await r.text();
+    L.push('体积：'+(txt.length/1024).toFixed(0)+' KB');
+    const j=JSON.parse(txt);
+    L.push('结构：v='+j.v+' · iter='+j.iter+' · ct='+(j.ct?Math.round(j.ct.length/1024)+'KB':'缺失'));
+    const t2=performance.now();
+    const d=await decryptEnc(j,AUTO_KEY);
+    L.push('✅ 解密成功：'+(performance.now()-t2).toFixed(0)+'ms · 站点 '+d.stations.length
+      +' · 总耗时 '+(performance.now()-t0).toFixed(0)+'ms');
+  }catch(e){
+    L.push('❌ 失败：'+(e&&e.name)+' / '+(e&&e.message||e));
+  }
+  box.innerHTML='<b style="color:#e0b070">密文通道诊断</b>　<span style="color:#859098">（关闭：刷新页面不带 ?enc=1）</span><br>'
+    + L.map(x=>'· '+x).join('<br>');
 }
 
 function showError(msg){
