@@ -52,6 +52,12 @@
   .kpi .v{font-size:25px;font-weight:800;margin-top:7px;line-height:1;font-variant-numeric:tabular-nums;}
   .kpi .u{color:var(--sub);font-size:12px;margin-left:5px;font-weight:500;}
   .kpi.accent92::before{background:var(--c92);} .kpi.accent95::before{background:var(--c95);}
+  /* 非当前油品视角的卡片：淡化占位，保证栅格不跳位；点击可切过去 */
+  /* 用 filter 而非 opacity：卡片有入场动画 rise(animation-fill-mode:both)，
+     动画的 opacity:1 会盖掉普通 opacity 声明，导致淡化失效 */
+  .kpi.dim{filter:saturate(.2) opacity(.4);transition:filter .18s;}
+  .kpi.dim:hover{filter:none;}
+  .kpi[data-prod]{cursor:pointer;}
   .kpi.accent0::before{background:var(--c0);}
 
   /* ── 区块标题 ── */
@@ -60,6 +66,8 @@
 
   .grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;}
+  /* 重点图表卡：顶部微光晕，暗色下更有层次（不改变正文可读性） */
+  .card.glow{background:radial-gradient(130% 90% at 50% 0%,rgba(127,163,168,.07),transparent 68%),var(--panel);}
   .card h2{font-size:14.5px;margin:1px 4px 2px;font-weight:700;}
   .card .sub{color:var(--sub);font-size:11.5px;margin:0 4px 10px;font-weight:400;}
   .chart{width:100%;height:360px;}
@@ -124,20 +132,22 @@
 
   /* ── 各罐损溢对比表（P1：站点级横向对比，替代逐罐切换的柱线图） ── */
   .loss-wrap{overflow-x:auto;margin-top:2px;-webkit-overflow-scrolling:touch;}
-  .ltab{border-collapse:separate;border-spacing:0;width:100%;max-width:960px;margin:0 auto;
-    font-size:12.5px;table-layout:fixed;
-    min-width:520px;}   /* 窄屏时保证数值列不被压塌，由 .loss-wrap 横向滚动 */
-  .ltab th{background:var(--panel);color:var(--sub);font-weight:600;font-size:11.5px;
-    padding:7px 5px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:center;}
-  .ltab td{padding:4px 5px;border-bottom:1px solid var(--line);text-align:center;
+  .ltab{border-collapse:separate;border-spacing:0;width:100%;margin:0;
+    font-size:13px;table-layout:fixed;
+    min-width:620px;}   /* 靠左撑满画幅；窄屏由 .loss-wrap 横向滚动 */
+  .ltab th{background:var(--panel);color:var(--sub);font-weight:600;font-size:12px;
+    padding:9px 6px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:center;}
+  .ltab td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:center;
     font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .ltab tbody tr:nth-child(even) td{background:rgba(127,163,168,.028);}
+  .ltab tbody tr:hover td{background:rgba(127,163,168,.1);}
   .ltab th:first-child,.ltab td:first-child{text-align:left;padding-left:2px;}
   .ltab tbody tr:hover td{background:rgba(127,163,168,.08);}
   .ltab .tk{color:var(--txt);font-weight:600;}
   .ltab .pd{display:inline-block;width:8px;height:8px;border-radius:2px;
     margin-right:6px;vertical-align:middle;}
-  .ltab .cellbg{display:inline-block;min-width:34px;padding:2px 4px;border-radius:5px;
-    color:var(--txt);font-variant-numeric:tabular-nums;font-size:12px;}
+  .ltab .cellbg{display:inline-block;min-width:46px;padding:3px 7px;border-radius:6px;
+    color:var(--txt);font-variant-numeric:tabular-nums;font-size:12.5px;}
   .ltab .cellbg.na{color:var(--faint);background:transparent;font-weight:400;}
   .ltab td.pos,.ltab td.neg{font-weight:600;}
   .ltab td.pos{color:#a7bda0;}
@@ -149,10 +159,10 @@
   .ltab .tankcell{line-height:1.2;}
   .ltab .asof{display:block;font-size:9.5px;color:var(--faint);margin-left:14px;font-weight:400;}
   .ltab .asof.warn{color:var(--warn);}
-  .ltab .sparkcell{padding:0 3px;}
+  .ltab .sparkcell{padding:0 3px 0 10px;}   /* 与「合计」列拉开，刻度数字不与数值粘在一起 */
   .sparkbox{display:flex;align-items:center;gap:5px;width:100%;}
-  .sparkticks{flex:0 0 32px;display:flex;flex-direction:column;justify-content:space-between;
-    height:44px;padding:1px 0;font-size:9.5px;line-height:1;color:#6b7681;text-align:right;
+  .sparkticks{flex:0 0 44px;display:flex;flex-direction:column;justify-content:space-between;
+    height:56px;padding:2px 0;font-size:10px;line-height:1;color:#6b7681;text-align:right;
     font-variant-numeric:tabular-nums;}
   .spark{flex:1 1 auto;display:block;min-width:0;}
   .swipe-hint{display:none;color:var(--faint);font-size:11px;text-align:center;margin-top:7px;}
@@ -276,10 +286,10 @@
   </div>
 
   <div class="section-title">三、损溢集中度 · 帕累托</div>
-  <div class="card">
-    <h2>哪些罐贡献了主要损溢</h2>
-    <div class="sub">按 |日均损溢| 降序取前 30 罐；柱 = 日均损溢（红亏 / 绿盈），线 = 累计占比；虚线为 80% 参考线</div>
-    <div id="lossPareto" class="chart" style="height:370px;"></div>
+  <div class="card glow">
+    <h2>哪些罐产生了主要损溢</h2>
+    <div class="sub">按 |日均损溢| 降序取前 30 罐 · 柱 = 日均损溢（红亏 / 绿盈）· 线 = 累计占比 · 橙色虚线 = 80% 分界</div>
+    <div id="lossPareto" class="chart" style="height:400px;"></div>
     <div class="src">SOURCE · 15 站罐表 L 列 · 与上方矩阵同一口径</div>
   </div>
 
@@ -524,20 +534,40 @@ function renderKPI(){
          ? `<span style="color:var(--warn);">${HEALTH.staleN} 罐停更</span> · ${fmt(HEALTH.staleL)} L`
          : `<span style="color:var(--good);">全部 ${STALE_DAYS} 日内有更新</span>`}</div>
      </div>`);
+  // 油品卡始终渲染 3 张：切换视角时只把非当前油品淡化，卡片位置不跳动，
+  // 首屏栅格永远是 2+3=5 张，不会因筛选留下空位导致错位。
   DATA.products.forEach(p=>{
-    if(!inFilter(p)) return;
     const b=c.byProduct[p];
-    if(!b) return;
+    const on=inFilter(p);
     const color=PROD_COLOR[p];
     const cls = p==='92#汽油'?'accent92':p==='95#汽油'?'accent95':'accent0';
+    if(!b){
+      cards.push(`<div class="kpi ${cls} dim"><div class="t">${prodOf(p)} 库存</div>
+        <div class="v" style="color:${color}">—</div>
+        <div class="t" style="margin-top:7px;">无数据</div></div>`);
+      return;
+    }
     cards.push(
-      `<div class="kpi ${cls}">
+      `<div class="kpi ${cls}${on?'':' dim'}" data-prod="${p}" title="${on?'':'点击只看 '+prodOf(p)}">
          <div class="t">${prodOf(p)} 库存</div>
          <div class="v" style="color:${color}">${fmt(b.stockL)}<span class="u">L</span></div>
          <div class="t" style="margin-top:7px;line-height:1.5;">吨位：<b style="color:${color}">${fmt2(b.stockT)}</b><span class="u">t</span></div>
        </div>`);
   });
   document.getElementById('kpis').innerHTML=cards.join('');
+  // 点淡化的油品卡 = 切到该油品视角
+  document.querySelectorAll('#kpis .kpi[data-prod]').forEach(el=>{
+    el.onclick=()=>{ if(el.classList.contains('dim')) setProduct(el.dataset.prod); };
+  });
+}
+
+// 统一的油品视角切换入口（筛选按钮与 KPI 卡共用）
+function setProduct(p){
+  FP=p;
+  document.querySelectorAll('#filters button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.p===p);
+  });
+  renderAll();
 }
 function kpi(t,v,u,color,cls){
   return `<div class="kpi ${cls||''}"><div class="t">${t}</div><div class="v" style="${color?('color:'+color):''}">${v}<span class="u">${u}</span></div></div>`;
@@ -751,21 +781,31 @@ function renderLossCards(){
   const agg={};
   const anom=[];
   DATA.stations.forEach(s=>(s.tanks||[]).forEach(t=>{
-    if(!inFilter(t.product)) return;
     const v=metricOf(t);
+    // 各油品都累计（切换视角时非当前油品也要显示真实数值，只做淡化）；
+    // 异常罐名单只统计当前视角，避免「需关注」计数跟着变但不直观
     const a=agg[t.product]||(agg[t.product]={sum:0,n:0,stock:0,anom:0});
     a.sum+=v; a.n++; a.stock+=(t.stockL||0);
-    if(t.anomaly){ a.anom++; anom.push({s:s.name,t:t.tank,v}); }
+    if(t.anomaly){
+      a.anom++;
+      if(inFilter(t.product)) anom.push({s:s.name,t:t.tank,v});
+    }
   }));
   anom.sort((a,b)=>Math.abs(b.v)-Math.abs(a.v));
-  const cards=DATA.products.filter(inFilter).map(p=>{
-    const a=agg[p]; if(!a||!a.n) return '';
+  const cards=DATA.products.map(p=>{
+    const a=agg[p];
+    const on=inFilter(p);
+    const dim=on?'':' dim';
+    if(!a||!a.n){
+      return `<div class="kpi dim"><div class="t">${prodOf(p)} · ${winLabel()}损溢</div>
+        <div class="v" style="color:var(--faint)">—</div><div class="t">无数据</div></div>`;
+    }
     const avgL=a.sum/a.n;
     const gain=avgL>=0;
     const col = p==='92#汽油'?'accent92':p==='95#汽油'?'accent95':'accent0';
     const rate=(a.stock?(a.sum/a.stock*1000):0);   // ‰ 比 % 更易读
     const anc=a.anom;
-    return `<div class="kpi ${col}"><div class="t">${prodOf(p)} · ${winLabel()}损溢</div>
+    return `<div class="kpi ${col}${dim}" data-prod="${p}" title="${on?'':'点击只看 '+prodOf(p)}"><div class="t">${prodOf(p)} · ${winLabel()}损溢</div>
       <div class="v" style="color:${gain?'#a7bda0':'#c89a92'}">${fmt(avgL)}<span class="u">L/罐·日</span></div>
       <div class="t" style="margin-top:7px;line-height:1.7;">
         损溢率：<b style="color:${rate>=0?'#a7bda0':'#c89a92'}">${rate.toFixed(2)}‰</b><br/>
@@ -779,6 +819,9 @@ function renderLossCards(){
       <span style="color:${HEALTH.staleN?'#d9a35b':'#a7bda0'};">停更 ${HEALTH.staleN} 罐</span>
     </div></div>`);
   document.getElementById('lossCards').innerHTML=cards.join('');
+  document.querySelectorAll('#lossCards .kpi[data-prod]').forEach(el=>{
+    el.onclick=()=>{ if(el.classList.contains('dim')) setProduct(el.dataset.prod); };
+  });
 }
 
 // 首屏结论句（P0 新增：把「谁在漏、漏多少、哪些数据不可信」压成一句话）
@@ -911,6 +954,9 @@ function renderPareto(){
   const top=all.slice(0,30);
   let cum=0;
   const cumArr=top.map(x=>{ cum+=Math.abs(x.v); return +(cum/total*100).toFixed(1); });
+  const idx80=cumArr.findIndex(v=>v>=80);          // 累计首次到 80% 的位置
+  const n80=idx80>=0?idx80+1:0;
+  const G=echarts.graphic.LinearGradient;
   charts.lossPareto.setOption({
     backgroundColor:'transparent',
     tooltip:Object.assign({trigger:'axis',axisPointer:{type:'shadow'},
@@ -929,21 +975,46 @@ function renderPareto(){
       axisLine:{lineStyle:{color:'#323b45'}},axisTick:{show:false}},
     yAxis:[
       {type:'value',name:'L/日',nameTextStyle:{color:'#5f6a73',fontSize:11},
-        axisLabel:AX_LABEL,splitLine:SPLIT,splitNumber:4},
+        axisLabel:AX_LABEL,splitNumber:4,
+        splitLine:{lineStyle:{color:'#323b45',type:'dashed',opacity:.55}}},
       {type:'value',name:'累计 %',min:0,max:100,nameTextStyle:{color:'#5f6a73',fontSize:11},
         axisLabel:{color:'#9aa4ad',fontFamily:FONT,fontSize:11,formatter:'{value}%'},
         splitLine:{show:false},splitNumber:5}
     ],
     series:[
-      {name:'日均损溢',type:'bar',barWidth:'58%',
-        data:top.map(x=>({value:x.v,itemStyle:{color:x.v>=0?'#63b26f':'#e05f5f',
-          opacity:x.anom?1:0.78,borderRadius:[3,3,0,0]}}))},
-      {name:'累计占比',type:'line',yAxisIndex:1,data:cumArr,smooth:false,
-        symbol:'circle',symbolSize:5,lineStyle:{color:'#7fa3a8',width:2},
-        itemStyle:{color:'#7fa3a8'},connectNulls:true,
+      {name:'日均损溢',type:'bar',barWidth:'64%',z:3,
+        data:top.map((x,i)=>{
+          const up=x.v>=0;
+          return {
+            value:x.v,
+            itemStyle:{
+              borderRadius:[5,5,0,0],
+              color: up
+                ? new G(0,0,0,1,[{offset:0,color:'#9ff0b8'},{offset:.55,color:'#5fc07d'},{offset:1,color:'#2b6644'}])
+                : new G(0,0,0,1,[{offset:0,color:'#ff9e94'},{offset:.55,color:'#e0655b'},{offset:1,color:'#7b2f2b'}]),
+              shadowBlur: i<3?18:8,
+              shadowColor: up?'rgba(99,178,111,.5)':'rgba(224,95,95,.45)',
+              opacity: x.anom?1:.88
+            },
+            label:{show:i<6,position:'top',distance:5,color:'#cdd4dc',
+              fontSize:10.5,fontFamily:FONT,fontWeight:600,
+              formatter:()=> (x.v>0?'+':'')+Math.round(x.v)}
+          };
+        })},
+      {name:'累计占比',type:'line',yAxisIndex:1,data:cumArr,smooth:true,z:4,
+        symbol:'circle',symbolSize:6,
+        lineStyle:{color:'#9fd3dc',width:2.6,shadowBlur:16,shadowColor:'rgba(159,211,220,.6)'},
+        itemStyle:{color:'#d6f0f4',borderColor:'#1c232b',borderWidth:1.5},
+        areaStyle:{color:new G(0,0,0,1,[
+          {offset:0,color:'rgba(159,211,220,.26)'},
+          {offset:1,color:'rgba(159,211,220,0)'}])},
+        connectNulls:true,
         markLine:{silent:true,symbol:'none',
-          label:{formatter:'80%',color:'#9aa4ad',fontSize:10,position:'insideEndTop'},
-          data:[{yAxis:80}],lineStyle:{color:'#5f6a73',type:'dashed',width:1}}}
+          label:{formatter:n80?('前 '+n80+' 罐占 80%'):'80%',color:'#e0b070',fontSize:10.5,
+            fontWeight:600,position:'insideEndTop',backgroundColor:'rgba(28,35,43,.85)',
+            padding:[3,6],borderRadius:3},
+          data:[{yAxis:80}],
+          lineStyle:{color:'#d9a35b',type:'dashed',width:1.3,opacity:.85}}}
     ]
   },true);
 }
@@ -996,8 +1067,8 @@ function syncStation(name){
 // 刻度用 HTML 渲染，避免非等比缩放把文字拉变形；因此窗口变化时无需重绘。
 function sparkline(vals,color){
   const present=vals.filter(v=>v!==null);
-  const H=44, VW=300;                 // VW 为逻辑宽度，实际按单元格宽度横向拉伸
-  const padX=5, padT=7, padB=7;
+  const H=56, VW=320;                 // VW 为逻辑宽度，实际按单元格宽度横向拉伸
+  const padX=6, padT=8, padB=8;
   const plotH=H-padT-padB;
   if(!present.length) return `<div class="sparkbox"><svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none"></svg></div>`;
   let mn=Math.min(...present,0), mx=Math.max(...present,0);
@@ -1020,17 +1091,24 @@ function sparkline(vals,color){
   segs.forEach(seg=>{
     if(seg.length<2) return;
     body+=`<path d="${seg.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ')}" `
-        +`fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" ${NS}/>`;
+        +`fill="none" stroke="${color}" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round" ${NS}/>`;
+  });
+  // 水平网格（顶 / 中 / 底三档）：拉宽后不至于空洞，同时给出纵向量感
+  [0,.5,1].forEach(k=>{
+    const gy=(padT+plotH*k).toFixed(1);
+    body+=`<line x1="${padX}" y1="${gy}" x2="${VW-padX}" y2="${gy}" `
+      +`stroke="rgba(120,132,144,.16)" stroke-width="0.6" ${NS}/>`;
   });
   // 0 基线：跨零用虚线强调，同号压到极淡
   const cross=(mn<0&&mx>0);
   body+=`<line x1="${padX}" y1="${y0.toFixed(1)}" x2="${VW-padX}" y2="${y0.toFixed(1)}" `
-    +`stroke="${cross?'#5f6a73':'rgba(107,118,129,.18)'}" stroke-width="${cross?1:0.8}"`
+    +`stroke="${cross?'#6b7681':'rgba(107,118,129,.2)'}" stroke-width="${cross?1.1:0.8}"`
     +(cross?' stroke-dasharray="3 3"':'')+` ${NS}/>`;
-  // 端点（非等比缩放下呈横向小胶囊，可接受）
+  // 端点：末段实心点 + 描边，强调「最新一天」
   segs.forEach(seg=>{
     const last=seg[seg.length-1];
-    body+=`<circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="2.2" fill="${color}"/>`;
+    body+=`<circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3.2" fill="${color}" `
+      +`stroke="#1c232b" stroke-width="1.2"/>`;
   });
   const fm=v=>Math.abs(v)>=100?Math.round(v):(Math.round(v*10)/10);
   return `<div class="sparkbox">`
@@ -1109,7 +1187,7 @@ function renderLossTable(){
   const unit=isL?'L':'‰';
 
   // 列宽：日期列压到 44px，罐号 78（含截止日副行），合计 62，走势列吸收剩余空间
-  const CW_DAY=44, CW_TANK=78, CW_TOT=62;
+  const CW_DAY=64, CW_TANK=104, CW_TOT=88;
   let html='<table class="ltab"><colgroup><col style="width:'+CW_TANK+'px">';
   for(let i=0;i<SLOTS;i++) html+='<col style="width:'+CW_DAY+'px">';
   html+='<col style="width:'+CW_TOT+'px"><col></colgroup><thead><tr><th>罐号</th>';
