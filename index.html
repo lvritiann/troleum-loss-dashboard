@@ -161,9 +161,9 @@
   .ltab .asof.warn{color:var(--warn);}
   .ltab .sparkcell{padding:0 3px 0 10px;}   /* 与「合计」列拉开，刻度数字不与数值粘在一起 */
   .sparkbox{display:flex;align-items:center;gap:5px;width:100%;}
-  .sparkticks{flex:0 0 44px;display:flex;flex-direction:column;justify-content:space-between;
-    height:56px;padding:2px 0;font-size:10px;line-height:1;color:#6b7681;text-align:right;
-    font-variant-numeric:tabular-nums;}
+  .sparkticks{flex:0 0 62px;display:flex;align-items:center;justify-content:flex-end;
+    height:56px;padding-right:3px;font-size:9.5px;line-height:1;color:#6b7681;text-align:right;
+    font-variant-numeric:tabular-nums;letter-spacing:-.2px;}
   .spark{flex:1 1 auto;display:block;min-width:0;}
   .swipe-hint{display:none;color:var(--faint);font-size:11px;text-align:center;margin-top:7px;}
   /* ── 接卸明细工具条 ── */
@@ -1112,7 +1112,7 @@ function sparkline(vals,color){
   });
   const fm=v=>Math.abs(v)>=100?Math.round(v):(Math.round(v*10)/10);
   return `<div class="sparkbox">`
-    +`<div class="sparkticks"><span>${fm(mx)}</span><span>${fm(mn)}</span></div>`
+    +`<div class="sparkticks" title="该行取值范围（最低 ~ 最高）"><span>${fm(mn)} ~ ${fm(mx)}</span></div>`
     +`<svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none">${body}</svg>`
     +`</div>`;
 }
