@@ -200,7 +200,6 @@
   #unloadTable th.sorted::after{content:" ↓";}
   #unloadTable th.sorted.asc::after{content:" ↑";}
   .cols2{column-count:2;column-gap:28px;}
-  .section-title .seg{margin-left:auto;font-weight:400;}
   .seg button:disabled{opacity:.42;cursor:not-allowed;}
   /* ── 单罐趋势弹层 ── */
   /* ── 解锁遮罩 ── */
@@ -376,13 +375,7 @@
 <div class="wrap">
   <div class="health" id="health"></div>
 
-  <div class="section-title">一、结论速览 · 库存与损溢
-    <span class="seg" id="winSeg">
-      <button data-w="5" class="active">近 5 日</button>
-      <button data-w="7">近 7 日</button>
-      <button data-w="30">近 30 日</button>
-    </span>
-  </div>
+  <div class="section-title">一、结论速览 · 库存与损溢</div>
   <div class="kpis" id="kpis"></div>
   <div class="kpis" id="lossCards" style="grid-template-columns:repeat(4,1fr);"></div>
   <div class="conclusion" id="conclusion"></div>
@@ -1190,7 +1183,7 @@ function renderPareto(){
 
 // ---------- 各罐损溢横向对比（选一次站点，全站罐同视图对比） ----------
 let LOSS_METRIC='L';   // 'L' = 损溢量(L)   'R' = 损溢率(‰)
-let WIN=5;             // 5 / 7 / 30：结论、损溢卡、矩阵、帕累托的统计窗口
+const WIN=5;           // 口径固定为近 5 日（窗口切换已移除）
 
 // 当前数据是否带「固定自然日窗口」聚合（由新版 build_all_data.py 产出）
 function hasWin(){ return !!(DATA && DATA.company && DATA.company.windows && DATA.company.windows.win7); }
@@ -1609,7 +1602,7 @@ function closeStationModal(){
 }
 
 // ---------- 主渲染 ----------
-function renderAll(){ syncWinButtons(); renderKPI(); renderConclusion(); renderHeatmap(); renderPareto(); renderStationChart(); renderUnload(); renderLossCards(); renderLossSelect(); }
+function renderAll(){ renderKPI(); renderConclusion(); renderHeatmap(); renderPareto(); renderStationChart(); renderUnload(); renderLossCards(); renderLossSelect(); }
 function bindFilters(){
   document.querySelectorAll('#filters button').forEach(b=>{
     b.onclick=()=>{
@@ -1619,35 +1612,7 @@ function bindFilters(){
   });
 }
 
-// 统计窗口切换（近 5 / 7 / 30 日）。7 日与 30 日依赖新版构建产出的 windows 字段，
-// 旧数据下按钮禁用并给出提示，不会静默显示错误口径。
-function bindWinSeg(){
-  const seg=document.getElementById('winSeg');
-  if(!seg||seg.dataset.bound) return;
-  seg.querySelectorAll('button').forEach(b=>{
-    b.onclick=()=>{
-      if(b.disabled) return;
-      WIN=Number(b.dataset.w);
-      seg.querySelectorAll('button').forEach(x=>x.classList.toggle('active',Number(x.dataset.w)===WIN));
-      renderAll();
-    };
-  });
-  seg.dataset.bound='1';
-}
-function syncWinButtons(){
-  const seg=document.getElementById('winSeg');
-  if(!seg||!DATA) return;
-  const ok=hasWin();
-  if(!ok && WIN!==5) WIN=5;      // 数据不支持时回落到 5 日，避免口径错位
-  seg.querySelectorAll('button').forEach(b=>{
-    const w=Number(b.dataset.w);
-    const dis=(w!==5 && !ok);
-    b.disabled=dis;
-    b.title=dis?'当前数据不含该窗口聚合，需云端按新版构建脚本跑批后可用':'';
-    b.classList.toggle('active',w===WIN);
-  });
-}
-initCharts(); bindFilters(); bindWinSeg();
+initCharts(); bindFilters();
 bootData();
 
 // ---------- 数据加载：加密 data.bin 优先，明文 all_data.json 仅作过渡兜底 ----------
