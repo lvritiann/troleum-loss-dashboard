@@ -162,7 +162,7 @@
   .ltab .sparkcell{padding:0 3px 0 10px;}   /* 与「合计」列拉开，刻度数字不与数值粘在一起 */
   .sparkbox{display:flex;align-items:center;gap:5px;width:100%;}
   .sparkticks{flex:0 0 62px;display:flex;align-items:center;justify-content:flex-end;
-    height:56px;padding-right:3px;font-size:9.5px;line-height:1;color:#6b7681;text-align:right;
+    height:84px;padding-right:3px;font-size:9.5px;line-height:1;color:#6b7681;text-align:right;
     font-variant-numeric:tabular-nums;letter-spacing:-.2px;}
   .spark{flex:1 1 auto;display:block;min-width:0;}
   .swipe-hint{display:none;color:var(--faint);font-size:11px;text-align:center;margin-top:7px;}
@@ -195,6 +195,11 @@
     cursor:pointer;line-height:1;padding:0 2px;}
   .modal-x:hover{color:var(--txt);}
   .ltab tbody tr{cursor:pointer;}
+  /* 发散柱入场：逐根错峰生长，克制不弹跳 */
+  @keyframes barIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+  .ltab .bar{animation:barIn .4s cubic-bezier(.2,.7,.3,1) both;animation-delay:var(--d,0ms);}
+  .ltab .bar:hover{fill-opacity:1;}
+  @media (prefers-reduced-motion:reduce){.ltab .bar{animation:none;}}
   /* ── 说明抽屉 ── */
   .note-card{padding:0;}
   .note-card summary{cursor:pointer;list-style:none;padding:13px 18px;font-size:13px;
@@ -262,6 +267,15 @@
   </div>
   <div class="meta" id="meta"></div>
 </header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="sgp" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#93e3a5"/><stop offset="1" stop-color="#3d8a55"/>
+  </linearGradient>
+  <linearGradient id="sgn" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#f5988c"/><stop offset="1" stop-color="#a33f38"/>
+  </linearGradient>
+</defs></svg>
 
 <div class="wrap">
   <div class="health" id="health"></div>
@@ -1065,58 +1079,63 @@ function syncStation(name){
 
 // 迷你走势：SVG 宽度自适应单元格（preserveAspectRatio=none + non-scaling-stroke），
 // 刻度用 HTML 渲染，避免非等比缩放把文字拉变形；因此窗口变化时无需重绘。
-function sparkline(vals,color){
+// 逐日损溢：正负发散柱（Diverging Bar）
+// 为什么换掉折线：这里的 5 个点是「离散的期段观测」，不是连续时间采样，
+// 折线会暗示「每天都在平滑变化」；而损溢天然有正有负，0 轴就是基准线，
+// 用柱长∝|数值| 才能直接比较「哪一天亏得多、盈得多」。
+function sparkbars(vals,color){
   const present=vals.filter(v=>v!==null);
-  const H=56, VW=320;                 // VW 为逻辑宽度，实际按单元格宽度横向拉伸
-  const padX=6, padT=8, padB=8;
-  const plotH=H-padT-padB;
+  const H=84, VW=760;              // 高度放大，柱状才有足够行程表达正负
+  const padT=9,padB=12,padX=5;
   if(!present.length) return `<div class="sparkbox"><svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none"></svg></div>`;
-  let mn=Math.min(...present,0), mx=Math.max(...present,0);
-  if(mn===mx){ mn-=1; mx+=1; }
-  const n=vals.length;
-  const X=i=>padX+(n<=1?VW/2:(i/(n-1))*(VW-padX*2));
-  const Y=v=>padT+plotH-((v-mn)/(mx-mn))*plotH;
-  const segs=[]; let cur=[];
-  vals.forEach((v,i)=>{
-    if(v===null){ if(cur.length){ segs.push(cur); cur=[]; } }
-    else cur.push([X(i),Y(v)]);
-  });
-  if(cur.length) segs.push(cur);
+  const maxV=Math.max(0,...present), minV=Math.min(0,...present);
+  const span=(maxV-minV)||1;
+  const plotH=H-padT-padB;
+  const Y=v=>padT+(maxV-v)/span*plotH;
   const y0=Y(0);
+  const n=vals.length;
+  const slot=(VW-padX*2)/n;
+  // 柱宽设上限：走势列很宽时（5 根柱摊 400+px）不限宽会变成色块，失去「柱」的形态
+  const barW=Math.min(34,Math.max(10,slot*0.44));
   const NS='vector-effect="non-scaling-stroke"';
-  let body='';
-  // 不做面积填充：全为负值时填充会落在 0 线上方、且用油品色（95号=绿），
-  // 视觉上像「盈利」，与亏损方向矛盾。只画折线 + 0 基线更不易误读。
-  // 折线
-  segs.forEach(seg=>{
-    if(seg.length<2) return;
-    body+=`<path d="${seg.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ')}" `
-        +`fill="none" stroke="${color}" stroke-width="2.1" stroke-linejoin="round" stroke-linecap="round" ${NS}/>`;
+  const amax=Math.max(...present.map(Math.abs));
+  let bars='';
+  vals.forEach((v,i)=>{
+    if(v===null) return;
+    const yv=Y(v);
+    const top=Math.min(yv,y0);
+    const h=Math.max(2,Math.abs(yv-y0));       // 柱长 ∝ |数值|，不做断轴
+    const x=padX+slot*i+(slot-barW)/2;
+    const up=v>=0;
+    const isMax=Math.abs(v)>1e-9 && Math.abs(v)>=amax-1e-9;   // 行内极值才标，且 0 值不标
+    bars+=`<rect class="bar" style="--d:${i*65}ms" x="${x.toFixed(1)}" y="${top.toFixed(1)}" `
+      +`width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="3" `
+      +`fill="url(#${up?'sgp':'sgn'})">`
+      +`<title>${v>0?'+':''}${fmt2(v)} L</title></rect>`;
+    if(isMax){
+      const ly=up?(top-3):(top+h+9);
+      bars+=`<text x="${(x+barW/2).toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="middle" `
+        +`fill="#c9d2d9" font-size="9.5" font-family="${FONT}" font-weight="600">`
+        +(v>0?'+':'')+(Math.abs(v)>=100?Math.round(v):Math.round(v*10)/10)+`</text>`;
+    }
   });
-  // 水平网格（顶 / 中 / 底三档）：拉宽后不至于空洞，同时给出纵向量感
-  [0,.5,1].forEach(k=>{
-    const gy=(padT+plotH*k).toFixed(1);
-    body+=`<line x1="${padX}" y1="${gy}" x2="${VW-padX}" y2="${gy}" `
-      +`stroke="rgba(120,132,144,.16)" stroke-width="0.6" ${NS}/>`;
-  });
-  // 0 基线：跨零用虚线强调，同号压到极淡
-  const cross=(mn<0&&mx>0);
-  body+=`<line x1="${padX}" y1="${y0.toFixed(1)}" x2="${VW-padX}" y2="${y0.toFixed(1)}" `
-    +`stroke="${cross?'#6b7681':'rgba(107,118,129,.2)'}" stroke-width="${cross?1.1:0.8}"`
-    +(cross?' stroke-dasharray="3 3"':'')+` ${NS}/>`;
-  // 端点：末段实心点 + 描边，强调「最新一天」
-  segs.forEach(seg=>{
-    const last=seg[seg.length-1];
-    body+=`<circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="3.2" fill="${color}" `
-      +`stroke="#1c232b" stroke-width="1.2"/>`;
-  });
+  // 槽位刻度：与 5 个日期列一一对应，帮助把「第几根柱」对上「第几天」
+  let slots='';
+  for(let i=0;i<n;i++){
+    const cx=(padX+slot*i+slot/2).toFixed(1);
+    slots+=`<line x1="${cx}" y1="${H-6}" x2="${cx}" y2="${H-1}" stroke="rgba(150,163,176,.6)" stroke-width="1" ${NS}/>`;
+  }
+  // 0 轴只在「跨零行」画：全正/全负时 0 轴就是行边界，再画一条会与相邻行的线错位成锯齿
+  const cross=(minV<0&&maxV>0);
+  const zero=cross
+    ? `<line x1="${padX}" y1="${y0.toFixed(1)}" x2="${VW-padX}" y2="${y0.toFixed(1)}" stroke="#7b8794" stroke-width="1" ${NS}/>`
+    : '';
   const fm=v=>Math.abs(v)>=100?Math.round(v):(Math.round(v*10)/10);
   return `<div class="sparkbox">`
-    +`<div class="sparkticks" title="该行取值范围（最低 ~ 最高）"><span>${fm(mn)} ~ ${fm(mx)}</span></div>`
-    +`<svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none">${body}</svg>`
+    +`<div class="sparkticks" title="该行取值范围（最低 ~ 最高）"><span>${fm(minV)} ~ ${fm(maxV)}</span></div>`
+    +`<svg class="spark" width="100%" height="${H}" viewBox="0 0 ${VW} ${H}" preserveAspectRatio="none">${zero}${bars}${slots}</svg>`
     +`</div>`;
 }
-
 function renderLossTable(){
   const wrap=document.getElementById('lossTableWrap');
   const asOfEl=document.getElementById('lossAsOf');
@@ -1199,7 +1218,7 @@ function renderLossTable(){
       : `<th>${lbl}</th>`;
   });
   html+=`<th>${isL?'合计 (L)':'均值 (‰)'}</th>`
-    +`<th title="曲线按该行自身的最小~最大值缩放，用于看形状；幅度对比请看底色深浅与合计列">走势（含 0 线与该行极值）</th></tr></thead><tbody>`;
+    +`<th title="柱高 ∝ 当日损溢绝对值，以 0 轴为基准；绿=盈、红=亏。各行按自身取值范围缩放，幅度对比请看底色深浅与合计列">逐日损溢柱（绿盈 / 红亏）</th></tr></thead><tbody>`;
 
   rows.forEach(r=>{
     const lag=dayDiff(r.asOf,HEALTH.asOf);
@@ -1224,7 +1243,7 @@ function renderLossTable(){
       }
     });
     html+=`<td class="tot ${clsOf(r.n?r.agg:null)}">${r.n?sign(r.agg)+fmtV(r.agg):'—'}</td>`;
-    html+=`<td class="sparkcell">${sparkline(r.cells.map(c=>c.v),PROD_COLOR[r.t.product]||'#7fa3a8')}</td>`;
+    html+=`<td class="sparkcell">${sparkbars(r.cells.map(c=>c.v))}</td>`;
     html+='</tr>';
   });
 
@@ -1247,7 +1266,7 @@ function renderLossTable(){
   const a0=asOfList[0], a1=asOfList[asOfList.length-1];
   const staleN=tanks.filter(t=>{const l=dayDiff(tankAsOf(t),HEALTH.asOf);return l===null||l>STALE_DAYS;}).length;
   const sub=document.getElementById('lossSub');
-  if(sub) sub.textContent=`行 = 罐、列 = 各罐自身最近 ${SLOTS} 条记录（右端为最新，故同一列未必同一天）；底色越深偏离越大（红亏 / 绿盈）；右侧走势带 0 基线与该行上下极值刻度`;
+  if(sub) sub.textContent=`行 = 罐、列 = 各罐自身最近 ${SLOTS} 条记录（右端为最新，故同一列未必同一天）；底色越深偏离越大；右侧为逐日损溢柱 —— 绿盈 / 红亏，柱高 ∝ 量级，左侧标注该行取值范围`;
   if(asOfEl) asOfEl.innerHTML=`${st.name} · ${tanks.length} 罐 · 数据截止 <b>${a0?(a0===a1?a0:a0+' ~ '+a1):'—'}</b>`
     +(staleN?` · <span style="color:var(--warn);">${staleN} 罐停更（罐号下带 *）</span>`:'');
   if(outEl) outEl.innerHTML = lowBase.length
