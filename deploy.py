@@ -9,7 +9,7 @@
   set GH_USER=yourname&& set GH_REPO=petroleum-loss-dashboard&& set GH_PAT=ghp_xxx&& python deploy.py
   或在 deploy_config.json 填入 {"user":..,"repo":..,"pat":..}（勿提交该文件）。
 """
-import os, sys, json, base64, datetime, urllib.request, urllib.error
+import os, sys, json, base64, datetime, time, urllib.request, urllib.error
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 cfg = {}
@@ -60,6 +60,9 @@ def push_file(local_rel, msg):
         return True
     path = "/repos/%s/%s/contents/%s" % (USER, REPO, local_rel)
     st, cur = api_call("GET", path)
+    if st != 200:
+        time.sleep(2)
+        st, cur = api_call("GET", path)
     sha = cur.get("sha") if st == 200 else None
     with open(local, "rb") as f:
         b64 = base64.b64encode(f.read()).decode("ascii")
@@ -104,6 +107,10 @@ def ensure_static_assets():
             continue
         st, _ = api_call("GET", "/repos/%s/%s/contents/%s" % (USER, REPO, f))
         if st == 200:
+            continue
+        if st != 404:
+            # 超时 / 限流 / 网络错误：无法确认文件是否缺失，不要贸然推送（否则 PUT 会因缺 sha 报 422）
+            print("  ! 检查 %s 失败(HTTP %s)，跳过本次补齐" % (f, st))
             continue
         print("  补齐静态资源: " + f)
         push_file(f, "chore(assets): 补齐静态资源 " + f)
