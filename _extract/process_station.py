@@ -194,18 +194,25 @@ def process_tank(tv, errors, tank_prod_fb, prod_density_fb):
     raw_dens = safe_num(cell_val(cur, 4)) or 0.0
     stockL = raw_stock if 0 <= raw_stock <= STOCK_MAX else 0.0
     density = raw_dens if DENS_MIN <= raw_dens <= DENS_MAX else 0.0
-    # 近5日损溢：取末5条含有效损溢信号的行
+    # 损溢序列：取末 30 条含有效损溢信号的行（last5 保留末 5 条以兼容旧前端）
+    # G 列（卸油升，index 6）一并带出，供前端在趋势上标注「卸油日」
+    LAST_N = 30
     loss_rows = [x for x in real_today if row_signal(x[1])]
-    last5_src = (loss_rows if loss_rows else real_today)[-5:]
-    last5_out, lossLs, lossRs = [], [], []
-    for d, r in last5_src:
+    src = (loss_rows if loss_rows else real_today)[-LAST_N:]
+    series_out = []
+    for d, r in src:
         lL = safe_num(cell_val(r, 11)) if len(r) > 11 else None
         lR = safe_num(cell_val(r, 13)) if len(r) > 13 else None
-        lL = lL if isinstance(lL, (int, float)) else 0.0
-        lR = lR if isinstance(lR, (int, float)) else 0.0
-        last5_out.append({"date": d.isoformat(), "lossL": lL, "lossRate5": lR})
-        lossLs.append(lL)
-        lossRs.append(lR)
+        gL = safe_num(cell_val(r, 6)) if len(r) > 6 else None
+        series_out.append({
+            "date": d.isoformat(),
+            "lossL": lL if isinstance(lL, (int, float)) else 0.0,
+            "lossRate5": lR if isinstance(lR, (int, float)) else 0.0,
+            "unloadL": gL if isinstance(gL, (int, float)) else 0.0,
+        })
+    last5_out = series_out[-5:]
+    lossLs = [x["lossL"] for x in last5_out]
+    lossRs = [x["lossRate5"] for x in last5_out]
     lossAvg5L = sum(lossLs) / len(lossLs) if lossLs else 0.0
     lossRateAvg5 = sum(lossRs) / len(lossRs) if lossRs else 0.0
     stockT = stockL * density / 1e6
@@ -219,7 +226,8 @@ def process_tank(tv, errors, tank_prod_fb, prod_density_fb):
     return {
         "tank": tank, "product": product,
         "stockL": stockL, "stockT": stockT,
-        "last5": last5_out, "lossAvg5L": lossAvg5L, "lossRateAvg5": lossRateAvg5,
+        "last5": last5_out, "series": series_out,
+        "lossAvg5L": lossAvg5L, "lossRateAvg5": lossRateAvg5,
         "density": density,
     }
 
