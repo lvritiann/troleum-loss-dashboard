@@ -4,14 +4,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>加油站损溢管理 · 公司驾驶舱</title>
-<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.5.1/echarts.min.js"></script>
+<!-- ECharts 本地化：原先走 CDN，实测 bootcdn 已 404、jsdelivr 需 14s，改为同站加载（保留 CDN 兜底） -->
+<script src="echarts.min.js"></script>
 <script>
   if (typeof echarts === 'undefined') {
-    document.write('<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"><\/script>');
+    document.write('<script src="https://unpkg.com/echarts@5.5.1/dist/echarts.min.js"><\/script>');
   }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#1c232b; --panel:#232b34; --panel2:#1f262e; --line:#323b45;
@@ -20,7 +19,7 @@
     --c92:#e05f5f; --c95:#63b26f; --c0:#5b8fd9;
     --good:#a7bda0; --bad:#c89a92; --warn:#d9a35b;
     --r:16px;
-    --font:'Inter','Microsoft YaHei','PingFang SC',system-ui,sans-serif;
+    --font:-apple-system,'Segoe UI','Microsoft YaHei','PingFang SC',system-ui,sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;}
@@ -501,7 +500,7 @@
 <script>
 const PROD_COLOR = {"92#汽油":"#e05f5f","95#汽油":"#63b26f","0#柴油":"#5b8fd9"};
 const PROD_CLASS = {"92#汽油":"p92","95#汽油":"p95","0#柴油":"p0"};
-const FONT = "Inter, 'Microsoft YaHei', 'PingFang SC', sans-serif";
+const FONT = "-apple-system, 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif";
 let DATA=null, FP='ALL', CUR_STATION=null;
 let HEALTH={asOf:'-', build:'-', staleN:0, staleL:0, tankN:0, lagDays:null};
 let charts={};
