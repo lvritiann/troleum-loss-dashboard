@@ -340,6 +340,7 @@
   <div class="meta" id="meta"></div>
 </header>
 
+<script id="encBlob" type="application/json"></script>
 <div class="lock" id="lockMask" hidden>
   <div class="lock-box">
     <div class="lock-ico">⚠️</div>
@@ -1629,14 +1630,17 @@ function onDataReady(d,plainMode){
     +(d.generatedAt||'')+' · 页面 '+PAGE_VER;
 }
 
-// 密文格式：DDB1(4) | iter(4) | salt(16) | iv(12) | tag(16) | ciphertext(gzip)
-async function decryptBin(buf,pwd){
-  const u8=new Uint8Array(buf);
-  if(u8.length<60) throw new Error('数据文件过短或损坏');
-  const magic=String.fromCharCode(u8[0],u8[1],u8[2],u8[3]);
-  if(magic!=='DDB1') throw new Error('数据格式不识别');
-  const iter=new DataView(buf).getUint32(4);
-  const salt=u8.slice(8,24), iv=u8.slice(24,36), tag=u8.slice(36,52), ct=u8.slice(52);
+// 密文格式（data.enc.json）：{v,iter,alg,salt,iv,tag,ct}，各字段 base64；
+// ct 为 gzip 后的明文经 AES-256-GCM 加密的结果。
+function b64ToBytes(s){
+  const bin=atob(s), u8=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) u8[i]=bin.charCodeAt(i);
+  return u8;
+}
+async function decryptEnc(o,pwd){
+  if(!o||!o.ct) throw new Error('密文结构异常');
+  const iter=Number(o.iter)||10000;
+  const salt=b64ToBytes(o.salt), iv=b64ToBytes(o.iv), tag=b64ToBytes(o.tag), ct=b64ToBytes(o.ct);
   const all=new Uint8Array(ct.length+tag.length);
   all.set(ct,0); all.set(tag,ct.length);
   const km=await crypto.subtle.importKey('raw',new TextEncoder().encode(pwd),'PBKDF2',false,['deriveKey']);
@@ -1649,37 +1653,59 @@ async function decryptBin(buf,pwd){
   return JSON.parse(txt);
 }
 
-// 密文只下载一次，解锁重试时复用（避免每次试错都重新拉 313KB）
+// 密文只取一次，失败重试时复用
 let BIN_BUF=null, BIN_TRIED=false;
-async function fetchBin(){
+async function fetchEnc(){
   if(BIN_TRIED) return BIN_BUF;
   BIN_TRIED=true;
   try{
-    const r=await fetch('data.bin',{cache:'no-store'});
+    const r=await fetch('data.enc.json',{cache:'no-store'});
     if(!r.ok) return (BIN_BUF=null);
-    BIN_BUF=await r.arrayBuffer();
+    const j=await r.json();
+    BIN_BUF=(j&&j.v===1&&j.ct)?j:null;
   }catch(e){ BIN_BUF=null; }
   return BIN_BUF;
 }
 
 
 async function bootData(){
-  // 有密文 → 用内置密钥静默解开，用户无感；解不开再退回明文（部署过渡期）
-  const bin=await fetchBin();
-  if(bin){
-    try{
-      onDataReady(await decryptBin(bin,AUTO_KEY),false);
-      return;
-    }catch(e){
-      console.warn('[dashboard] 密文解密失败，尝试明文回退',e);
-    }
-  }
-  try{
+  // 调试/验证开关：?enc=1 时跳过明文，强制走密文通道（用于确认加密副本可正常解开）
+  const forceEnc=/[?&]enc=1\b/.test(location.search);
+
+  // ① 明文优先：首屏直接用 all_data.json，打开速度最快、最稳
+  if(!forceEnc) try{
     const d=await (await fetch('all_data.json',{cache:'no-store'})).json();
     onDataReady(d,true);
+    return;
   }catch(e){
-    showError('数据加载失败：'+(e&&e.message||e));
+    console.warn('[dashboard] 明文数据不可用，尝试解密副本',e);
   }
+  if(forceEnc) console.info('[dashboard] ?enc=1 已跳过明文，直接验证加密副本');
+
+  // ② 明文不可用时才用密文副本（data.enc.json 或页面内联），内置密钥静默解开
+  try{
+    const el=document.getElementById('encBlob');
+    const txt=el&&el.textContent.trim();
+    let blob=txt?JSON.parse(txt):null;
+    if(!blob){
+      blob=await Promise.race([
+        fetchEnc(),
+        new Promise(r=>setTimeout(()=>r(null),3000))
+      ]);
+    }
+    if(blob){
+      const d=await Promise.race([
+        decryptEnc(blob,AUTO_KEY),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('解密超时')),5000))
+      ]);
+      onDataReady(d,false);
+      return;
+    }
+  }catch(e){
+    console.warn('[dashboard] 密文副本解密失败',e);
+  }
+
+  showError('数据加载失败：明文与加密副本均不可用，请稍后重试或联系维护方。');
 }
 
 function showError(msg){
