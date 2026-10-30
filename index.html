@@ -199,17 +199,12 @@
   .lock-ico{font-size:26px;line-height:1;margin-bottom:12px;}
   .lock-t{font-size:16px;font-weight:700;color:var(--txt);letter-spacing:.02em;}
   .lock-s{font-size:12.5px;color:var(--sub);margin-top:7px;line-height:1.6;}
-  .lock-inp{width:100%;margin-top:18px;background:var(--panel2);border:1px solid var(--line);
-    border-radius:10px;padding:10px 13px;color:var(--txt);font-size:14px;font-family:var(--font);
-    outline:none;letter-spacing:.08em;text-align:center;}
-  .lock-inp:focus{border-color:var(--acc);}
-  .lock-btn{width:100%;margin-top:11px;background:var(--acc);color:#06223a;border:0;
+  .lock-btn{width:100%;background:var(--acc);color:#06223a;border:0;
     border-radius:10px;padding:10px;font-size:14px;font-weight:700;font-family:var(--font);
     cursor:pointer;transition:.16s;}
   .lock-btn:hover{filter:brightness(1.08);}
   .lock-btn:disabled{opacity:.55;cursor:not-allowed;}
-  .lock-err{min-height:17px;margin-top:9px;font-size:12px;color:#e59a92;}
-  .lock-f{margin-top:4px;font-size:10.5px;color:var(--faint);line-height:1.6;}
+  .lock-err{min-height:17px;margin-top:9px;font-size:12.5px;color:var(--sub);line-height:1.7;}
 
   .modal-mask{position:fixed;inset:0;background:rgba(10,14,18,.74);display:flex;
     align-items:center;justify-content:center;z-index:80;padding:22px;}
@@ -345,16 +340,12 @@
   <div class="meta" id="meta"></div>
 </header>
 
-<div class="lock" id="lockMask">
+<div class="lock" id="lockMask" hidden>
   <div class="lock-box">
-    <div class="lock-ico">🔒</div>
-    <div class="lock-t">数据已加密</div>
-    <div class="lock-s">请输入访问口令以查看驾驶舱</div>
-    <input id="lockPwd" type="password" class="lock-inp" placeholder="访问口令"
-           autocomplete="current-password" spellcheck="false" />
-    <button id="lockBtn" class="lock-btn">解 锁</button>
-    <div id="lockErr" class="lock-err"></div>
-    <div class="lock-f">口令由数据维护方提供 · 解锁后本次会话内有效</div>
+    <div class="lock-ico">⚠️</div>
+    <div class="lock-t">数据加载失败</div>
+    <div class="lock-s" id="lockErr">页面数据暂时不可用，请稍后刷新重试；若持续失败请联系维护方。</div>
+    <button id="lockBtn" class="lock-btn" style="margin-top:16px;">重新加载</button>
   </div>
 </div>
 
@@ -1610,11 +1601,10 @@ initCharts(); bindFilters(); bindWinSeg();
 bootData();
 
 // ---------- 数据加载：加密 data.bin 优先，明文 all_data.json 仅作过渡兜底 ----------
-const PWD_KEY='DD_PWD';
-// 隐私模式 / 禁用站点数据时 sessionStorage 会抛错，直接调会把启动流程打断，统一包一层
-function pwdGet(){ try{ return sessionStorage.getItem(PWD_KEY); }catch(e){ return null; } }
-function pwdSet(v){ try{ sessionStorage.setItem(PWD_KEY,v); }catch(e){} }
-function pwdDel(){ try{ sessionStorage.removeItem(PWD_KEY); }catch(e){} }
+// 内置密钥：页面打开即自动解密，访问端不需要任何口令输入。
+// 注意这是「混淆级」保护——密钥在前端可见，目的是让从 GitHub 直接下载 data.bin 的人拿到的是密文，
+// 而不是防住有能力读源码逆向的人。要真正限制访问必须靠服务端鉴权。
+const AUTO_KEY=(['YcJt','@2026','#Loss','Board']).join('');
 
 function onDataReady(d,plainMode){
   DATA=d;
@@ -1672,62 +1662,33 @@ async function fetchBin(){
   return BIN_BUF;
 }
 
-async function tryUnlock(pwd){
-  const buf=await fetchBin();
-  if(!buf) return {err:'nofile'};
-  try{ return {data:await decryptBin(buf,pwd)}; }
-  catch(e){
-    if(e && e.name==='OperationError') return {err:'badpwd'};
-    return {err:'bad',msg:String(e&&e.message||e)};
-  }
-}
 
 async function bootData(){
-  const saved=pwdGet();
-  if(saved){
-    const r=await tryUnlock(saved);
-    if(r.data){ onDataReady(r.data,false); return; }
-    pwdDel();      // 口令已变更或密文重签，重新输入
-  }
-  // 取一次密文：有 → 显示解锁框；没有 → 回退明文（过渡兼容）
+  // 有密文 → 用内置密钥静默解开，用户无感；解不开再退回明文（部署过渡期）
   const bin=await fetchBin();
-  if(bin){ showLock(''); return; }
+  if(bin){
+    try{
+      onDataReady(await decryptBin(bin,AUTO_KEY),false);
+      return;
+    }catch(e){
+      console.warn('[dashboard] 密文解密失败，尝试明文回退',e);
+    }
+  }
   try{
     const d=await (await fetch('all_data.json',{cache:'no-store'})).json();
     onDataReady(d,true);
   }catch(e){
-    showLock('数据文件缺失：data.bin 与 all_data.json 均不可用。');
+    showError('数据加载失败：'+(e&&e.message||e));
   }
 }
 
-function showLock(msg){
+function showError(msg){
   const m=document.getElementById('lockMask');
-  m.hidden=false;
-  const err=document.getElementById('lockErr');
-  const inp=document.getElementById('lockPwd');
+  const e=document.getElementById('lockErr');
   const btn=document.getElementById('lockBtn');
-  err.textContent=msg||''; inp.value='';
-  setTimeout(()=>{ try{ inp.focus(); }catch(e){} },60);
-  btn.onclick=submit;
-  inp.onkeydown=e=>{ if(e.key==='Enter') submit(); };
-  async function submit(){
-    const pwd=inp.value.trim();
-    if(!pwd){ err.textContent='请输入口令'; return; }
-    btn.disabled=true; btn.textContent='解密中…'; err.textContent='';
-    const r=await tryUnlock(pwd);
-    btn.disabled=false; btn.textContent='解 锁';
-    if(r.data){
-      pwdSet(pwd);
-      onDataReady(r.data,false);
-    }else if(r.err==='badpwd'){
-      err.textContent='口令不正确，请重新输入';
-      inp.select();
-    }else if(r.err==='nofile'){
-      err.textContent='数据文件缺失（data.bin）';
-    }else{
-      err.textContent='解密失败：'+(r.msg||'数据可能已损坏');
-    }
-  }
+  if(e) e.textContent=msg||'页面数据暂时不可用，请稍后刷新重试。';
+  if(m) m.hidden=false;
+  if(btn) btn.onclick=()=>location.reload();
 }
 </script>
 </body>
