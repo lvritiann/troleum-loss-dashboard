@@ -22,7 +22,10 @@ name: daily-dashboard
 on:
   schedule:
     # cron 一律按 UTC 解释。北京 08:20 / 09:20 / 10:20 / 11:20 = UTC 00:20 / 01:20 / 02:20 / 03:20
-    - cron: "20 0-3 * * *"
+    - cron: "20 0 * * *"   # 北京 08:20
+    - cron: "20 1 * * *"   # 北京 09:20
+    - cron: "20 2 * * *"   # 北京 10:20
+    - cron: "20 3 * * *"   # 北京 11:20
   workflow_dispatch:
 
 # 需要把刷新后的 all_data.json / index.html 提交回本仓库（deploy.py 走 Contents API）
