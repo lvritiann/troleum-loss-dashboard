@@ -12,6 +12,11 @@
  *      不依赖站点背景色）。
  *   5. 可覆盖：站点若需换位置，在引入前设置 window.HUB_HOME_POS = 'bl'；
  *      若要换目标地址，设置 window.HUB_HOME_URL。
+ *
+ * ★ 硬约束（2026-11-02 用户明确要求）：不得影响桌面端现有访问效果。
+ *   电脑端（鼠标设备 / 宽屏 >1024px）不注入任何 DOM、样式或事件，
+ *   看到的布局、样式、交互、页面结构与改造前完全一致。
+ *   要撤销全部注入，跑 _hubnav/rollback.py。
  * ========================================================================== */
 (function () {
   'use strict';
@@ -25,6 +30,18 @@
     if (/^\/hub\/?(index\.html)?$/i.test(location.pathname)) return;
   } catch (e) { /* 某些沙箱环境取不到 pathname，忽略 */ }
   if (document.getElementById(MARK)) return;
+
+  /* ★★★ 桌面端零改动 ★★★
+   * 只有在「触屏设备」且「窄屏（≤1024px）」时才注入按钮。
+   * 电脑（鼠标/触控板）访问时直接 return —— 不建节点、不插样式、不加监听、
+   * 不注册任何事件，页面 DOM / CSS / 布局 / 交互与改造前完全一致。
+   * 这条判断是「不影响网页版」的唯一闸门，改动前务必确认不要放宽。 */
+  var coarse = false;
+  try {
+    coarse = window.matchMedia('(pointer: coarse)').matches;
+  } catch (e) { /* 极老浏览器无 matchMedia，按桌面处理 */ }
+  var vw = window.innerWidth || document.documentElement.clientWidth || 0;
+  if (!coarse || vw > 1024) return;
 
   var CSS = ''
     + '#' + MARK + '{position:fixed;z-index:2147483000;display:inline-flex;'
