@@ -51,8 +51,8 @@
    },
    "win30": {
     "days": 30,
-    "lossSumL": 45457.07,
-    "lossRate": 12.74,
+    "lossSumL": 56418.87,
+    "lossRate": 15.82,
     "unloadSumL": 10783215.0,
     "tanksCovered": 180,
     "tanksTotal": 180
@@ -11509,45 +11509,33 @@
        "unloadL": 0
       },
       {
-       "date": "2026-10-22",
-       "lossL": 0,
-       "lossRate5": 0,
-       "unloadL": 0
-      },
-      {
-       "date": "2026-10-23",
-       "lossL": 0,
-       "lossRate5": 0,
-       "unloadL": 0
-      },
-      {
        "date": "2026-10-24",
-       "lossL": 0,
-       "lossRate5": 0,
+       "lossL": 2602.1,
+       "lossRate5": 0.560710102793681,
        "unloadL": 0
       },
       {
        "date": "2026-10-25",
        "lossL": 0,
-       "lossRate5": 0,
+       "lossRate5": 0.699274307904761,
        "unloadL": 0
       },
       {
        "date": "2026-10-26",
        "lossL": 0,
-       "lossRate5": 0,
+       "lossRate5": 0.928747058798186,
        "unloadL": 28135.1
       },
       {
        "date": "2026-10-27",
        "lossL": 0,
-       "lossRate5": 0,
+       "lossRate5": 0.83392115157695,
        "unloadL": 0
       },
       {
        "date": "2026-10-28",
        "lossL": 7.10000000000218,
-       "lossRate5": 0.00135426402426272,
+       "lossRate5": 0.497682491845805,
        "unloadL": 0
       },
       {
@@ -11679,9 +11667,9 @@
       "days": 30,
       "from": "2026-10-12",
       "to": "2026-11-10",
-      "n": 30,
-      "lossSumL": -14.87,
-      "lossAvgL": -0.5,
+      "n": 28,
+      "lossSumL": 2587.23,
+      "lossAvgL": 92.4,
       "lossRateAvg": 0.0,
       "unloadSumL": 28135.1,
       "unloadDays": 1
@@ -11788,44 +11776,44 @@
       },
       {
        "date": "2026-10-22",
-       "lossL": 0,
-       "lossRate5": 0,
+       "lossL": 2150,
+       "lossRate5": 0.147690802778511,
        "unloadL": 0
       },
       {
        "date": "2026-10-23",
-       "lossL": 0,
-       "lossRate5": 0,
+       "lossL": 3362.3,
+       "lossRate5": 0.347986654503789,
        "unloadL": 0
       },
       {
        "date": "2026-10-24",
-       "lossL": 0,
-       "lossRate5": 0,
+       "lossL": 2847.4,
+       "lossRate5": 0.547616864060371,
        "unloadL": 0
       },
       {
        "date": "2026-10-25",
        "lossL": 0,
-       "lossRate5": 0,
+       "lossRate5": 0.580796887483934,
        "unloadL": 0
       },
       {
        "date": "2026-10-26",
        "lossL": 0,
-       "lossRate5": 0,
+       "lossRate5": 0.584935140539909,
        "unloadL": 0
       },
       {
        "date": "2026-10-27",
        "lossL": 0,
-       "lossRate5": 0,
+       "lossRate5": 0.426416288927817,
        "unloadL": 0
       },
       {
        "date": "2026-10-28",
        "lossL": 7.0199999999968,
-       "lossRate5": 0.000534000301230696,
+       "lossRate5": 0.21713121650137,
        "unloadL": 0
       },
       {
@@ -11837,7 +11825,7 @@
       {
        "date": "2026-10-30",
        "lossL": 33.9100000000017,
-       "lossRate5": 0.00199711084146919,
+       "lossRate5": 0.0019971108414692,
        "unloadL": 0
       },
       {
@@ -11849,7 +11837,7 @@
       {
        "date": "2026-11-01",
        "lossL": 27.2099999999991,
-       "lossRate5": 0.000188691267489636,
+       "lossRate5": 0.000188691267489638,
        "unloadL": 0
       },
       {
@@ -11861,7 +11849,7 @@
       {
        "date": "2026-11-03",
        "lossL": -3.97000000000116,
-       "lossRate5": -0.000733985100043881,
+       "lossRate5": -0.00073398510004388,
        "unloadL": 0
       },
       {
@@ -11958,8 +11946,8 @@
       "from": "2026-10-12",
       "to": "2026-11-10",
       "n": 30,
-      "lossSumL": -87.39,
-      "lossAvgL": -2.91,
+      "lossSumL": 8272.31,
+      "lossAvgL": 275.74,
       "lossRateAvg": 0.0,
       "unloadSumL": 82538.7,
       "unloadDays": 3
